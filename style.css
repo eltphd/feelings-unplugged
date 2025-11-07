@@ -4,23 +4,23 @@
    ============================================ */
 
 :root {
-    /* Firefly Light Palette - Soft, Calming, Warm */
-    --bg-primary: #fafaf8;
-    --bg-secondary: #f5f3f0;
-    --bg-card: #ffffff;
-    --text-primary: #2d2d2d;
-    --text-secondary: #5a5a5a;
-    --accent-firefly: #f4c430; /* Warm firefly glow */
-    --accent-soft: #ffd966;
-    --accent-calm: #a8dadc;
-    --accent-warm: #f1c27d;
-    --border-subtle: #e8e6e2;
-    --shadow-soft: rgba(0, 0, 0, 0.08);
+    /* Terracotta Forest Palette - Warm, Grounded, Healing */
+    --bg-primary: #F4F1DE;        /* Warm cream */
+    --bg-secondary: #F9F7F0;      /* Lighter cream */
+    --bg-card: #FDFBF7;           /* Off-white surface */
+    --text-primary: #2D3142;      /* Deep charcoal */
+    --text-secondary: #5A5A5A;    /* Medium gray */
+    --accent-terracotta: #E07A5F; /* Warm healing clay */
+    --accent-forest: #3A5A40;     /* Grounded green */
+    --accent-amber: #D4A574;      /* Warm amber glow */
+    --accent-sage: #81B29A;       /* Calm sage */
+    --border-subtle: #E8E3D8;     /* Warm neutral */
+    --shadow-soft: rgba(45, 49, 66, 0.1);
 
-    /* Soft Glow Effects - Firefly Inspired */
-    --glow-sm: 0 0 15px rgba(244, 196, 48, 0.2);
-    --glow-md: 0 0 25px rgba(244, 196, 48, 0.25), 0 0 40px rgba(244, 196, 48, 0.15);
-    --glow-lg: 0 0 35px rgba(244, 196, 48, 0.3), 0 0 50px rgba(244, 196, 48, 0.2);
+    /* Soft Glow Effects - Natural, Warm */
+    --glow-sm: 0 0 20px rgba(224, 122, 95, 0.15);
+    --glow-md: 0 0 30px rgba(224, 122, 95, 0.2), 0 0 50px rgba(212, 165, 116, 0.15);
+    --glow-lg: 0 0 40px rgba(224, 122, 95, 0.25), 0 0 60px rgba(212, 165, 116, 0.2);
 
     /* Typography */
     --font-serif: 'Crimson Text', 'Libre Baskerville', Georgia, serif;
@@ -48,8 +48,8 @@ body {
     font-family: var(--font-serif);
     background-color: var(--bg-primary);
     background-image:
-        radial-gradient(circle at 20% 30%, rgba(244, 196, 48, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(168, 218, 220, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, rgba(224, 122, 95, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(129, 178, 154, 0.08) 0%, transparent 50%);
     color: var(--text-primary);
     line-height: 1.8;
     font-size: 18px;
@@ -81,12 +81,12 @@ h1 {
 
 h2 {
     font-size: clamp(1.8rem, 3vw, 2.5rem);
-    color: var(--accent-firefly);
+    color: var(--accent-terracotta);
 }
 
 h3 {
     font-size: clamp(1.3rem, 2vw, 1.8rem);
-    color: var(--accent-warm);
+    color: var(--accent-forest);
 }
 
 p {
@@ -95,13 +95,13 @@ p {
 }
 
 a {
-    color: var(--accent-firefly);
+    color: var(--accent-terracotta);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 a:hover {
-    color: var(--accent-soft);
+    color: var(--accent-forest);
     text-shadow: var(--glow-sm);
 }
 
@@ -123,7 +123,7 @@ a:hover {
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(244, 196, 48, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(224, 122, 95, 0.12) 0%, rgba(129, 178, 154, 0.08) 50%, transparent 70%);
     pointer-events: none;
     z-index: 0;
     animation: glow-pulse 4s ease-in-out infinite;
@@ -132,7 +132,7 @@ a:hover {
 .title {
     position: relative;
     z-index: 1;
-    color: var(--accent-firefly);
+    color: var(--accent-terracotta);
     text-shadow: var(--glow-sm);
     margin-bottom: var(--space-sm);
     font-style: italic;
@@ -201,7 +201,7 @@ a:hover {
     inset: -2px;
     border-radius: 16px;
     padding: 2px;
-    background: linear-gradient(135deg, var(--accent-firefly), var(--accent-calm), var(--accent-firefly));
+    background: linear-gradient(135deg, var(--accent-terracotta), var(--accent-sage), var(--accent-terracotta));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -227,11 +227,11 @@ a:hover {
 
 .tag {
     font-size: 0.85rem;
-    color: var(--accent-firefly);
+    color: var(--accent-amber);
     font-family: var(--font-sans);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    background: rgba(244, 196, 48, 0.1);
+    background: rgba(212, 165, 116, 0.15);
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
 }
@@ -257,7 +257,7 @@ a:hover {
     content: '✨';
     position: absolute;
     left: 0;
-    color: var(--accent-firefly);
+    color: var(--accent-amber);
 }
 
 .cta-group {
@@ -288,27 +288,27 @@ a:hover {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     transition: all 0.3s ease;
-    border: 2px solid var(--accent-firefly);
+    border: 2px solid var(--accent-terracotta);
     background: transparent;
-    color: var(--accent-firefly);
+    color: var(--accent-terracotta);
     cursor: pointer;
 }
 
 .btn:hover {
-    background: var(--accent-firefly);
+    background: var(--accent-terracotta);
     color: white;
     box-shadow: var(--glow-md);
     transform: translateY(-2px);
 }
 
 .btn-primary {
-    background: var(--accent-firefly);
+    background: var(--accent-terracotta);
     color: white;
 }
 
 .btn-primary:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent-soft);
+    background: var(--accent-forest);
+    border-color: var(--accent-forest);
 }
 
 .btn-large {
@@ -362,7 +362,7 @@ a:hover {
 .cta-final {
     text-align: center;
     padding: var(--space-lg) var(--space-md);
-    background: linear-gradient(135deg, rgba(244, 196, 48, 0.05) 0%, rgba(168, 218, 220, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(224, 122, 95, 0.08) 0%, rgba(129, 178, 154, 0.08) 100%);
     border-radius: 16px;
     margin-bottom: var(--space-lg);
     border: 2px solid var(--border-subtle);
@@ -419,7 +419,7 @@ footer p {
     display: inline-block;
     margin-bottom: var(--space-md);
     font-size: 0.95rem;
-    color: var(--accent-firefly);
+    color: var(--accent-terracotta);
 }
 
 .back-link:hover {
@@ -440,8 +440,8 @@ footer p {
 }
 
 .highlight-box {
-    background: linear-gradient(135deg, rgba(244, 196, 48, 0.08) 0%, rgba(168, 218, 220, 0.08) 100%);
-    border-left: 4px solid var(--accent-firefly);
+    background: linear-gradient(135deg, rgba(224, 122, 95, 0.08) 0%, rgba(129, 178, 154, 0.08) 100%);
+    border-left: 4px solid var(--accent-terracotta);
     padding: var(--space-md);
     margin: var(--space-md) 0;
     border-radius: 8px;
@@ -450,7 +450,7 @@ footer p {
 
 .purchase-cta {
     background: var(--bg-card);
-    border: 3px solid var(--accent-firefly);
+    border: 3px solid var(--accent-terracotta);
     border-radius: 16px;
     padding: var(--space-md);
     text-align: center;
@@ -460,7 +460,7 @@ footer p {
 
 .purchase-cta h3 {
     margin-bottom: var(--space-sm);
-    color: var(--accent-firefly);
+    color: var(--accent-terracotta);
 }
 
 .purchase-buttons {
@@ -474,7 +474,7 @@ footer p {
 /* Example content boxes */
 .example-box {
     background: white;
-    border: 2px solid var(--accent-calm);
+    border: 2px solid var(--accent-sage);
     border-radius: 12px;
     padding: var(--space-md);
     margin: var(--space-md) 0;
@@ -482,7 +482,7 @@ footer p {
 }
 
 .example-box h4 {
-    color: var(--accent-firefly);
+    color: var(--accent-forest);
     margin-bottom: var(--space-sm);
 }
 
@@ -490,7 +490,7 @@ footer p {
     font-style: italic;
     color: var(--text-secondary);
     padding: var(--space-sm);
-    background: rgba(244, 196, 48, 0.05);
+    background: rgba(212, 165, 116, 0.08);
     border-radius: 8px;
     margin: var(--space-sm) 0;
 }
@@ -579,7 +579,7 @@ footer p {
    ============================================ */
 
 :focus {
-    outline: 3px solid var(--accent-firefly);
+    outline: 3px solid var(--accent-terracotta);
     outline-offset: 2px;
 }
 
@@ -588,6 +588,6 @@ footer p {
 }
 
 :focus-visible {
-    outline: 3px solid var(--accent-firefly);
+    outline: 3px solid var(--accent-terracotta);
     outline-offset: 2px;
 }
