@@ -1,23 +1,26 @@
 /* ============================================
-   FEELINGS UNPLUGGED - DARK ACADEMIA AESTHETIC
+   FEELINGS UNPLUGGED - FIREFLY LIGHT AESTHETIC
+   Calming, warm, gentle - for mental health & wellness
    ============================================ */
 
 :root {
-    /* Dark Academia Color Palette */
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #1a1a1a;
-    --bg-card: #151515;
-    --text-primary: #e8e6e3;
-    --text-secondary: #b8b5b0;
-    --accent-gold: #d4af37;
-    --accent-amber: #ffbf00;
-    --accent-glow: rgba(212, 175, 55, 0.15);
-    --border-subtle: #2a2a2a;
+    /* Firefly Light Palette - Soft, Calming, Warm */
+    --bg-primary: #fafaf8;
+    --bg-secondary: #f5f3f0;
+    --bg-card: #ffffff;
+    --text-primary: #2d2d2d;
+    --text-secondary: #5a5a5a;
+    --accent-firefly: #f4c430; /* Warm firefly glow */
+    --accent-soft: #ffd966;
+    --accent-calm: #a8dadc;
+    --accent-warm: #f1c27d;
+    --border-subtle: #e8e6e2;
+    --shadow-soft: rgba(0, 0, 0, 0.08);
 
-    /* Soft Glow Effects */
-    --glow-sm: 0 0 10px var(--accent-glow);
-    --glow-md: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
-    --glow-lg: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-glow), 0 0 90px var(--accent-glow);
+    /* Soft Glow Effects - Firefly Inspired */
+    --glow-sm: 0 0 15px rgba(244, 196, 48, 0.2);
+    --glow-md: 0 0 25px rgba(244, 196, 48, 0.25), 0 0 40px rgba(244, 196, 48, 0.15);
+    --glow-lg: 0 0 35px rgba(244, 196, 48, 0.3), 0 0 50px rgba(244, 196, 48, 0.2);
 
     /* Typography */
     --font-serif: 'Crimson Text', 'Libre Baskerville', Georgia, serif;
@@ -44,6 +47,9 @@
 body {
     font-family: var(--font-serif);
     background-color: var(--bg-primary);
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(244, 196, 48, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(168, 218, 220, 0.05) 0%, transparent 50%);
     color: var(--text-primary);
     line-height: 1.8;
     font-size: 18px;
@@ -63,8 +69,9 @@ body {
 
 h1, h2, h3, h4 {
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.3;
     margin-bottom: var(--space-sm);
+    color: var(--text-primary);
 }
 
 h1 {
@@ -74,12 +81,12 @@ h1 {
 
 h2 {
     font-size: clamp(1.8rem, 3vw, 2.5rem);
-    color: var(--accent-gold);
+    color: var(--accent-firefly);
 }
 
 h3 {
     font-size: clamp(1.3rem, 2vw, 1.8rem);
-    color: var(--accent-gold);
+    color: var(--accent-warm);
 }
 
 p {
@@ -88,13 +95,13 @@ p {
 }
 
 a {
-    color: var(--accent-gold);
+    color: var(--accent-firefly);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 a:hover {
-    color: var(--accent-amber);
+    color: var(--accent-soft);
     text-shadow: var(--glow-sm);
 }
 
@@ -116,16 +123,17 @@ a:hover {
     transform: translate(-50%, -50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(244, 196, 48, 0.15) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
+    animation: glow-pulse 4s ease-in-out infinite;
 }
 
 .title {
     position: relative;
     z-index: 1;
-    color: var(--accent-gold);
-    text-shadow: var(--glow-md);
+    color: var(--accent-firefly);
+    text-shadow: var(--glow-sm);
     margin-bottom: var(--space-sm);
     font-style: italic;
 }
@@ -176,10 +184,11 @@ a:hover {
 
 .product-card {
     background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
+    border: 2px solid var(--border-subtle);
+    border-radius: 16px;
     padding: var(--space-md);
     transition: all 0.4s ease;
+    box-shadow: 0 4px 12px var(--shadow-soft);
 }
 
 .glow-card {
@@ -189,10 +198,10 @@ a:hover {
 .glow-card::before {
     content: '';
     position: absolute;
-    inset: -1px;
-    border-radius: 8px;
-    padding: 1px;
-    background: linear-gradient(135deg, var(--accent-gold), transparent, var(--accent-gold));
+    inset: -2px;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--accent-firefly), var(--accent-calm), var(--accent-firefly));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -201,12 +210,12 @@ a:hover {
 }
 
 .glow-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--glow-md);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px var(--shadow-soft), var(--glow-md);
 }
 
 .glow-card:hover::before {
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .card-header {
@@ -218,10 +227,13 @@ a:hover {
 
 .tag {
     font-size: 0.85rem;
-    color: var(--accent-amber);
+    color: var(--accent-firefly);
     font-family: var(--font-sans);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    background: rgba(244, 196, 48, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
 }
 
 .description {
@@ -242,10 +254,10 @@ a:hover {
 }
 
 .features li::before {
-    content: '→';
+    content: '✨';
     position: absolute;
     left: 0;
-    color: var(--accent-gold);
+    color: var(--accent-firefly);
 }
 
 .cta-group {
@@ -269,34 +281,34 @@ a:hover {
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    border-radius: 4px;
+    border-radius: 24px;
     font-family: var(--font-sans);
     font-size: 0.95rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     transition: all 0.3s ease;
-    border: 2px solid var(--accent-gold);
+    border: 2px solid var(--accent-firefly);
     background: transparent;
-    color: var(--accent-gold);
+    color: var(--accent-firefly);
     cursor: pointer;
 }
 
 .btn:hover {
-    background: var(--accent-gold);
-    color: var(--bg-primary);
+    background: var(--accent-firefly);
+    color: white;
     box-shadow: var(--glow-md);
     transform: translateY(-2px);
 }
 
 .btn-primary {
-    background: var(--accent-gold);
-    color: var(--bg-primary);
+    background: var(--accent-firefly);
+    color: white;
 }
 
 .btn-primary:hover {
-    background: var(--accent-amber);
-    border-color: var(--accent-amber);
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
 }
 
 .btn-large {
@@ -325,10 +337,17 @@ a:hover {
 }
 
 .about-card {
-    background: var(--bg-secondary);
+    background: var(--bg-card);
     padding: var(--space-md);
-    border-radius: 8px;
-    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    border: 2px solid var(--border-subtle);
+    box-shadow: 0 4px 12px var(--shadow-soft);
+    transition: all 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px var(--shadow-soft), var(--glow-sm);
 }
 
 .about-card h3 {
@@ -342,10 +361,11 @@ a:hover {
 
 .cta-final {
     text-align: center;
-    padding: var(--space-lg) 0;
-    background: var(--bg-secondary);
-    border-radius: 8px;
+    padding: var(--space-lg) var(--space-md);
+    background: linear-gradient(135deg, rgba(244, 196, 48, 0.05) 0%, rgba(168, 218, 220, 0.05) 100%);
+    border-radius: 16px;
     margin-bottom: var(--space-lg);
+    border: 2px solid var(--border-subtle);
 }
 
 .cta-final h2 {
@@ -371,7 +391,7 @@ a:hover {
 footer {
     text-align: center;
     padding: var(--space-lg) 0 var(--space-md);
-    border-top: 1px solid var(--border-subtle);
+    border-top: 2px solid var(--border-subtle);
     margin-top: var(--space-xl);
 }
 
@@ -399,10 +419,15 @@ footer p {
     display: inline-block;
     margin-bottom: var(--space-md);
     font-size: 0.95rem;
+    color: var(--accent-firefly);
+}
+
+.back-link:hover {
+    text-decoration: underline;
 }
 
 .page-content {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -415,24 +440,27 @@ footer p {
 }
 
 .highlight-box {
-    background: var(--bg-secondary);
-    border-left: 4px solid var(--accent-gold);
+    background: linear-gradient(135deg, rgba(244, 196, 48, 0.08) 0%, rgba(168, 218, 220, 0.08) 100%);
+    border-left: 4px solid var(--accent-firefly);
     padding: var(--space-md);
     margin: var(--space-md) 0;
-    border-radius: 4px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-soft);
 }
 
 .purchase-cta {
     background: var(--bg-card);
-    border: 2px solid var(--accent-gold);
-    border-radius: 8px;
+    border: 3px solid var(--accent-firefly);
+    border-radius: 16px;
     padding: var(--space-md);
     text-align: center;
     margin: var(--space-lg) 0;
+    box-shadow: var(--glow-md);
 }
 
 .purchase-cta h3 {
     margin-bottom: var(--space-sm);
+    color: var(--accent-firefly);
 }
 
 .purchase-buttons {
@@ -441,6 +469,30 @@ footer p {
     gap: var(--space-sm);
     margin-top: var(--space-md);
     flex-wrap: wrap;
+}
+
+/* Example content boxes */
+.example-box {
+    background: white;
+    border: 2px solid var(--accent-calm);
+    border-radius: 12px;
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+    box-shadow: 0 4px 12px var(--shadow-soft);
+}
+
+.example-box h4 {
+    color: var(--accent-firefly);
+    margin-bottom: var(--space-sm);
+}
+
+.prompt-example {
+    font-style: italic;
+    color: var(--text-secondary);
+    padding: var(--space-sm);
+    background: rgba(244, 196, 48, 0.05);
+    border-radius: 8px;
+    margin: var(--space-sm) 0;
 }
 
 /* ============================================
@@ -477,6 +529,10 @@ footer p {
     .btn-large {
         width: 100%;
     }
+
+    .purchase-buttons {
+        flex-direction: column;
+    }
 }
 
 /* ============================================
@@ -492,8 +548,22 @@ footer p {
     }
 }
 
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
 .glow-overlay {
     animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Firefly floating animation for decorative elements */
+.firefly-float {
+    animation: float 3s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -502,4 +572,22 @@ footer p {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+:focus {
+    outline: 3px solid var(--accent-firefly);
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid var(--accent-firefly);
+    outline-offset: 2px;
 }
