@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { UserPreferences } from '@/types';
 
@@ -17,6 +17,14 @@ export default function PrivacySettings() {
     'user-preferences',
     DEFAULT_PREFERENCES
   );
+  const [lastExport, setLastExport] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const stored = window.localStorage.getItem('fu-last-export');
+      setLastExport(stored ? stored : null);
+    }
+  }, []);
 
   const handleToggle = (key: keyof UserPreferences) => {
     setPreferences({ ...preferences, [key]: !preferences[key] });
@@ -39,6 +47,12 @@ export default function PrivacySettings() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    const timestamp = new Date().toISOString();
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('fu-last-export', timestamp);
+    }
+    setLastExport(timestamp);
   };
 
   const handleDeleteAll = () => {
@@ -164,6 +178,10 @@ export default function PrivacySettings() {
           >
             Delete Everything
           </button>
+        </div>
+        <div className="mt-4 text-xs opacity-70 space-y-1">
+          <p>Last export: {lastExport ? new Date(lastExport).toLocaleString() : 'Never'}</p>
+          <p>We never transmit your entries. Exports are stored wherever you download them.</p>
         </div>
       </div>
     </div>

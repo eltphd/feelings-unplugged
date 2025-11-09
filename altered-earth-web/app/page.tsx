@@ -24,7 +24,10 @@ export default function Home() {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
 
   const handleCheckInComplete = (entry: JournalEntry) => {
-    setToast({ message: 'Moment captured. Proud of you for checking in 💜', type: 'success' });
+    setToast({
+      message: 'You listened to yourself and it stays right here 💜',
+      type: 'success',
+    });
   };
 
   return (

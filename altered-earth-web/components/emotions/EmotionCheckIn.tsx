@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { EMOTIONS } from '@/utils/emotions';
 import { JournalEntry, EmotionType } from '@/types';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -15,6 +16,21 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
   const [note, setNote] = useState('');
   const [showNote, setShowNote] = useState(false);
   const [entries, setEntries] = useLocalStorage<JournalEntry[]>('journal-entries', []);
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  useEffect(() => {
+    const hasSeen = typeof window !== 'undefined' ? window.localStorage.getItem('fu-welcome-dismissed') : 'true';
+    if (!hasSeen) {
+      setShowWelcome(true);
+    }
+  }, []);
+
+  const dismissWelcome = () => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('fu-welcome-dismissed', 'true');
+    }
+    setShowWelcome(false);
+  };
 
   const gradientMap = useMemo(() => ({
     primary: 'from-primary to-primary/80 text-primary-content',
@@ -71,6 +87,7 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
     setIntensity(5);
     setNote('');
     setShowNote(false);
+    setShowWelcome(false);
 
     // Callback for parent component
     onComplete?.(newEntry);
@@ -81,6 +98,38 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
     setIntensity(5);
     setNote('');
     setShowNote(false);
+  };
+
+  const supportCard = () => {
+    if (!selectedEmotion) return null;
+    const map: Partial<Record<EmotionType, { title: string; copy: string }>> = {
+      'overwhelmed': {
+        title: 'Take a breather',
+        copy: 'Try a 4-7-8 breath, step outside for 60 seconds, or visit quick resources if it feels too heavy.',
+      },
+      'numb': {
+        title: 'Feeling flat is still a feeling',
+        copy: 'Micro-movements help—stretch hands, drink water, or tap through sensory grounding exercises.',
+      },
+      'confused': {
+        title: 'It’s okay not to know',
+        copy: 'You can jot messy thoughts or bookmark this moment and circle back later. There’s no rush.',
+      },
+    };
+    const info = map[selectedEmotion];
+    if (!info) return null;
+    return (
+      <div className="alert alert-soft bg-base-200/80 border border-base-content/10 text-left">
+        <div>
+          <h3 className="font-semibold text-base md:text-lg">{info.title}</h3>
+          <p className="text-sm opacity-80 leading-relaxed">{info.copy}</p>
+        </div>
+        <div className="flex gap-2">
+          <Link href="/resources" className="btn btn-xs btn-primary">Quick help →</Link>
+          <button className="btn btn-xs" onClick={handleSkip}>Pause for now</button>
+        </div>
+      </div>
+    );
   };
 
   const getButtonClass = (emotion: typeof EMOTIONS[0], isSelected: boolean) => {
@@ -95,6 +144,16 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
   return (
     <div className="card glass-card w-full max-w-md mx-auto">
       <div className="card-body">
+        {showWelcome && (
+          <div className="alert alert-info flex items-start gap-3 text-left">
+            <div>
+              <h3 className="font-semibold">This space is yours</h3>
+              <p className="text-sm opacity-80">Everything you save stays on this device. Export or wipe it anytime in Settings.</p>
+            </div>
+            <button className="btn btn-xs btn-ghost" onClick={dismissWelcome} aria-label="Dismiss welcome message">Got it</button>
+          </div>
+        )}
+
         <h2 className="card-title text-2xl font-bold">Right now, I'm feeling...</h2>
         
         {/* Emotion Selection Grid */}
@@ -139,6 +198,8 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
           </div>
         )}
 
+        {supportCard()}
+
         {selectedEmotion && (
           <div className="collapse collapse-arrow bg-base-200 mt-4">
             <input 
@@ -179,6 +240,14 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
           >
             Save this moment
           </button>
+        </div>
+        <div className="mt-4 flex flex-wrap gap-3 text-xs md:text-sm opacity-70">
+          <span className="inline-flex items-center gap-2">
+            <span className="badge badge-ghost badge-sm">Privacy</span> Nothing leaves this device unless you export it.
+          </span>
+          <Link href="/resources" className="link link-hover inline-flex items-center gap-1">
+            Need help fast? →
+          </Link>
         </div>
       </div>
     </div>
