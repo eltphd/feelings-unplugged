@@ -3,11 +3,22 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import EmotionCheckIn from '@/components/emotions/EmotionCheckIn';
-import EmotionTimeline from '@/components/journal/EmotionTimeline';
-import PromptCarousel from '@/components/prompts/PromptCarousel';
+import dynamic from 'next/dynamic';
 import Layout from './components/Layout';
 import Toast from './components/Toast';
 import { JournalEntry } from '@/types';
+import EmotionTimelineSkeleton from '@/components/journal/EmotionTimelineSkeleton';
+import PromptCarouselSkeleton from '@/components/prompts/PromptCarouselSkeleton';
+
+const EmotionTimeline = dynamic(() => import('@/components/journal/EmotionTimeline'), {
+  ssr: false,
+  loading: () => <EmotionTimelineSkeleton />,
+});
+
+const PromptCarousel = dynamic(() => import('@/components/prompts/PromptCarousel'), {
+  ssr: false,
+  loading: () => <PromptCarouselSkeleton />,
+});
 
 export default function Home() {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);

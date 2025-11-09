@@ -11,6 +11,7 @@ interface EmotionCheckInProps {
 
 export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
   const [selectedEmotion, setSelectedEmotion] = useState<EmotionType | null>(null);
+  const [intensity, setIntensity] = useState<number>(5);
   const [note, setNote] = useState('');
   const [showNote, setShowNote] = useState(false);
   const [entries, setEntries] = useLocalStorage<JournalEntry[]>('journal-entries', []);
@@ -26,6 +27,7 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date(),
       emotion: selectedEmotion,
+      intensity,
       note: note.trim() || undefined,
     };
 
@@ -33,6 +35,7 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
     
     // Reset form
     setSelectedEmotion(null);
+    setIntensity(5);
     setNote('');
     setShowNote(false);
 
@@ -42,6 +45,7 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
 
   const handleSkip = () => {
     setSelectedEmotion(null);
+    setIntensity(5);
     setNote('');
     setShowNote(false);
   };
@@ -84,6 +88,27 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
         </div>
 
         {/* Optional Note Section */}
+        {selectedEmotion && (
+          <div className="mt-4 space-y-2">
+            <label className="flex items-center justify-between text-sm font-semibold text-base-content/80">
+              <span>How strong is this feeling?</span>
+              <span className="badge badge-outline">{intensity}/10</span>
+            </label>
+            <input
+              type="range"
+              min={1}
+              max={10}
+              value={intensity}
+              onChange={(e) => setIntensity(Number(e.target.value))}
+              className="range range-primary"
+            />
+            <div className="flex justify-between text-xs opacity-60">
+              <span>barely there</span>
+              <span>all consuming</span>
+            </div>
+          </div>
+        )}
+
         {selectedEmotion && (
           <div className="collapse collapse-arrow bg-base-200 mt-4">
             <input 

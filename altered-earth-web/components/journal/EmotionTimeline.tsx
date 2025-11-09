@@ -124,6 +124,11 @@ export default function EmotionTimeline() {
                     {formatDate(entry.timestamp)}
                   </time>
                   <div className="text-lg font-black">{emotion.label}</div>
+                  {entry.intensity && (
+                    <div className="badge badge-outline badge-primary mt-2">
+                      Intensity: {entry.intensity}/10
+                    </div>
+                  )}
                   {entry.note && (
                     <p className="text-sm opacity-80 mt-2">{entry.note}</p>
                   )}
