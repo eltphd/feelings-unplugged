@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { EMOTIONS } from '@/utils/emotions';
 import { JournalEntry, EmotionType } from '@/types';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -15,6 +15,39 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
   const [note, setNote] = useState('');
   const [showNote, setShowNote] = useState(false);
   const [entries, setEntries] = useLocalStorage<JournalEntry[]>('journal-entries', []);
+
+  const gradientMap = useMemo(() => ({
+    primary: 'from-primary to-primary/80 text-primary-content',
+    secondary: 'from-secondary to-secondary/80 text-secondary-content',
+    accent: 'from-accent to-accent/80 text-accent-content',
+    info: 'from-info to-info/80 text-info-content',
+    success: 'from-success to-success/80 text-success-content',
+    warning: 'from-warning to-warning/80 text-warning-content',
+    error: 'from-error to-error/80 text-error-content',
+    neutral: 'from-neutral to-neutral/80 text-neutral-content',
+  }), []);
+
+  const ringMap = useMemo(() => ({
+    primary: 'focus:ring-primary',
+    secondary: 'focus:ring-secondary',
+    accent: 'focus:ring-accent',
+    info: 'focus:ring-info',
+    success: 'focus:ring-success',
+    warning: 'focus:ring-warning',
+    error: 'focus:ring-error',
+    neutral: 'focus:ring-neutral',
+  }), []);
+
+  const hoverBorderMap = useMemo(() => ({
+    primary: 'hover:border-primary/40',
+    secondary: 'hover:border-secondary/40',
+    accent: 'hover:border-accent/40',
+    info: 'hover:border-info/40',
+    success: 'hover:border-success/40',
+    warning: 'hover:border-warning/40',
+    error: 'hover:border-error/40',
+    neutral: 'hover:border-neutral/40',
+  }), []);
 
   const handleEmotionSelect = (emotionId: EmotionType) => {
     setSelectedEmotion(emotionId);
@@ -51,21 +84,12 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
   };
 
   const getButtonClass = (emotion: typeof EMOTIONS[0], isSelected: boolean) => {
-    const baseClass = 'btn btn-lg flex-col h-auto py-4 gap-2 emotion-pulse';
-    if (!isSelected) return `${baseClass} btn-outline`;
-    
-    const colorMap: Record<string, string> = {
-      'primary': 'btn-primary',
-      'secondary': 'btn-secondary',
-      'accent': 'btn-accent',
-      'info': 'btn-info',
-      'success': 'btn-success',
-      'warning': 'btn-warning',
-      'error': 'btn-error',
-      'neutral': 'btn-neutral',
-    };
-    
-    return `${baseClass} ${colorMap[emotion.color] || 'btn-primary'}`;
+    const gradient = gradientMap[emotion.color] || 'from-primary to-primary/80 text-primary-content';
+    const ringClass = ringMap[emotion.color] || 'focus:ring-primary';
+    const hoverClass = hoverBorderMap[emotion.color] || 'hover:border-primary/40';
+    const base = `w-full rounded-3xl border border-base-content/10 transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${ringClass} flex items-center gap-4 p-4 md:p-5 bg-base-200/70 ${hoverClass} hover:-translate-y-1`;
+    const selected = `bg-gradient-to-br ${gradient} shadow-glow scale-[1.03] border-transparent`;
+    return `${base} ${isSelected ? selected : ''}`;
   };
 
   return (
@@ -74,15 +98,21 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
         <h2 className="card-title text-2xl font-bold">Right now, I'm feeling...</h2>
         
         {/* Emotion Selection Grid */}
-        <div className="grid grid-cols-2 gap-3 my-4">
+        <div className="grid grid-cols-1 gap-3 my-4 sm:grid-cols-2">
           {EMOTIONS.map((emotion) => (
             <button
               key={emotion.id}
               onClick={() => handleEmotionSelect(emotion.id)}
               className={getButtonClass(emotion, selectedEmotion === emotion.id)}
+              aria-pressed={selectedEmotion === emotion.id}
             >
-              <span className="text-4xl">{emotion.emoji}</span>
-              <span className="text-sm font-semibold">{emotion.label}</span>
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-base-100/20 text-3xl md:text-4xl">
+                {emotion.emoji}
+              </span>
+              <div className="flex flex-col items-start text-left">
+                <span className="text-base font-semibold md:text-lg">{emotion.label}</span>
+                <span className="text-xs opacity-80 md:text-sm">{emotion.description}</span>
+              </div>
             </button>
           ))}
         </div>
@@ -135,15 +165,15 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
         )}
 
         {/* Action Buttons */}
-        <div className="card-actions justify-between mt-4">
+        <div className="mt-6 flex items-center justify-between gap-4">
           <button 
-            className="btn btn-ghost btn-sm"
+            className="btn btn-ghost btn-sm md:btn-md"
             onClick={handleSkip}
           >
             Not today
           </button>
           <button 
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm md:btn-md"
             onClick={handleSave}
             disabled={!selectedEmotion}
           >

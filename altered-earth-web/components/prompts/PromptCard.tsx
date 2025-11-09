@@ -11,24 +11,27 @@ interface PromptCardProps {
 }
 
 export default function PromptCard({ prompt, onStart, onSkip, onBookmark }: PromptCardProps) {
-  const getCategoryColor = (category: Prompt['category']) => {
-    const colors: Record<Prompt['category'], string> = {
-      'identity': 'badge badge-outline badge-primary',
-      'relationships': 'badge badge-outline badge-secondary',
-      'future-self': 'badge badge-outline badge-accent',
-      'hard-days': 'badge badge-outline badge-info',
-      'joy': 'badge badge-outline badge-success',
+  const categoryBadge = (category: Prompt['category']) => {
+    const map: Record<Prompt['category'], { badge: string; emoji: string }> = {
+      'identity': { badge: 'badge-primary text-primary-content', emoji: '🪞' },
+      'relationships': { badge: 'badge-secondary text-secondary-content', emoji: '🫂' },
+      'future-self': { badge: 'badge-accent text-accent-content', emoji: '🔮' },
+      'hard-days': { badge: 'badge-info text-info-content', emoji: '🛡️' },
+      'joy': { badge: 'badge-success text-success-content', emoji: '🌈' },
     };
-    return colors[category];
+    return map[category];
   };
 
+  const { badge, emoji } = categoryBadge(prompt.category);
+
   return (
-    <div className="card w-80 glass-card shadow-xl hover:shadow-glow transition-all">
-      <div className="card-body">
-        <div className="flex items-start justify-between">
-          <span className={getCategoryColor(prompt.category)}>
-            {prompt.category.replace('-', ' ')}
-          </span>
+    <div className="card w-72 sm:w-80 glass-card shadow-lg hover:shadow-glow transition-all duration-200 ease-out">
+      <div className="card-body space-y-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className={`badge badge-lg rounded-full px-4 py-2 font-semibold ${badge}`}>
+            <span className="text-lg mr-2">{emoji}</span>
+            <span className="capitalize">{prompt.category.replace('-', ' ')}</span>
+          </div>
           {onBookmark && (
             <button 
               className="btn btn-ghost btn-xs btn-circle"
@@ -41,20 +44,22 @@ export default function PromptCard({ prompt, onStart, onSkip, onBookmark }: Prom
             </button>
           )}
         </div>
-        
+
+        <div className="space-y-2 text-left">
+          <h2 className="text-xl font-semibold leading-snug">{prompt.question}</h2>
+          <p className="text-sm opacity-70 leading-relaxed">{prompt.context}</p>
+        </div>
+
         {prompt.contentWarning && (
-          <div className="alert alert-warning py-2 text-xs mt-2">
+          <div className="alert alert-warning py-2 text-xs">
             <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             <span>CW: {prompt.contentWarning}</span>
           </div>
         )}
-        
-        <h2 className="card-title text-xl mt-2">{prompt.question}</h2>
-        <p className="text-sm opacity-70">{prompt.context}</p>
-        
-        <div className="card-actions justify-end mt-4">
+
+        <div className="card-actions justify-end gap-2 pt-2">
           <button 
             className="btn btn-ghost btn-sm"
             onClick={onSkip}
