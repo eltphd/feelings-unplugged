@@ -1,9 +1,15 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
 export const metadata: Metadata = {
-  title: 'ALTERED.EARTH Journizine Vol. 1',
-  description: 'A journal + magazine for teens who feel everything. Free digital version with interactive prompts, playlist builders, and mental health resources.',
+  title: 'Feelings Unplugged',
+  description: 'A Gen Alpha/Z-optimized mental health journaling experience',
 }
 
 export default function RootLayout({
@@ -12,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" data-theme="feelingsunplugged">
+      <body className={`${inter.variable} antialiased`}>{children}</body>
     </html>
   )
 }
