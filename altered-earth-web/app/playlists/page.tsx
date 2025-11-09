@@ -132,14 +132,18 @@ export default function PlaylistsPage() {
 
       {/* Playlists */}
       <section className="max-w-4xl mx-auto px-6 pb-12 space-y-8">
-        {playlistConfigs.map((config) => (
-          <PlaylistBuilder
-            key={config.key}
-            {...config}
-            songs={playlists[config.key]}
-            onUpdateSong={(index, value) => updateSong(config.key, index, value)}
-          />
-        ))}
+        {playlistConfigs.map((config) => {
+          const { key, ...rest } = config
+          return (
+            <PlaylistBuilder
+              key={key}
+              playlistKey={key}
+              {...rest}
+              songs={playlists[key]}
+              onUpdateSong={(index, value) => updateSong(key, index, value)}
+            />
+          )
+        })}
       </section>
 
       {/* How to Use */}
@@ -182,6 +186,7 @@ export default function PlaylistsPage() {
 }
 
 function PlaylistBuilder({
+  playlistKey,
   title,
   emoji,
   subtitle,
@@ -191,6 +196,7 @@ function PlaylistBuilder({
   songs,
   onUpdateSong
 }: {
+  playlistKey: string
   title: string
   emoji: string
   subtitle: string
