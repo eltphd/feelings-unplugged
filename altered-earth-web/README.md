@@ -56,7 +56,8 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ## 📜 License
 
-Created by Dr. Erica L. Tartt | BASEops
+Altered.earth publications presents Feelings Unplugged
+Created by Dr. Erica L. Tartt | Atlas Academy
 For educational and mental health support purposes.
 
 ## 💝 Mission

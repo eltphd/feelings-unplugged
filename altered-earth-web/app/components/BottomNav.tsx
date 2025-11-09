@@ -9,8 +9,8 @@ export default function BottomNav() {
   const navItems = [
     { icon: '🏠', label: 'Home', href: '/' },
     { icon: '✍️', label: 'Journal', href: '/journal' },
+    { icon: '📊', label: 'Review', href: '/weekly-review' },
     { icon: '📚', label: 'Read', href: '/articles' },
-    { icon: '🎵', label: 'Music', href: '/playlists' },
     { icon: '🆘', label: 'Help', href: '/resources' },
   ]
 

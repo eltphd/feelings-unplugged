@@ -52,7 +52,10 @@ export default function Home() {
       <footer className="gradient-bg-sage text-white py-12 px-6 mt-16">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-lg mb-2 font-sans font-semibold">
-            Created by Dr. Erica L. Tartt | BASEops
+            Altered.earth publications presents Feelings Unplugged
+          </p>
+          <p className="text-base mb-2 font-sans">
+            Created by Dr. Erica L. Tartt | Atlas Academy
           </p>
           <p className="text-cream text-base font-serif italic">
             Your brilliance is not conditional. Neither is theirs.

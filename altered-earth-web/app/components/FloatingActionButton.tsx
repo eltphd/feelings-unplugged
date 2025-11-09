@@ -8,7 +8,7 @@ export default function FloatingActionButton() {
 
   const quickActions = [
     { icon: '✍️', label: 'Quick Journal', href: '/journal', gradient: 'from-terracotta to-amber' },
-    { icon: '🎵', label: 'Add Song', href: '/playlists', gradient: 'from-amber to-yellow-400' },
+    { icon: '📊', label: 'Weekly Review', href: '/weekly-review', gradient: 'from-sage to-forest' },
     { icon: '🆘', label: 'Get Help', href: '/resources', gradient: 'from-red-400 to-red-600' },
   ]
 

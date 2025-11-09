@@ -160,7 +160,14 @@ export default function DashboardWidgets() {
       </div>
 
       {/* Quick Access Cards */}
-      <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <QuickAccessCard
+          emoji="📊"
+          title="Weekly Review"
+          description="Reflect on patterns and track your growth"
+          href="/weekly-review"
+          gradient="from-terracotta to-amber"
+        />
         <QuickAccessCard
           emoji="📚"
           title="Read Articles"
