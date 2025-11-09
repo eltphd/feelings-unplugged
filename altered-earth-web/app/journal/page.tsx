@@ -178,10 +178,10 @@ function JournalEntry({
                   placeholder="Write here..."
                 />
               )}
-              {prompt.wordBank && (
+              {'wordBank' in prompt && prompt.wordBank && (
                 <div className="mt-2 flex flex-wrap gap-2">
                   <span className="text-sm text-gray-600">Word bank:</span>
-                  {prompt.wordBank.map((word) => (
+                  {prompt.wordBank.map((word: string) => (
                     <button
                       key={word}
                       onClick={() => onUpdate(prompt.key, entry[prompt.key] ? entry[prompt.key] + ', ' + word : word)}
@@ -216,10 +216,10 @@ function JournalEntry({
                 rows={3}
                 placeholder="Write here..."
               />
-              {prompt.wordBank && (
+              {'wordBank' in prompt && prompt.wordBank && (
                 <div className="mt-3 flex flex-wrap gap-2">
                   <span className="text-sm font-sans text-gray-600">Word bank:</span>
-                  {prompt.wordBank.map((word) => (
+                  {prompt.wordBank.map((word: string) => (
                     <button
                       key={word}
                       onClick={() => onUpdate(prompt.key, entry[prompt.key] ? entry[prompt.key] + ', ' + word : word)}
