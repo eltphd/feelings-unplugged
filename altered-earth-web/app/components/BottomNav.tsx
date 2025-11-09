@@ -20,25 +20,47 @@ export default function BottomNav() {
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-sage/20 z-50 safe-area-bottom shadow-2xl">
-      <div className="max-w-screen-xl mx-auto px-2 py-2">
-        <div className="flex items-center justify-around">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t-2 border-sage/30 z-50 thumb-safe shadow-2xl">
+      {/* Firefly Glow Accent - Top Border */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-terracotta to-transparent opacity-60"></div>
+
+      <div className="max-w-screen-xl mx-auto px-3 py-3">
+        <div className="flex items-center justify-around gap-1">
           {navItems.map((item) => {
             const active = isActive(item.href)
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center px-3 py-2 rounded-2xl transition-all duration-300 min-w-[60px] ${
-                  active
-                    ? 'bg-gradient-to-br from-terracotta to-amber text-white scale-105 shadow-lg'
-                    : 'text-gray-600 hover:text-terracotta hover:bg-cream/50'
-                }`}
+                className={`
+                  tap-target haptic-medium
+                  flex flex-col items-center justify-center
+                  px-4 py-2.5 rounded-3xl
+                  transition-all duration-300
+                  min-w-[68px] relative overflow-hidden
+                  ${
+                    active
+                      ? 'bg-gradient-to-br from-terracotta via-amber to-terracotta text-white scale-105 firefly-glow-sm animate-pop'
+                      : 'text-gray-600 hover:text-terracotta hover:bg-cream/70 hover:scale-105'
+                  }
+                `}
               >
-                <span className={`text-2xl mb-1 transition-transform ${active ? 'scale-110' : ''}`}>
+                {/* Active Indicator Pulse */}
+                {active && (
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber to-terracotta opacity-50 animate-pulse-soft rounded-3xl"></div>
+                )}
+
+                <span className={`
+                  relative z-10 text-2xl mb-1
+                  transition-all duration-300
+                  ${active ? 'scale-110 animate-bounce-soft' : ''}
+                `}>
                   {item.icon}
                 </span>
-                <span className={`text-xs font-sans font-bold ${active ? 'text-white' : ''}`}>
+                <span className={`
+                  relative z-10 text-[10px] font-sans font-extrabold tracking-wide uppercase
+                  ${active ? 'text-white' : ''}
+                `}>
                   {item.label}
                 </span>
               </Link>
