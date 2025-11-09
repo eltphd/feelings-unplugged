@@ -1,28 +1,25 @@
-import { redirect } from 'next/navigation';
-import Layout from '../../components/Layout';
-import { PROMPTS, getPromptById } from '@/utils/prompts';
+'use client';
+
+import { useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import PromptResponse from '@/components/prompts/PromptResponse';
+import { getPromptById } from '@/utils/prompts';
 
-export const dynamicParams = false;
+export default function PromptResponsePage() {
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
+  const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
+  const prompt = id ? getPromptById(id) : undefined;
 
-export function generateStaticParams() {
-  return PROMPTS.map((prompt) => ({ id: prompt.id }));
-}
+  useEffect(() => {
+    if (!prompt) {
+      router.replace('/prompts-feelings');
+    }
+  }, [prompt, router]);
 
-interface PageProps {
-  params: { id: string };
-}
-
-export default function PromptResponsePage({ params }: PageProps) {
-  const id = Array.isArray(params.id) ? params.id[0] : params.id;
-  const prompt = getPromptById(id);
   if (!prompt) {
-    redirect('/prompts-feelings');
+    return null;
   }
 
-  return (
-    <Layout>
-      <PromptResponse prompt={prompt} />
-    </Layout>
-  );
+  return <PromptResponse prompt={prompt} />;
 }
