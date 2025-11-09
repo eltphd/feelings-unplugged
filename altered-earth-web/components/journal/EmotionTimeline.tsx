@@ -124,9 +124,14 @@ export default function EmotionTimeline() {
                     {formatDate(entry.timestamp)}
                   </time>
                   <div className="text-lg font-black">{emotion.label}</div>
-                  {entry.intensity && (
-                    <div className="badge badge-outline badge-primary mt-2">
-                      Intensity: {entry.intensity}/10
+                  {entry.promptQuestion && (
+                    <p className="text-xs uppercase tracking-wide mt-1 opacity-60">Prompt: {entry.promptQuestion}</p>
+                  )}
+                  {entry.tags && entry.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {entry.tags.map((tag) => (
+                        <span key={tag} className="badge badge-ghost badge-sm">#{tag}</span>
+                      ))}
                     </div>
                   )}
                   {entry.note && (

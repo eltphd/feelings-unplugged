@@ -17,6 +17,8 @@ export interface JournalEntry {
   intensity?: number; // 1-10 scale
   note?: string;
   prompt?: string;
+  promptId?: string;
+  promptQuestion?: string;
   tags?: string[];
 }
 
