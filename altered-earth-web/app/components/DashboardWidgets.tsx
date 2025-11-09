@@ -53,17 +53,15 @@ export default function DashboardWidgets() {
     if (!existingToday) {
       data.moodLog.push({ date: today, mood })
 
-      // Celebration for mood check-in
+      // Quiet acknowledgment (SDT: competence feedback, not celebration)
       const messages = [
-        '✨ Checked in! Your feelings matter',
-        '🌟 Great job checking in with yourself',
-        '💫 You showed up today. That counts.',
-        '🔥 Emotional awareness unlocked!',
-        '⭐ Your feelings are valid, always'
+        'Logged',
+        'Noted',
+        'Saved',
       ]
       setCelebrationMessage(messages[Math.floor(Math.random() * messages.length)])
       setShowCelebration(true)
-      setTimeout(() => setShowCelebration(false), 3000)
+      setTimeout(() => setShowCelebration(false), 2000)
     }
 
     localStorage.setItem('alteredEarthJournal', JSON.stringify(data))
@@ -71,63 +69,47 @@ export default function DashboardWidgets() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 -mt-8 relative z-20">
-      {/* Celebration Toast */}
+      {/* Quiet Toast - Minimal feedback */}
       {showCelebration && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[100] animate-slide-up">
-          <div className="bg-gradient-to-br from-terracotta via-amber to-amber text-white px-6 py-4 rounded-full firefly-glow-lg font-sans font-bold text-center shadow-2xl animate-celebration">
+          <div className="bg-charcoal text-white px-4 py-2 rounded-lg font-sans text-sm shadow-lg">
             {celebrationMessage}
           </div>
         </div>
       )}
 
-      {/* Firefly Ambient Glows */}
-      <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-amber/30 to-terracotta/20 rounded-full blur-3xl animate-firefly-glow pointer-events-none"></div>
-      <div className="absolute bottom-20 left-10 w-40 h-40 bg-gradient-to-br from-sage/20 to-forest/10 rounded-full blur-3xl animate-firefly-glow pointer-events-none" style={{ animationDelay: '1.5s' }}></div>
-
-      {/* Quick Check-In Widget - Enhanced */}
-      <div className="mb-6 animate-fade-in">
-        <div className="card-glass p-6 md:p-8 rounded-3xl hover-lift relative overflow-hidden border border-terracotta/10">
-          {/* Decorative Firefly Accents */}
-          <div className="absolute top-4 right-4 w-3 h-3 bg-amber rounded-full animate-firefly-float opacity-60"></div>
-          <div className="absolute top-8 right-12 w-2 h-2 bg-terracotta rounded-full animate-firefly-float opacity-40" style={{ animationDelay: '0.5s' }}></div>
-
-          <h2 className="text-2xl md:text-4xl font-sans font-extrabold gradient-text mb-2 text-center md:text-left">
-            How are you feeling right now?
+      {/* Mood Check-In - Large, Prominent */}
+      <div className="mb-8 animate-fade-in">
+        <div className="bg-white rounded-2xl p-8 md:p-12 border border-light-300 shadow-sm">
+          <h2 className="text-3xl md:text-4xl font-sans font-bold text-dark mb-3">
+            How are you feeling today?
           </h2>
-          <p className="text-sm md:text-base text-gray-600 font-serif mb-5 text-center md:text-left">
-            Every firefly glows differently. Your feelings are valid. ✨
+          <p className="text-lg text-dark-300 mb-8">
+            Check in with yourself
           </p>
 
-          <div className="grid grid-cols-5 gap-2 md:gap-4">
+          <div className="grid grid-cols-5 gap-3 md:gap-4">
             {moods.map((mood) => (
               <button
                 key={mood.label}
                 onClick={() => saveTodayMood(mood.label)}
                 className={`
-                  tap-target haptic-heavy
                   flex flex-col items-center justify-center
-                  p-3 md:p-5 rounded-2xl md:rounded-3xl
-                  transition-all duration-300
-                  relative overflow-hidden
+                  p-4 md:p-6 rounded-2xl
+                  transition-all duration-200
+                  hover:scale-105 active:scale-95
                   ${
                     todaysMood === mood.label
-                      ? `bg-gradient-to-br ${mood.color} text-white scale-110 firefly-glow-md animate-celebration shadow-2xl`
-                      : 'bg-white hover:scale-110 hover:shadow-xl border-2 border-gray-100'
+                      ? 'bg-gradient-to-br from-primary-light to-primary ring-2 ring-primary shadow-lg'
+                      : 'bg-light-200 hover:bg-light-300 border border-light-300'
                   }
                 `}
               >
-                {/* Shimmer effect for selected mood */}
-                {todaysMood === mood.label && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
-                )}
-
-                <span className={`text-3xl md:text-5xl mb-1 md:mb-2 transition-all ${
-                  todaysMood === mood.label ? 'animate-bounce-soft' : ''
-                }`}>
+                <span className="text-4xl md:text-6xl mb-2">
                   {mood.emoji}
                 </span>
-                <span className={`text-[10px] md:text-sm font-sans font-extrabold uppercase tracking-wide ${
-                  todaysMood === mood.label ? 'text-white' : 'text-gray-700'
+                <span className={`text-xs md:text-sm font-sans font-semibold ${
+                  todaysMood === mood.label ? 'text-white' : 'text-dark-300'
                 }`}>
                   {mood.label}
                 </span>
@@ -161,87 +143,51 @@ export default function DashboardWidgets() {
           </div>
         </Link>
 
-        {/* Progress Widget - Enhanced with Streaks */}
-        <div className="card-glass p-6 rounded-3xl hover-lift bg-gradient-to-br from-white to-amber/10 border border-amber/20 relative overflow-hidden">
-          {/* Firefly glow accent */}
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-amber/40 to-terracotta/30 rounded-full blur-2xl animate-firefly-glow"></div>
+        {/* Progress Widget - Vercel Analytics Style */}
+        <div className="bg-white rounded-2xl p-6 md:p-8 border border-light-300 shadow-sm">
+          <h3 className="text-xl font-sans font-bold text-dark mb-6">
+            Your Progress
+          </h3>
 
-          <div className="relative z-10">
-            <div className={`text-5xl mb-4 inline-block ${currentStreak >= 3 ? 'animate-wiggle' : ''}`}>
-              🔥
+          {/* Progress Bar - Large */}
+          <div className="mb-6">
+            <div className="flex justify-between items-baseline mb-3">
+              <span className="text-sm font-medium text-dark-300">Daily entries</span>
+              <span className="text-2xl font-bold text-dark font-mono">{totalDays}<span className="text-lg text-dark-300">/30</span></span>
             </div>
-            <h3 className="text-xl md:text-2xl font-sans font-extrabold text-forest mb-3">
-              Your Progress
-            </h3>
-
-            {/* Streak Milestone Messages */}
-            {currentStreak >= 7 && (
-              <div className="mb-4 p-3 bg-gradient-to-r from-amber/20 to-terracotta/20 rounded-2xl border border-amber/30 animate-scale-in">
-                <p className="text-sm font-sans font-bold text-forest">
-                  🎉 {currentStreak} day streak! You're on fire!
-                </p>
-              </div>
-            )}
-
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-sans font-bold text-gray-700">Days Completed</span>
-                  <span className="text-sm font-sans font-extrabold gradient-text">{totalDays}/30</span>
-                </div>
-                <div className="w-full bg-gradient-to-r from-gray-200 to-gray-100 rounded-full h-4 overflow-hidden shadow-inner">
-                  <div
-                    className="bg-gradient-to-r from-amber via-terracotta to-amber h-full rounded-full transition-all duration-700 firefly-glow-sm relative"
-                    style={{
-                      width: `${Math.min((totalDays / 30) * 100, 100)}%`,
-                      backgroundSize: '200% 100%',
-                      animation: 'shimmer 2s linear infinite'
-                    }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="text-center bg-gradient-to-br from-amber/10 to-terracotta/10 rounded-2xl p-4 border border-amber/20">
-                  <div className="text-3xl font-black gradient-text font-sans">{currentStreak}</div>
-                  <div className="text-xs text-gray-600 font-sans font-bold uppercase tracking-wide">Day Streak 🔥</div>
-                </div>
-                <div className="text-center bg-gradient-to-br from-sage/10 to-forest/10 rounded-2xl p-4 border border-sage/20">
-                  <div className="text-3xl font-black gradient-text font-sans">{totalDays}</div>
-                  <div className="text-xs text-gray-600 font-sans font-bold uppercase tracking-wide">Total Entries ✨</div>
-                </div>
-              </div>
-
-              {/* Motivational Progress Messages */}
-              {totalDays === 0 && (
-                <p className="text-xs text-gray-600 font-serif italic text-center mt-3">
-                  🌟 Start your journey today. Every firefly starts with a single glow.
-                </p>
-              )}
-              {totalDays >= 1 && totalDays < 7 && (
-                <p className="text-xs text-gray-600 font-serif italic text-center mt-3">
-                  💫 You're building momentum. Keep glowing!
-                </p>
-              )}
-              {totalDays >= 7 && totalDays < 14 && (
-                <p className="text-xs text-gray-600 font-serif italic text-center mt-3">
-                  ⭐ One week strong! Your consistency is powerful.
-                </p>
-              )}
-              {totalDays >= 14 && totalDays < 30 && (
-                <p className="text-xs text-gray-600 font-serif italic text-center mt-3">
-                  🚀 Halfway there! Your growth is undeniable.
-                </p>
-              )}
-              {totalDays >= 30 && (
-                <p className="text-xs text-gray-600 font-serif italic text-center mt-3">
-                  👑 30 days completed! You're a journaling legend.
-                </p>
-              )}
+            <div className="h-3 bg-light-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-700"
+                style={{ width: `${Math.min((totalDays / 30) * 100, 100)}%` }}
+              ></div>
             </div>
           </div>
+
+          {/* Stats Grid - Spacious */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-light-100 rounded-xl p-4 border border-light-300">
+              <div className="text-3xl font-bold text-dark font-mono mb-1">{currentStreak}</div>
+              <div className="text-sm text-dark-300 font-medium">Day streak</div>
+            </div>
+            <div className="bg-light-100 rounded-xl p-4 border border-light-300">
+              <div className="text-3xl font-bold text-dark font-mono mb-1">{totalDays}</div>
+              <div className="text-sm text-dark-300 font-medium">Total entries</div>
+            </div>
+          </div>
+
+          {/* Encouragement */}
+          {totalDays === 0 && (
+            <p className="text-sm text-dark-300 text-center mt-6">
+              Start your first entry today
+            </p>
+          )}
+          {totalDays >= 30 && (
+            <div className="mt-6 p-4 bg-gradient-to-r from-success/10 to-accent/10 rounded-xl border border-success/20">
+              <p className="text-sm font-semibold text-success text-center">
+                🎉 30 days complete!
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Mood Calendar Widget */}
