@@ -32,6 +32,7 @@ export default function Home() {
               <p className="text-base text-stone mb-6 max-w-2xl">
                 Evidence-based journaling grounded in Self-Determination Theory. No login required.
               </p>
+              {/* Trigger deploy */}
               <div className="inline-flex flex-col sm:flex-row gap-3 items-start">
                 <div className="bg-ash/50 px-4 py-2 rounded-lg border border-ash">
                   <p className="text-charcoal font-sans text-sm">
