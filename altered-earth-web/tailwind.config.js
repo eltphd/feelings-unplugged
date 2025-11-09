@@ -7,18 +7,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Cognitive Calm Palette - Monochrome + Soft Pastels
-        charcoal: '#2D3748',      // Primary text (SDT: clarity)
-        stone: '#57534E',          // Secondary text
-        slate: '#475569',          // Neutral dark
-        ash: '#E7E5E4',            // Light backgrounds
-        pearl: '#FAFAF9',          // Off-white base
-        lavender: '#C4B5FD',       // Calm, introspection
-        mint: '#A7F3D0',           // Growth, competence
-        blush: '#FECACA',          // Warmth, relatedness
-
-        // Legacy support (will phase out)
-        'off-white': '#FAFAF9',
+        // Modern SaaS Palette - Leonardo.ai + Vercel inspired
+        dark: {
+          DEFAULT: '#0A0A0A',      // True black background
+          100: '#111111',          // Elevated surface
+          200: '#1A1A1A',          // Card background
+          300: '#2A2A2A',          // Border/divider
+        },
+        light: {
+          DEFAULT: '#FFFFFF',      // White
+          100: '#FAFAFA',          // Light gray bg
+          200: '#F5F5F5',          // Card background
+          300: '#E5E5E5',          // Border
+        },
+        primary: {
+          DEFAULT: '#8B5CF6',      // Purple (Leonardo.ai vibe)
+          dark: '#7C3AED',
+          light: '#A78BFA',
+        },
+        accent: {
+          DEFAULT: '#06B6D4',      // Cyan
+          dark: '#0891B2',
+          light: '#22D3EE',
+        },
+        success: '#10B981',        // Green
+        warning: '#F59E0B',        // Amber
+        danger: '#EF4444',         // Red
       },
       fontFamily: {
         // System fonts for accessibility and cognitive load reduction

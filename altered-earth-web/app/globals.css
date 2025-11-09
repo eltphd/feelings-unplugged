@@ -2,208 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Root Variables - Cognitive Calm Design System */
-:root {
-  --color-charcoal: #2D3748;
-  --color-stone: #57534E;
-  --color-slate: #475569;
-  --color-ash: #E7E5E4;
-  --color-pearl: #FAFAF9;
-  --color-lavender: #C4B5FD;
-  --color-mint: #A7F3D0;
-  --color-blush: #FECACA;
-}
+/* Modern SaaS Design System - Leonardo.ai + Vercel + Notion inspired */
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Roboto', system-ui, sans-serif;
-  background-color: var(--color-pearl);
-  color: var(--color-charcoal);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', 'Roboto', system-ui, sans-serif;
+  background-color: #FAFAFA;
+  color: #0A0A0A;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Dark Mode - Simplified */
-.dark body {
-  background-color: #1a1a1a;
-  color: #f5f5f5;
-}
-
-.dark .bg-pearl {
-  background-color: #1a1a1a;
-}
-
-.dark .bg-white {
-  background-color: #2d2d2d;
-}
-
-.dark .card,
-.dark .card-minimal {
-  background-color: #2d2d2d;
-  border-color: #3d3d3d;
-}
-
-.dark .text-charcoal {
-  color: #e0e0e0;
-}
-
-.dark .text-stone {
-  color: #b0b0b0;
-}
-
-.dark input,
-.dark textarea {
-  background-color: #2d2d2d;
-  color: #f5f5f5;
-  border-color: #3d3d3d;
-}
-
-.dark input:focus,
-.dark textarea:focus {
-  border-color: var(--color-lavender);
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Subtle gradients - no flashy colors */
-  .gradient-text {
-    background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-slate) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .gradient-calm {
-    background: linear-gradient(135deg, var(--color-lavender) 0%, var(--color-mint) 100%);
-  }
-
-  /* Tap Targets - 44px minimum for accessibility */
-  .tap-target {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 12px;
-  }
-
-  /* Haptic Feedback - Muted, purposeful */
-  .haptic-light {
-    transition: transform 0.15s ease-out;
-  }
-
-  .haptic-light:active {
-    transform: scale(0.97);
-  }
-
-  .haptic-medium {
-    transition: transform 0.2s ease-out;
-  }
-
-  .haptic-medium:active {
-    transform: scale(0.95);
-  }
-
-  /* Thumb Zone Safe Area */
-  .thumb-safe {
-    padding-bottom: max(env(safe-area-inset-bottom), 20px);
-  }
+  font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
 @layer components {
-  /* Card System - Minimal, Notion-like */
-  .card-minimal {
+  /* Modern Card Styles */
+  .card-modern {
     background: white;
-    border: 1px solid var(--color-ash);
-    border-radius: 12px;
-    padding: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #E5E5E5;
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
   }
 
-  .card-minimal:hover {
-    border-color: var(--color-lavender);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  .card-modern:hover {
+    border-color: #8B5CF6;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
   }
 
-  .card-minimal:focus-within {
-    border-color: var(--color-lavender);
-    box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.1);
-  }
-
-  /* Glass Effect - Subtle */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-  }
-
-  /* Soft Shadows - Apple Health style */
-  .soft-shadow {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-  }
-
-  .soft-shadow-lg {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-
-  /* Interactive Elements - Muted */
-  .interactive {
-    transition: all 0.2s ease-out;
-  }
-
-  .interactive:hover {
-    transform: translateY(-2px);
-  }
-
-  .interactive:active {
-    transform: translateY(0);
-  }
-
-  /* Buttons - Minimal, Clear */
+  /* Buttons */
   .btn-primary {
-    background-color: var(--color-charcoal);
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
     color: white;
-    font-weight: 500;
+    font-weight: 600;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
+    border-radius: 12px;
+    transition: all 0.2s ease;
     border: none;
+    font-size: 1rem;
   }
 
   .btn-primary:hover {
-    background-color: var(--color-slate);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
   }
 
   .btn-primary:active {
-    background-color: var(--color-charcoal);
+    transform: translateY(0);
   }
 
   .btn-secondary {
-    background-color: white;
-    color: var(--color-charcoal);
-    font-weight: 500;
+    background: white;
+    color: #0A0A0A;
+    font-weight: 600;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--color-ash);
+    border-radius: 12px;
+    border: 1px solid #E5E5E5;
     transition: all 0.2s ease;
   }
 
   .btn-secondary:hover {
-    border-color: var(--color-lavender);
-    background-color: rgba(196, 181, 253, 0.05);
+    border-color: #8B5CF6;
+    background: #FAFAFA;
   }
 
-  /* Progress Indicators - Competence (SDT) */
-  .progress-bar {
-    height: 8px;
-    background: var(--color-ash);
-    border-radius: 4px;
+  /* Progress Bars */
+  .progress-bar-modern {
+    height: 12px;
+    background: #F5F5F5;
+    border-radius: 999px;
     overflow: hidden;
   }
 
-  .progress-fill {
+  .progress-fill-modern {
     height: 100%;
-    background: linear-gradient(90deg, var(--color-mint) 0%, var(--color-lavender) 100%);
+    background: linear-gradient(90deg, #8B5CF6 0%, #06B6D4 100%);
+    border-radius: 999px;
     transition: width 0.6s ease-out;
   }
 
@@ -212,61 +85,37 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* Floating Action Button - BeReal style */
-  .fab {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    background: white;
-    border: 1px solid var(--color-ash);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 40;
-    transition: all 0.2s ease;
-  }
-
-  .fab:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    transform: scale(1.05);
-  }
-
   /* Smooth Scroll */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Custom Scrollbar - Minimal */
+  /* Custom Scrollbar - Modern */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-pearl);
+    background: #FAFAFA;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-ash);
-    border-radius: 4px;
+    background: #E5E5E5;
+    border-radius: 5px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-stone);
+    background: #8B5CF6;
   }
 }
 
-/* Focus Visible - Accessibility First */
+/* Focus Visible - Modern */
 *:focus-visible {
-  outline: 2px solid var(--color-lavender);
+  outline: 2px solid #8B5CF6;
   outline-offset: 2px;
 }
 
-/* Print Styles for PDF Export */
+/* Print Styles */
 @media print {
   @page {
     size: letter;
@@ -291,7 +140,7 @@ body {
     padding: 1rem 0 !important;
   }
 
-  .card-minimal,
+  .card-modern,
   section {
     border: 1px solid #ddd !important;
     page-break-inside: avoid;

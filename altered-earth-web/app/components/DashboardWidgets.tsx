@@ -78,38 +78,38 @@ export default function DashboardWidgets() {
         </div>
       )}
 
-      {/* Mood Check-In - Minimal */}
-      <div className="mb-6 animate-fade-in">
-        <div className="card-minimal p-6 md:p-8">
-          <h2 className="text-xl md:text-2xl font-sans font-semibold text-charcoal mb-1">
-            How are you feeling?
+      {/* Mood Check-In - Large, Prominent */}
+      <div className="mb-8 animate-fade-in">
+        <div className="bg-white rounded-2xl p-8 md:p-12 border border-light-300 shadow-sm">
+          <h2 className="text-3xl md:text-4xl font-sans font-bold text-dark mb-3">
+            How are you feeling today?
           </h2>
-          <p className="text-sm text-stone mb-5">
+          <p className="text-lg text-dark-300 mb-8">
             Check in with yourself
           </p>
 
-          <div className="grid grid-cols-5 gap-2 md:gap-3">
+          <div className="grid grid-cols-5 gap-3 md:gap-4">
             {moods.map((mood) => (
               <button
                 key={mood.label}
                 onClick={() => saveTodayMood(mood.label)}
                 className={`
-                  tap-target haptic-medium
                   flex flex-col items-center justify-center
-                  p-3 md:p-4 rounded-xl
+                  p-4 md:p-6 rounded-2xl
                   transition-all duration-200
+                  hover:scale-105 active:scale-95
                   ${
                     todaysMood === mood.label
-                      ? 'bg-lavender border-2 border-lavender shadow-sm'
-                      : 'bg-white hover:bg-ash/50 border border-ash'
+                      ? 'bg-gradient-to-br from-primary-light to-primary ring-2 ring-primary shadow-lg'
+                      : 'bg-light-200 hover:bg-light-300 border border-light-300'
                   }
                 `}
               >
-                <span className="text-2xl md:text-4xl mb-1">
+                <span className="text-4xl md:text-6xl mb-2">
                   {mood.emoji}
                 </span>
-                <span className={`text-[10px] md:text-xs font-sans font-medium ${
-                  todaysMood === mood.label ? 'text-charcoal' : 'text-stone'
+                <span className={`text-xs md:text-sm font-sans font-semibold ${
+                  todaysMood === mood.label ? 'text-white' : 'text-dark-300'
                 }`}>
                   {mood.label}
                 </span>
@@ -143,51 +143,51 @@ export default function DashboardWidgets() {
           </div>
         </Link>
 
-        {/* Progress Widget - Minimal, SDT-aligned */}
-        <div className="card-minimal p-6">
-          <h3 className="text-lg font-sans font-semibold text-charcoal mb-4">
-            Progress
+        {/* Progress Widget - Vercel Analytics Style */}
+        <div className="bg-white rounded-2xl p-6 md:p-8 border border-light-300 shadow-sm">
+          <h3 className="text-xl font-sans font-bold text-dark mb-6">
+            Your Progress
           </h3>
 
-          <div className="space-y-4">
-            {/* Progress Bar - Competence */}
-            <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm text-stone">Entries</span>
-                <span className="text-sm font-mono text-charcoal">{totalDays}/30</span>
-              </div>
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${Math.min((totalDays / 30) * 100, 100)}%` }}
-                ></div>
-              </div>
+          {/* Progress Bar - Large */}
+          <div className="mb-6">
+            <div className="flex justify-between items-baseline mb-3">
+              <span className="text-sm font-medium text-dark-300">Daily entries</span>
+              <span className="text-2xl font-bold text-dark font-mono">{totalDays}<span className="text-lg text-dark-300">/30</span></span>
             </div>
-
-            {/* Stats Grid - Clean */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="text-center bg-ash/30 rounded-lg p-3 border border-ash">
-                <div className="text-2xl font-semibold text-charcoal font-mono">{currentStreak}</div>
-                <div className="text-xs text-stone font-sans">Streak</div>
-              </div>
-              <div className="text-center bg-ash/30 rounded-lg p-3 border border-ash">
-                <div className="text-2xl font-semibold text-charcoal font-mono">{totalDays}</div>
-                <div className="text-xs text-stone font-sans">Total</div>
-              </div>
+            <div className="h-3 bg-light-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-700"
+                style={{ width: `${Math.min((totalDays / 30) * 100, 100)}%` }}
+              ></div>
             </div>
-
-            {/* Muted Encouragement - Only when needed */}
-            {totalDays === 0 && (
-              <p className="text-xs text-stone text-center mt-3">
-                Start today
-              </p>
-            )}
-            {totalDays >= 30 && (
-              <p className="text-xs text-stone text-center mt-3">
-                30 days complete
-              </p>
-            )}
           </div>
+
+          {/* Stats Grid - Spacious */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-light-100 rounded-xl p-4 border border-light-300">
+              <div className="text-3xl font-bold text-dark font-mono mb-1">{currentStreak}</div>
+              <div className="text-sm text-dark-300 font-medium">Day streak</div>
+            </div>
+            <div className="bg-light-100 rounded-xl p-4 border border-light-300">
+              <div className="text-3xl font-bold text-dark font-mono mb-1">{totalDays}</div>
+              <div className="text-sm text-dark-300 font-medium">Total entries</div>
+            </div>
+          </div>
+
+          {/* Encouragement */}
+          {totalDays === 0 && (
+            <p className="text-sm text-dark-300 text-center mt-6">
+              Start your first entry today
+            </p>
+          )}
+          {totalDays >= 30 && (
+            <div className="mt-6 p-4 bg-gradient-to-r from-success/10 to-accent/10 rounded-xl border border-success/20">
+              <p className="text-sm font-semibold text-success text-center">
+                🎉 30 days complete!
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Mood Calendar Widget */}
