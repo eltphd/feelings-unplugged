@@ -1,23 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Crimson Text', Georgia, serif;
-  background-color: #FDFBF7;
-  color: #000000;
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Root Variables - Cognitive Calm Design System */
+:root {
+  --color-charcoal: #2D3748;
+  --color-stone: #57534E;
+  --color-slate: #475569;
+  --color-ash: #E7E5E4;
+  --color-pearl: #FAFAF9;
+  --color-lavender: #C4B5FD;
+  --color-mint: #A7F3D0;
+  --color-blush: #FECACA;
 }
 
-/* Dark Mode */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Roboto', system-ui, sans-serif;
+  background-color: var(--color-pearl);
+  color: var(--color-charcoal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark Mode - Simplified */
 .dark body {
   background-color: #1a1a1a;
   color: #f5f5f5;
 }
 
-.dark .bg-off-white {
+.dark .bg-pearl {
   background-color: #1a1a1a;
 }
 
@@ -25,30 +37,18 @@ body {
   background-color: #2d2d2d;
 }
 
-.dark .bg-cream {
-  background-color: #252525;
-}
-
 .dark .card,
-.dark .card-glass {
+.dark .card-minimal {
   background-color: #2d2d2d;
   border-color: #3d3d3d;
 }
 
-.dark .text-gray-600 {
-  color: #b0b0b0;
-}
-
-.dark .text-gray-700 {
-  color: #d0d0d0;
-}
-
-.dark .text-gray-800 {
+.dark .text-charcoal {
   color: #e0e0e0;
 }
 
-.dark .text-forest {
-  color: #81B29A;
+.dark .text-stone {
+  color: #b0b0b0;
 }
 
 .dark input,
@@ -60,7 +60,7 @@ body {
 
 .dark input:focus,
 .dark textarea:focus {
-  border-color: #E07A5F;
+  border-color: var(--color-lavender);
 }
 
 @layer utilities {
@@ -68,139 +68,151 @@ body {
     text-wrap: balance;
   }
 
+  /* Subtle gradients - no flashy colors */
   .gradient-text {
-    background: linear-gradient(135deg, #E07A5F 0%, #D4A574 100%);
+    background: linear-gradient(135deg, var(--color-charcoal) 0%, var(--color-slate) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .gradient-bg-terracotta {
-    background: linear-gradient(135deg, #E07A5F 0%, #D4A574 100%);
+  .gradient-calm {
+    background: linear-gradient(135deg, var(--color-lavender) 0%, var(--color-mint) 100%);
   }
 
-  .gradient-bg-sage {
-    background: linear-gradient(135deg, #81B29A 0%, #3A5A40 100%);
-  }
-
-  /* Firefly Glow Effects - Mobile Optimized */
-  .firefly-glow-sm {
-    box-shadow: 0 0 15px rgba(224, 122, 95, 0.3), 0 0 30px rgba(212, 165, 116, 0.2);
-  }
-
-  .firefly-glow-md {
-    box-shadow: 0 0 20px rgba(224, 122, 95, 0.4), 0 0 40px rgba(212, 165, 116, 0.3);
-  }
-
-  .firefly-glow-lg {
-    box-shadow: 0 0 30px rgba(224, 122, 95, 0.5), 0 0 60px rgba(212, 165, 116, 0.4), 0 0 90px rgba(224, 122, 95, 0.2);
-  }
-
-  /* Tap Target - Optimized for Thumb */
+  /* Tap Targets - 44px minimum for accessibility */
   .tap-target {
     min-height: 44px;
     min-width: 44px;
     padding: 12px;
   }
 
-  /* Haptic Feedback Style */
+  /* Haptic Feedback - Muted, purposeful */
   .haptic-light {
-    transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.15s ease-out;
   }
 
   .haptic-light:active {
-    transform: scale(0.95);
+    transform: scale(0.97);
   }
 
   .haptic-medium {
-    transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.2s ease-out;
   }
 
   .haptic-medium:active {
-    transform: scale(0.92);
+    transform: scale(0.95);
   }
 
-  .haptic-heavy {
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .haptic-heavy:active {
-    transform: scale(0.88);
-  }
-
-  /* Thumb Zone Safe Area - Bottom 60% of screen */
+  /* Thumb Zone Safe Area */
   .thumb-safe {
     padding-bottom: max(env(safe-area-inset-bottom), 20px);
   }
 }
 
 @layer components {
+  /* Card System - Minimal, Notion-like */
+  .card-minimal {
+    background: white;
+    border: 1px solid var(--color-ash);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card-minimal:hover {
+    border-color: var(--color-lavender);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-minimal:focus-within {
+    border-color: var(--color-lavender);
+    box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.1);
+  }
+
+  /* Glass Effect - Subtle */
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .card-glass {
     background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(224, 122, 95, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
   }
 
+  /* Soft Shadows - Apple Health style */
   .soft-shadow {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
   }
 
-  .hover-lift {
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 0.3s ease;
+  .soft-shadow-lg {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
-  .hover-lift:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  /* Interactive Elements - Muted */
+  .interactive {
+    transition: all 0.2s ease-out;
   }
 
+  .interactive:hover {
+    transform: translateY(-2px);
+  }
+
+  .interactive:active {
+    transform: translateY(0);
+  }
+
+  /* Buttons - Minimal, Clear */
   .btn-primary {
-    background-color: #E07A5F;
+    background-color: var(--color-charcoal);
     color: white;
-    font-weight: bold;
+    font-weight: 500;
     padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    border: none;
   }
 
   .btn-primary:hover {
-    background-color: rgba(224, 122, 95, 0.9);
-    transform: scale(1.05);
+    background-color: var(--color-slate);
+  }
+
+  .btn-primary:active {
+    background-color: var(--color-charcoal);
   }
 
   .btn-secondary {
-    background-color: #81B29A;
-    color: white;
-    font-weight: bold;
+    background-color: white;
+    color: var(--color-charcoal);
+    font-weight: 500;
     padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 8px;
+    border: 1px solid var(--color-ash);
+    transition: all 0.2s ease;
   }
 
   .btn-secondary:hover {
-    background-color: rgba(129, 178, 154, 0.9);
-    transform: scale(1.05);
+    border-color: var(--color-lavender);
+    background-color: rgba(196, 181, 253, 0.05);
   }
 
-  .card {
-    background-color: white;
-    border-radius: 1rem;
-    padding: 1.5rem;
+  /* Progress Indicators - Competence (SDT) */
+  .progress-bar {
+    height: 8px;
+    background: var(--color-ash);
+    border-radius: 4px;
+    overflow: hidden;
   }
 
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-mint) 0%, var(--color-lavender) 100%);
+    transition: width 0.6s ease-out;
+  }
+
+  /* Safe Areas */
   .safe-area-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* Floating Action Button */
+  /* Floating Action Button - BeReal style */
   .fab {
     position: fixed;
     bottom: 80px;
@@ -212,55 +224,46 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    box-shadow: 0 4px 20px rgba(224, 122, 95, 0.4);
+    background: white;
+    border: 1px solid var(--color-ash);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 40;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.2s ease;
   }
 
   .fab:hover {
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 8px 30px rgba(224, 122, 95, 0.6);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
   }
 
-  /* Neumorphism styles */
-  .neomorph {
-    background: #FDFBF7;
-    border-radius: 20px;
-    box-shadow:
-      8px 8px 16px rgba(0, 0, 0, 0.1),
-      -8px -8px 16px rgba(255, 255, 255, 0.9);
-  }
-
-  .neomorph-inset {
-    background: #FDFBF7;
-    border-radius: 20px;
-    box-shadow:
-      inset 4px 4px 8px rgba(0, 0, 0, 0.08),
-      inset -4px -4px 8px rgba(255, 255, 255, 0.9);
-  }
-
-  /* Smooth scroll */
+  /* Smooth Scroll */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar */
+  /* Custom Scrollbar - Minimal */
   ::-webkit-scrollbar {
     width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #F4F1DE;
+    background: var(--color-pearl);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #E07A5F 0%, #D4A574 100%);
+    background: var(--color-ash);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #D4A574 0%, #E07A5F 100%);
+    background: var(--color-stone);
   }
+}
+
+/* Focus Visible - Accessibility First */
+*:focus-visible {
+  outline: 2px solid var(--color-lavender);
+  outline-offset: 2px;
 }
 
 /* Print Styles for PDF Export */
@@ -275,7 +278,6 @@ body {
     color: black;
   }
 
-  /* Hide navigation elements */
   header a,
   .sticky,
   button,
@@ -283,67 +285,21 @@ body {
     display: none !important;
   }
 
-  /* Show header title */
   header {
     background: none !important;
     color: black !important;
     padding: 1rem 0 !important;
-    margin-bottom: 1rem;
   }
 
-  header h1 {
-    color: black !important;
-    font-size: 2rem !important;
-  }
-
-  header p {
-    color: black !important;
-  }
-
-  /* Remove backgrounds and shadows */
-  .bg-gradient-to-b,
-  .bg-gradient-to-br,
-  .gradient-bg-terracotta,
-  .gradient-bg-sage,
-  .glass-card,
-  .soft-shadow,
-  .hover-lift {
-    background: white !important;
-    box-shadow: none !important;
-  }
-
-  /* Simplify cards for printing */
-  .card,
+  .card-minimal,
   section {
     border: 1px solid #ddd !important;
-    border-radius: 8px !important;
-    padding: 1rem !important;
-    margin-bottom: 1rem !important;
     page-break-inside: avoid;
   }
 
-  /* Make text readable */
-  .text-white,
-  .text-white\\/80,
-  .text-white\\/90 {
-    color: black !important;
-  }
-
-  /* Simplify inputs for print */
   input,
   textarea {
     border: 1px solid #333 !important;
     background: white !important;
-    page-break-inside: avoid;
-  }
-
-  /* Page breaks */
-  h2, h3 {
-    page-break-after: avoid;
-  }
-
-  /* Hide emoji buttons, show only selected */
-  button {
-    display: none !important;
   }
 }
