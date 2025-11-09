@@ -178,22 +178,20 @@ function JournalEntry({
                   placeholder="Write here..."
                 />
               )}
-              {('wordBank' in prompt) ? (
-                prompt.wordBank && (
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    <span className="text-sm text-gray-600">Word bank:</span>
-                    {prompt.wordBank.map((word: string) => (
-                      <button
-                        key={word}
-                        onClick={() => onUpdate(prompt.key, entry[prompt.key] ? entry[prompt.key] + ', ' + word : word)}
-                        className="text-sm px-2 py-1 bg-cream border border-terracotta rounded hover:bg-terracotta/20"
-                      >
-                        {word}
-                      </button>
-                    ))}
-                  </div>
-                )
-              ) : null}
+              {(prompt as any).wordBank && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <span className="text-sm text-gray-600">Word bank:</span>
+                  {((prompt as any).wordBank as string[]).map((word: string) => (
+                    <button
+                      key={word}
+                      onClick={() => onUpdate(prompt.key, entry[prompt.key] ? entry[prompt.key] + ', ' + word : word)}
+                      className="text-sm px-2 py-1 bg-cream border border-terracotta rounded hover:bg-terracotta/20"
+                    >
+                      {word}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -218,22 +216,20 @@ function JournalEntry({
                 rows={3}
                 placeholder="Write here..."
               />
-              {('wordBank' in prompt) ? (
-                prompt.wordBank && (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="text-sm font-sans text-gray-600">Word bank:</span>
-                    {prompt.wordBank.map((word: string) => (
-                      <button
-                        key={word}
-                        onClick={() => onUpdate(prompt.key, entry[prompt.key] ? entry[prompt.key] + ', ' + word : word)}
-                        className="text-sm font-sans px-3 py-1.5 bg-sage/10 border border-sage/30 rounded-full hover:bg-sage/20 hover:border-sage transition-all"
-                      >
-                        {word}
-                      </button>
-                    ))}
-                  </div>
-                )
-              ) : null}
+              {(prompt as any).wordBank && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="text-sm font-sans text-gray-600">Word bank:</span>
+                  {((prompt as any).wordBank as string[]).map((word: string) => (
+                    <button
+                      key={word}
+                      onClick={() => onUpdate(prompt.key, entry[prompt.key] ? entry[prompt.key] + ', ' + word : word)}
+                      className="text-sm font-sans px-3 py-1.5 bg-sage/10 border border-sage/30 rounded-full hover:bg-sage/20 hover:border-sage transition-all"
+                    >
+                      {word}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
