@@ -5,6 +5,7 @@ import BottomNav from './components/BottomNav'
 import DashboardWidgets from './components/DashboardWidgets'
 import FloatingActionButton from './components/FloatingActionButton'
 import DarkModeToggle from './components/DarkModeToggle'
+import DataBackup from './components/DataBackup'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -47,6 +48,9 @@ export default function Home() {
 
       {/* Dark Mode Toggle */}
       <DarkModeToggle />
+
+      {/* Data Backup */}
+      <DataBackup />
 
       {/* Footer */}
       <footer className="gradient-bg-sage text-white py-12 px-6 mt-16">

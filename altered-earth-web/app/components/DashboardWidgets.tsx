@@ -192,6 +192,26 @@ export default function DashboardWidgets() {
         />
       </div>
 
+      {/* Backup Reminder */}
+      {totalDays > 7 && (
+        <div className="mt-6 card-glass p-6 rounded-3xl border-2 border-amber/30 bg-gradient-to-br from-amber/10 to-terracotta/10">
+          <div className="flex items-center gap-4">
+            <div className="text-5xl">💾</div>
+            <div className="flex-1">
+              <h3 className="text-xl font-sans font-bold text-forest mb-2">
+                Backup Your Progress!
+              </h3>
+              <p className="text-gray-700 font-serif mb-3">
+                You've journaled for {totalDays} days! Your entries are precious. Back them up so you never lose them.
+              </p>
+              <p className="text-sm text-gray-600 font-sans">
+                💡 Click "Backup Data" in the top-left corner to download your entries.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Inspirational Quote Widget */}
       <div className="mt-6 card-glass p-6 rounded-3xl text-center bg-gradient-to-br from-white to-cream/50">
         <p className="text-xl md:text-2xl font-serif italic text-gray-700 mb-2">
