@@ -18,11 +18,6 @@ export default function PromptCarousel({ onPromptSelect }: PromptCarouselProps) 
     setCurrentIndex((prev) => (prev + 1) % PROMPTS.length);
   };
 
-  const handleStart = (prompt: Prompt) => {
-    onPromptSelect?.(prompt);
-    router.push(`/prompts-feelings/${prompt.id}`);
-  };
-
   return (
     <div className="w-full max-w-6xl mx-auto p-6">
       <div className="mb-6">
@@ -36,7 +31,10 @@ export default function PromptCarousel({ onPromptSelect }: PromptCarouselProps) 
           <div key={prompt.id} className="carousel-item snap-start">
             <PromptCard
               prompt={prompt}
-              onStart={handleStart}
+              onStart={(p) => {
+                onPromptSelect?.(p);
+                router.push(`/prompts-feelings/${p.id}`);
+              }}
               onSkip={handleNext}
             />
           </div>

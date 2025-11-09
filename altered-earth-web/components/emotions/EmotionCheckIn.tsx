@@ -175,8 +175,12 @@ export default function EmotionCheckIn({ onComplete }: EmotionCheckInProps) {
             </button>
           ))}
         </div>
+        <p className="text-xs md:text-sm opacity-70" aria-live="polite">
+          {selectedEmotion
+            ? `You chose ${selectedEmotion.replace('-', ' ')}. Adjust intensity below, then save when you’re ready.`
+            : 'Tap one that matches your vibe — nothing saves until you hit “Save”.'}
+        </p>
 
-        {/* Optional Note Section */}
         {selectedEmotion && (
           <div className="mt-4 space-y-2">
             <label className="flex items-center justify-between text-sm font-semibold text-base-content/80">

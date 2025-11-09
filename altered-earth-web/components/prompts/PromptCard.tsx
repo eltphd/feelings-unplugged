@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Prompt } from '@/types';
 
 interface PromptCardProps {
@@ -59,20 +60,23 @@ export default function PromptCard({ prompt, onStart, onSkip, onBookmark }: Prom
           </div>
         )}
 
-        <div className="card-actions justify-end gap-2 pt-2">
+        <div className="card-actions justify-between items-center pt-2 text-xs opacity-60">
           <button 
             className="btn btn-ghost btn-sm"
             onClick={onSkip}
+            type="button"
           >
             Skip
           </button>
-          <button 
+          <Link 
             className="btn btn-primary btn-sm"
+            href={`/prompts-feelings/${prompt.id}`}
             onClick={() => onStart(prompt)}
           >
-            Let's go →
-          </button>
+            Open prompt →
+          </Link>
         </div>
+        <p className="text-xs opacity-70 text-left">Tap “Open prompt” to write privately; everything stays on this device unless you export.</p>
       </div>
     </div>
   );
