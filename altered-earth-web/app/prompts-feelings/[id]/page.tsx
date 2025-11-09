@@ -1,22 +1,18 @@
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import Layout from '../../components/Layout';
-import { PROMPTS, getPromptById } from '@/utils/prompts';
+import { getPromptById } from '@/utils/prompts';
 import PromptResponse from '@/components/prompts/PromptResponse';
+
+export const dynamic = 'force-dynamic';
 
 interface PageProps {
   params: { id: string };
 }
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return PROMPTS.map((prompt) => ({ id: prompt.id }));
-}
-
 export default function PromptResponsePage({ params }: PageProps) {
   const prompt = getPromptById(params.id);
   if (!prompt) {
-    notFound();
+    redirect('/prompts-feelings');
   }
 
   return (

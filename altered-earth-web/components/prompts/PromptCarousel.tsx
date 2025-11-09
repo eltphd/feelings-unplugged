@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PromptCard from './PromptCard';
 import { PROMPTS } from '@/utils/prompts';
 import { Prompt } from '@/types';
@@ -13,9 +13,13 @@ interface PromptCarouselProps {
 export default function PromptCarousel({ onPromptSelect }: PromptCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
+  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % PROMPTS.length);
+    const nextIndex = (currentIndex + 1) % PROMPTS.length;
+    setCurrentIndex(nextIndex);
+    const nextPrompt = PROMPTS[nextIndex];
+    itemRefs.current[nextPrompt.id]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
   };
 
   return (
@@ -28,7 +32,8 @@ export default function PromptCarousel({ onPromptSelect }: PromptCarouselProps) 
       {/* Carousel */}
       <div className="carousel carousel-center w-full space-x-4 p-4 carousel-smooth overflow-x-auto snap-x snap-mandatory">
         {PROMPTS.map((prompt) => (
-          <div key={prompt.id} className="carousel-item snap-start">
+          <div key={prompt.id} className="carousel-item">
+            <div ref={(el) => { itemRefs.current[prompt.id] = el; }}>
             <PromptCard
               prompt={prompt}
               onStart={(p) => {
@@ -37,6 +42,7 @@ export default function PromptCarousel({ onPromptSelect }: PromptCarouselProps) 
               }}
               onSkip={handleNext}
             />
+            </div>
           </div>
         ))}
       </div>
@@ -47,7 +53,11 @@ export default function PromptCarousel({ onPromptSelect }: PromptCarouselProps) 
           <button
             key={index}
             className={`btn btn-xs ${index === currentIndex ? 'btn-primary' : 'btn-ghost'}`}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => {
+              setCurrentIndex(index);
+              const target = PROMPTS[index];
+              itemRefs.current[target.id]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }}
             aria-label={`Go to prompt ${index + 1}`}
           >
             {index + 1}
