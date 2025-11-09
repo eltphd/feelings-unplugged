@@ -12,11 +12,19 @@ export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
 
   const navItems = [
+    { href: '/', label: 'Home', icon: '🏠' },
     { href: '/emotions', label: 'Check In', icon: '💜' },
     { href: '/timeline', label: 'Timeline', icon: '📖' },
     { href: '/prompts-feelings', label: 'Prompts', icon: '✨' },
     { href: '/settings', label: 'Settings', icon: '⚙️' },
   ];
+
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <div className="min-h-screen bg-base-100 flex flex-col">
@@ -34,7 +42,7 @@ export default function Layout({ children }: LayoutProps) {
               <li key={item.href}>
                 <Link 
                   href={item.href}
-                  className={pathname === item.href ? 'active' : ''}
+                  className={isActive(item.href) ? 'active' : ''}
                 >
                   <span className="text-lg mr-1">{item.icon}</span>
                   {item.label}
@@ -56,7 +64,7 @@ export default function Layout({ children }: LayoutProps) {
           <Link 
             key={item.href}
             href={item.href}
-            className={pathname === item.href ? 'active' : ''}
+            className={isActive(item.href) ? 'active' : ''}
           >
             <span className="text-2xl">{item.icon}</span>
             <span className="btm-nav-label text-xs">{item.label}</span>

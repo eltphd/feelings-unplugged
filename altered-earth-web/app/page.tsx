@@ -1,78 +1,99 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import BottomNav from './components/BottomNav'
-import DashboardWidgets from './components/DashboardWidgets'
-import FloatingActionButton from './components/FloatingActionButton'
-import DarkModeToggle from './components/DarkModeToggle'
-import DataBackup from './components/DataBackup'
+import { useState } from 'react';
+import Link from 'next/link';
+import EmotionCheckIn from '@/components/emotions/EmotionCheckIn';
+import EmotionTimeline from '@/components/journal/EmotionTimeline';
+import PromptCarousel from '@/components/prompts/PromptCarousel';
+import Layout from './components/Layout';
+import Toast from './components/Toast';
+import { JournalEntry } from '@/types';
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
+  const handleCheckInComplete = (entry: JournalEntry) => {
+    setToast({ message: 'Moment captured. Proud of you for checking in 💜', type: 'success' });
+  };
 
   return (
-    <div className="min-h-screen bg-light-100 pb-24">
-      {/* Hero Section - Modern, Spacious */}
-      <section className="bg-gradient-to-b from-white to-light-100 border-b border-light-300">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-sans font-bold mb-6 text-dark bg-gradient-to-r from-dark to-dark-200 bg-clip-text text-transparent">
-              Feelings Unplugged
+    <Layout>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
+      <div className="space-y-12">
+        <section className="glass-card px-8 py-10 text-center md:text-left">
+          <div className="max-w-3xl mx-auto md:mx-0 space-y-4">
+            <span className="badge badge-secondary badge-lg px-4 py-3 shadow-glow-secondary">Gen Z · Mental Health · Journaling</span>
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+              How are you really feeling right now?
             </h1>
-            <p className="text-xl md:text-2xl text-dark-300 mb-8 leading-relaxed">
-              Track your emotions with clarity. Built on Self-Determination Theory for meaningful growth.
+            <p className="text-base-content/80 text-lg">
+              Feelings Unplugged is your private space to understand your emotions, notice your patterns, and show up for yourself—no pressure, no judgment.
             </p>
-            {/* Trigger deployment */}
-            <div className="flex flex-wrap gap-4 text-sm text-dark-300">
-              <span className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-                Free forever
-              </span>
-              <span className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-                No login required
-              </span>
-              <span className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-                Privacy-first
-              </span>
+            <div className="flex flex-col md:flex-row gap-3 md:items-center md:gap-4 pt-2">
+              <Link href="/prompts-feelings" className="btn btn-secondary btn-wide md:btn-md shadow-glow-secondary">
+                Explore Soul Compass Prompts
+              </Link>
+              <Link href="/settings" className="btn btn-outline btn-accent btn-wide md:btn-md">
+                Your privacy, your rules →
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Dashboard Widgets */}
-      <DashboardWidgets />
+        <section className="max-w-4xl mx-auto">
+          <EmotionCheckIn onComplete={handleCheckInComplete} />
+        </section>
 
-      {/* Dark Mode Toggle */}
-      <DarkModeToggle />
+        <section className="glass-card p-6 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-3xl font-bold">Your emotional timeline</h2>
+              <p className="text-base-content/70">Notice how your feelings ebb and flow across the week. Patterns make things make sense.</p>
+            </div>
+            <Link href="/timeline" className="btn btn-outline btn-primary">Open full timeline</Link>
+          </div>
+          <EmotionTimeline />
+        </section>
 
-      {/* Data Backup */}
-      <DataBackup />
+        <section className="glass-card p-6 md:p-8 space-y-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h2 className="text-3xl font-bold">Soul Compass prompts</h2>
+              <p className="text-base-content/70">Pick a prompt that feels like a real conversation, not homework.</p>
+            </div>
+            <Link href="/prompts-feelings" className="btn btn-outline">See all prompts</Link>
+          </div>
+          <PromptCarousel />
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-ash text-charcoal py-12 px-6 mt-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm text-stone mb-2">
-            Altered.earth publications presents Feelings Unplugged
-          </p>
-          <p className="text-sm text-stone mb-2">
-            Created by Dr. Erica L. Tartt | Atlas Academy
-          </p>
-        </div>
-      </footer>
-
-      {/* Floating Action Button */}
-      <FloatingActionButton />
-
-      {/* Bottom Navigation */}
-      <BottomNav />
-    </div>
-  )
+        <section className="grid gap-4 md:grid-cols-2">
+          <Link href="/settings" className="glass-card p-6 hover:shadow-glow transition-transform hover:-translate-y-1">
+            <div className="flex items-start gap-4">
+              <span className="text-3xl">🔐</span>
+              <div>
+                <h3 className="text-xl font-semibold">Privacy settings</h3>
+                <p className="text-base-content/70">Control what stays on your device, export entries, or wipe everything. You decide.</p>
+              </div>
+            </div>
+          </Link>
+          <Link href="/resources" className="glass-card p-6 hover:shadow-glow transition-transform hover:-translate-y-1">
+            <div className="flex items-start gap-4">
+              <span className="text-3xl">🆘</span>
+              <div>
+                <h3 className="text-xl font-semibold">Need support?</h3>
+                <p className="text-base-content/70">Immediate help, crisis hotlines, and grounding tools—available whenever you need them.</p>
+              </div>
+            </div>
+          </Link>
+        </section>
+      </div>
+    </Layout>
+  );
 }

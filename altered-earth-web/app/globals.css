@@ -10,7 +10,8 @@
   }
   
   body {
-    @apply bg-base-100 text-base-content;
+    background-color: #0F172A;
+    color: #F1F5F9;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 }
