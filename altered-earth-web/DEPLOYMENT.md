@@ -43,14 +43,29 @@ git push -u origin main
 5. Click "Deploy"
 6. Wait 2 minutes... DONE! 🎉
 
-**Your site will be live at:** `https://altered-earth-journizine.vercel.app`
+**Your site will be live at:** `https://app.feelingsunplugged.space`
 
-### Step 4: (Optional) Custom Domain
+### Step 4: Custom Domain Setup (REQUIRED)
 
-Want `alteredearth.com` instead?
-1. Buy domain on Namecheap ($12/year)
-2. In Vercel → Settings → Domains → Add your domain
-3. Update DNS settings (Vercel gives you instructions)
+This project uses `app.feelingsunplugged.space` as the production domain:
+
+1. **In Vercel Dashboard:**
+   - Go to your project → Settings → Domains
+   - Click "Add Domain"
+   - Enter: `app.feelingsunplugged.space`
+   - Vercel will provide DNS records
+
+2. **In Your Domain Registrar (Namecheap/etc):**
+   - Add CNAME record:
+     - Type: `CNAME`
+     - Name: `app`
+     - Value: `cname.vercel-dns.com`
+     - TTL: Automatic or 3600
+
+3. **Wait 5-10 minutes** for DNS to propagate
+4. Vercel will auto-enable HTTPS/SSL
+
+**Backup domain:** `altered-earth-green.vercel.app` (temporary URL until DNS configured)
 
 ---
 
