@@ -17,26 +17,45 @@ export default function Home() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-off-white via-cream/30 to-off-white pb-24">
-      {/* Hero Section - Compact */}
+    <div className="min-h-screen bg-gradient-to-b from-off-white via-cream/30 to-off-white pb-24 relative overflow-hidden">
+      {/* Ambient Firefly Glows - Background */}
+      <div className="fixed top-20 right-10 w-64 h-64 bg-gradient-to-br from-amber/20 to-terracotta/10 rounded-full blur-3xl animate-firefly-glow pointer-events-none"></div>
+      <div className="fixed top-60 left-10 w-96 h-96 bg-gradient-to-br from-sage/15 to-forest/10 rounded-full blur-3xl animate-firefly-glow pointer-events-none" style={{ animationDelay: '2s' }}></div>
+
+      {/* Hero Section - Mobile-First Enhanced */}
       <section className="relative overflow-hidden">
-        <div className="gradient-bg-sage py-12 md:py-16 px-6">
+        <div className="gradient-bg-sage py-16 md:py-20 px-6 relative">
+          {/* Floating Fireflies - Multiple */}
+          <div className="absolute top-8 right-8 md:right-16 pointer-events-none">
+            <div className="w-14 h-14 md:w-20 md:h-20 bg-gradient-to-br from-amber to-terracotta rounded-full opacity-70 animate-firefly-float blur-md firefly-glow-md"></div>
+          </div>
+          <div className="absolute top-24 right-24 md:right-32 pointer-events-none">
+            <div className="w-8 h-8 md:w-12 md:h-12 bg-gradient-to-br from-amber/60 to-terracotta/60 rounded-full opacity-50 animate-firefly-float blur-sm" style={{ animationDelay: '1s' }}></div>
+          </div>
+          <div className="absolute bottom-12 left-12 md:left-20 pointer-events-none">
+            <div className="w-10 h-10 md:w-16 md:h-16 bg-gradient-to-br from-cream/80 to-amber/60 rounded-full opacity-60 animate-firefly-float blur-md" style={{ animationDelay: '1.5s' }}></div>
+          </div>
+
           <div className="max-w-6xl mx-auto relative z-10">
-            {/* Floating Firefly */}
-            <div className="absolute top-4 right-4 md:right-12">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-amber to-terracotta rounded-full opacity-80 animate-float blur-sm"></div>
-            </div>
-            <div className="text-center md:text-left">
-              <h1 className="text-4xl md:text-6xl font-sans font-bold mb-2 text-white">
+            <div className="text-center animate-fade-in">
+              <div className="mb-4 inline-block">
+                <div className="text-5xl md:text-7xl animate-float">✨</div>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-sans font-black mb-3 text-white drop-shadow-lg">
                 ALTERED.EARTH
               </h1>
-              <p className="text-xl md:text-2xl font-serif italic text-amber mb-3">
+              <p className="text-2xl md:text-3xl font-serif italic text-amber mb-4 drop-shadow-md">
                 Your Personal Feelings Companion
               </p>
-              <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
-                <p className="text-white/90 font-sans text-xs md:text-sm">
-                  ✨ Free • No Login • Privacy-First
-                </p>
+              <p className="text-base md:text-lg font-serif text-white/90 mb-6 max-w-2xl mx-auto">
+                Every firefly glows differently. Track your emotions, build playlists, and discover your light.
+              </p>
+              <div className="inline-flex flex-col sm:flex-row gap-3 items-center">
+                <div className="bg-white/25 backdrop-blur-md px-6 py-3 rounded-full border-2 border-white/40 firefly-glow-sm">
+                  <p className="text-white font-sans text-sm md:text-base font-bold">
+                    ✨ Free Forever • 🔒 No Login • 🛡️ Privacy-First
+                  </p>
+                </div>
               </div>
             </div>
           </div>

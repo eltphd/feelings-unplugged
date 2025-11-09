@@ -82,6 +82,56 @@ body {
   .gradient-bg-sage {
     background: linear-gradient(135deg, #81B29A 0%, #3A5A40 100%);
   }
+
+  /* Firefly Glow Effects - Mobile Optimized */
+  .firefly-glow-sm {
+    box-shadow: 0 0 15px rgba(224, 122, 95, 0.3), 0 0 30px rgba(212, 165, 116, 0.2);
+  }
+
+  .firefly-glow-md {
+    box-shadow: 0 0 20px rgba(224, 122, 95, 0.4), 0 0 40px rgba(212, 165, 116, 0.3);
+  }
+
+  .firefly-glow-lg {
+    box-shadow: 0 0 30px rgba(224, 122, 95, 0.5), 0 0 60px rgba(212, 165, 116, 0.4), 0 0 90px rgba(224, 122, 95, 0.2);
+  }
+
+  /* Tap Target - Optimized for Thumb */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+  }
+
+  /* Haptic Feedback Style */
+  .haptic-light {
+    transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .haptic-light:active {
+    transform: scale(0.95);
+  }
+
+  .haptic-medium {
+    transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .haptic-medium:active {
+    transform: scale(0.92);
+  }
+
+  .haptic-heavy {
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .haptic-heavy:active {
+    transform: scale(0.88);
+  }
+
+  /* Thumb Zone Safe Area - Bottom 60% of screen */
+  .thumb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 20px);
+  }
 }
 
 @layer components {

@@ -31,6 +31,12 @@ module.exports = {
         'fade-in': 'fade-in 0.4s ease-out',
         'scale-in': 'scale-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
         'wiggle': 'wiggle 1s ease-in-out infinite',
+        'firefly-glow': 'firefly-glow 3s ease-in-out infinite',
+        'firefly-float': 'firefly-float 4s ease-in-out infinite',
+        'celebration': 'celebration 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'shake': 'shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97)',
+        'pop': 'pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'shimmer': 'shimmer 2s linear infinite',
       },
       keyframes: {
         float: {
@@ -64,6 +70,35 @@ module.exports = {
         'wiggle': {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
+        },
+        'firefly-glow': {
+          '0%, 100%': { opacity: '0.4', filter: 'blur(8px)' },
+          '50%': { opacity: '0.8', filter: 'blur(12px)' },
+        },
+        'firefly-float': {
+          '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
+          '25%': { transform: 'translate(10px, -10px) rotate(5deg)' },
+          '50%': { transform: 'translate(5px, -20px) rotate(-5deg)' },
+          '75%': { transform: 'translate(-5px, -10px) rotate(3deg)' },
+        },
+        'celebration': {
+          '0%': { transform: 'scale(0.8) rotate(0deg)' },
+          '50%': { transform: 'scale(1.2) rotate(180deg)' },
+          '100%': { transform: 'scale(1) rotate(360deg)' },
+        },
+        'shake': {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+          '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+        },
+        'pop': {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.15)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        'shimmer': {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
         },
       },
     },
