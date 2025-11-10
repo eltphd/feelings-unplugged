@@ -406,6 +406,10 @@ footer a:hover {
     margin-bottom: 4rem;
 }
 
+.quick-overview .features {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
 .section {
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
@@ -430,6 +434,52 @@ footer a:hover {
 
 .example-box + .example-box {
     margin-top: 1.75rem;
+}
+
+.details-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    padding: 1.5rem 1.75rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.details-card summary {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+    font-weight: 600;
+    color: var(--color-secondary);
+    cursor: pointer;
+    list-style: none;
+}
+
+.details-card summary::-webkit-details-marker {
+    display: none;
+}
+
+.details-card summary::after {
+    content: '＋';
+    float: right;
+    color: var(--color-primary);
+    font-size: 1.4rem;
+    transform: translateY(-4px);
+    transition: transform 0.2s ease;
+}
+
+.details-card[open] summary::after {
+    content: '－';
+}
+
+.details-card .details-body {
+    margin-top: 1.25rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.grid-two {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
 }
 
 .prompt-example {
