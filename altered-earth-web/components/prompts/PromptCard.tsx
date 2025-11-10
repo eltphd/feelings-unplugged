@@ -7,11 +7,12 @@ import { Prompt } from '@/types';
 interface PromptCardProps {
   prompt: Prompt;
   onStart: (prompt: Prompt) => void;
-  onSkip: () => void;
+  onSkip?: () => void;
   onBookmark?: (prompt: Prompt) => void;
+  layout?: 'carousel' | 'list';
 }
 
-export default function PromptCard({ prompt, onStart, onSkip, onBookmark }: PromptCardProps) {
+export default function PromptCard({ prompt, onStart, onSkip, onBookmark, layout = 'carousel' }: PromptCardProps) {
   const categoryBadge = (category: Prompt['category']) => {
     const map: Record<Prompt['category'], { badge: string; emoji: string }> = {
       'identity': { badge: 'badge-primary text-primary-content', emoji: '🪞' },
@@ -26,7 +27,11 @@ export default function PromptCard({ prompt, onStart, onSkip, onBookmark }: Prom
   const { badge, emoji } = categoryBadge(prompt.category);
 
   return (
-    <div className="card w-72 sm:w-80 glass-card shadow-lg hover:shadow-glow transition-all duration-200 ease-out">
+    <div
+      className={`card glass-card shadow-lg hover:shadow-glow transition-all duration-200 ease-out ${
+        layout === 'carousel' ? 'w-72 sm:w-80' : 'w-full'
+      }`}
+    >
       <div className="card-body space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div className={`badge badge-lg rounded-full px-4 py-2 font-semibold ${badge}`}>
@@ -60,23 +65,29 @@ export default function PromptCard({ prompt, onStart, onSkip, onBookmark }: Prom
           </div>
         )}
 
-        <div className="card-actions justify-between items-center pt-2 text-xs opacity-60">
-          <button 
-            className="btn btn-ghost btn-sm"
-            onClick={onSkip}
-            type="button"
-          >
-            Skip
-          </button>
-          <Link 
-            className="btn btn-primary btn-sm"
+        <div className="card-actions justify-between items-center pt-2 text-xs sm:text-sm opacity-80">
+          {onSkip && (
+            <button
+              className="btn btn-ghost btn-md"
+              onClick={onSkip}
+              type="button"
+            >
+              Skip
+            </button>
+          )}
+          <Link
+            className="btn btn-primary btn-md"
             href={`/prompts-feelings/${prompt.id}`}
             onClick={() => onStart(prompt)}
           >
-            Open prompt →
+            Open prompt
           </Link>
         </div>
-        <p className="text-xs opacity-70 text-left">Tap “Open prompt” to write privately; everything stays on this device unless you export.</p>
+        {layout === 'carousel' && (
+          <p className="text-xs opacity-70 text-left">
+            Tap “Open prompt” to write privately; everything stays on this device unless you export.
+          </p>
+        )}
       </div>
     </div>
   );
