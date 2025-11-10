@@ -1,7 +1,7 @@
 # UI & UX Review — November 10, 2025
 
 ## Scope
-- Marketing landing pages (`index.html`, `teen-journal.html`, `parent-guide.html`, `educator-toolkit.html`)
+- Marketing landing pages (`marketing/index.html`, `marketing/teen-journal.html`, `marketing/parent-guide.html`, `marketing/educator-toolkit.html`)
 - Web app routes under `app.feelingsunplugged.space`
 - Focus on mobile responsiveness, clarity, and friction points (not full accessibility audit)
 

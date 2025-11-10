@@ -8,8 +8,8 @@ Evidence-based emotional regulation tools for Gen Alpha/Gen Z teens, their careg
 
 - **Production web app:** https://app.feelingsunplugged.space  
   Next.js 16 experience with emotion check-ins, timelines, prompts, and privacy controls.
-- **Marketing/packaging assets:** `/index.html`, `/teen-journal.html`, `/parent-guide.html`, `/educator-toolkit.html`  
-  Static landing pages that can be deployed to Cloudflare Pages when you are ready.
+- **Marketing/packaging assets:** `marketing/` (`index.html`, `teen-journal.html`, `parent-guide.html`, `educator-toolkit.html`, `_headers`, `style.css`)  
+  Static landing pages now deployable via the dedicated Vercel project `feelings-unplugged-marketing`.
 
 Deployment steps for the app live in the canonical [`DEPLOYMENT.md`](./DEPLOYMENT.md).
 
@@ -28,6 +28,7 @@ feelings-unplugged/
 ├── docs/
 │   ├── reports/               # Current performance & efficiency reports
 │   └── reference/             # Domain plan, print handoffs, designer briefs
+├── marketing/                 # Static marketing site (HTML/CSS + Cloudflare headers)
 ├── products/, branding/, content/   # PDF deliverables & creative assets
 ├── indesign-scripts/          # MCP automation helpers for print production
 ├── archive/                   # Older docs & reports kept for historical context

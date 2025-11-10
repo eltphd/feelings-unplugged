@@ -32,8 +32,16 @@ echo "✅ Authenticated with Cloudflare"
 echo ""
 
 # Show files to be deployed
-echo "📦 Files to deploy:"
-ls -lh index.html teen-journal.html parent-guide.html educator-toolkit.html style.css _headers 2>/dev/null | awk '{print "  - " $9 " (" $5 ")"}'
+PAGES_DIR="marketing"
+
+if [ ! -d "$PAGES_DIR" ]; then
+    echo "❌ Marketing directory '$PAGES_DIR' not found."
+    echo "Please ensure the static site lives in $PAGES_DIR/"
+    exit 1
+fi
+
+echo "📦 Files to deploy from $PAGES_DIR/:"
+(cd "$PAGES_DIR" && ls -lh index.html teen-journal.html parent-guide.html educator-toolkit.html style.css _headers 2>/dev/null | awk '{print "  - " $9 " (" $5 ")"}')
 echo ""
 
 # Ask for project name
@@ -67,11 +75,11 @@ echo "Using project name: $PROJECT_NAME"
 echo ""
 
 # Deploy
-echo "🚀 Deploying to Cloudflare Pages..."
+echo "🚀 Deploying $PAGES_DIR/ to Cloudflare Pages..."
 echo "===================================="
 echo ""
 
-wrangler pages deploy . \
+wrangler pages deploy "$PAGES_DIR" \
     --project-name="$PROJECT_NAME" \
     --branch=main
 

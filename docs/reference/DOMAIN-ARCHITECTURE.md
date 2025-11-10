@@ -24,13 +24,13 @@ Dedicated product line for emotional wellness journaling tools.
 altered.earth
 ├── Purpose: Publication hub & product showcase
 ├── Hosting: Cloudflare Pages (FREE)
-├── Content: index.html (main landing), product links, research, news
+├── Content: marketing/index.html (main landing), product links, research, news
 └── Status: OWNED ✅
 
 feelingsunplugged.space
 ├── Purpose: Feelings Unplugged product site
-├── Hosting: Cloudflare Pages (FREE)
-├── Content: teen-journal.html, parent-guide.html, educator-toolkit.html
+├── Hosting: Vercel static project (`feelings-unplugged-marketing`)
+├── Content: marketing/teen-journal.html, marketing/parent-guide.html, marketing/educator-toolkit.html
 └── Status: OWNED ✅
 ```
 
@@ -52,19 +52,19 @@ app.feelingsunplugged.space
 
 **Project #1: Altered.Earth Hub**
 ```
-Repository: /home/user/feelings-unplugged/
+Repository: /home/user/feelings-unplugged/marketing
 Domain: altered.earth
 Files: index.html (product hub)
-Deploy: Cloudflare Pages
+Deploy: Cloudflare Pages or Vercel static (optional)
 Cost: $0/month
 ```
 
 **Project #2: Feelings Unplugged**
 ```
-Repository: /home/user/feelings-unplugged/
+Repository: /home/user/feelings-unplugged/marketing
 Domain: feelingsunplugged.space
 Files: teen-journal.html, parent-guide.html, educator-toolkit.html, style.css
-Deploy: Cloudflare Pages
+Deploy: Vercel (`feelings-unplugged-marketing`)
 Cost: $0/month
 ```
 
@@ -134,13 +134,14 @@ TTL: Auto
 ### **Static Site Files**
 
 ```
-/home/user/feelings-unplugged/
+/home/user/feelings-unplugged/marketing
 ├── index.html                 → Will be at altered.earth
-├── teen-journal.html          → Will be at feelingsunplugged.space
+├── teen-journal.html          → Will be at feelingsunplugged.space/teen-journal.html
 │   └── Links to: app.feelingsunplugged.space (2 places)
 ├── parent-guide.html          → Will be at feelingsunplugged.space/parent-guide.html
 ├── educator-toolkit.html      → Will be at feelingsunplugged.space/educator-toolkit.html
-└── style.css                  → Shared styles
+├── style.css                  → Shared styles
+└── _headers                   → Security headers (Cloudflare/Vercel)
 ```
 
 ### **Web App Files**

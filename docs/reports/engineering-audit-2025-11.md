@@ -9,7 +9,7 @@
 | `docs/` | Ops | Active documentation (`reports/`, `reference/`) | ✅ Organized | Continue adding dated reports here; archive previous versions under `archive/docs/` when superseded. |
 | `archive/` | Archive | Historical documentation/assets | ✅ Contained | Leave untouched; helpful for provenance. |
 | `branding/`, `products/`, `content/` | Marketing | Static assets and collateral | ✅ Useful | Document owners and update cadence; add README if workflows change. |
-| Static marketing pages (`index.html`, etc.) | Marketing | Landing pages intended for Cloudflare Pages | 🟡 Pending deploy | Decide on hosting (Cloudflare Pages or Vercel static) and set up CI deploy; currently lives only in repo. |
+| Static marketing site (`marketing/`) | Marketing | Landing pages + collateral | ✅ Deployed | Vercel project `feelings-unplugged-marketing`; update analytics token and consider adding CI smoke checks. |
 | `indesign-scripts/` | Production | MCP automation scripts for print journizine | ✅ Valid | Updated to reference the new content plan; keep for production handoff. |
 
 ## Branch & Workflow Overview
