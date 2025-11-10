@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelings Unplugged · Parent Guide (Print Edition)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    :root {
+      --surface: linear-gradient(135deg, rgba(252, 249, 243, 0.98), rgba(240, 229, 211, 0.94));
+      --pattern: repeating-linear-gradient(
+        125deg,
+        rgba(183, 102, 79, 0.06) 0px,
+        rgba(183, 102, 79, 0.06) 28px,
+        rgba(109, 139, 138, 0.06) 28px,
+        rgba(109, 139, 138, 0.06) 56px
+      );
+      --border: rgba(70, 91, 115, 0.2);
+      --border-strong: rgba(70, 91, 115, 0.32);
+      --primary: #B7664F;
+      --secondary: #465B73;
+      --accent: #6D8B8A;
+      --neutral: #2E2A29;
+      --muted: rgba(46, 42, 41, 0.68);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #F4EEE2;
+      font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--neutral);
+      line-height: 1.6;
+      font-size: 12pt;
+    }
+
+    .page {
+      position: relative;
+      min-height: 10.5in;
+      padding: 0.8in 0.75in;
+      margin-bottom: 0.35in;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .page:last-of-type {
+      page-break-after: auto;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--pattern);
+      mix-blend-mode: multiply;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .page > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+      margin: 0 0 0.22in;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 46pt; letter-spacing: -0.02em; }
+    h2 { font-size: 30pt; color: var(--primary); }
+    h3 { font-size: 22pt; color: var(--secondary); }
+    h4 { font-size: 15pt; color: var(--accent); }
+
+    p { margin: 0 0 0.18in; color: var(--muted); }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.15in 0 0.3in;
+    }
+
+    ul li {
+      margin-bottom: 0.12in;
+      padding-left: 0.3in;
+      position: relative;
+      color: var(--neutral);
+    }
+
+    ul li::before {
+      content: "✶";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 11pt;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08in 0.3in;
+      border-radius: 999px;
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      background: rgba(70, 91, 115, 0.12);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 10pt;
+      color: var(--secondary);
+    }
+
+    .cover-subtitle {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 11pt;
+      color: var(--secondary);
+      margin-bottom: 0.25in;
+    }
+
+    .card {
+      background: rgba(252, 249, 243, 0.92);
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      border-radius: 18px;
+      padding: 0.38in;
+      margin-bottom: 0.25in;
+      box-shadow: 0 18px 38px rgba(71, 59, 56, 0.12);
+      break-inside: avoid;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.06in 0.24in;
+      border-radius: 999px;
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      background: rgba(70, 91, 115, 0.08);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 9pt;
+      color: var(--secondary);
+      margin-bottom: 0.14in;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(2.7in, 1fr));
+      gap: 0.25in;
+      margin-top: 0.25in;
+    }
+
+    .grid .card { height: 100%; }
+
+    .list-plain {
+      list-style: none;
+      padding: 0;
+      margin: 0.12in 0;
+    }
+
+    .list-plain li {
+      padding-left: 0;
+      margin-bottom: 0.12in;
+      color: var(--muted);
+    }
+
+    .list-plain li::before { display: none; }
+
+    .footnote {
+      font-size: 9pt;
+      color: rgba(46, 42, 41, 0.55);
+      margin-top: 0.25in;
+    }
+
+    .page-metadata {
+      position: absolute;
+      bottom: 0.45in;
+      left: 0.75in;
+      right: 0.75in;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9pt;
+      color: rgba(46, 42, 41, 0.55);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 2.1in;
+      border: 1px dashed var(--border-strong);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11pt;
+      color: rgba(70, 91, 115, 0.6);
+      margin: 0.3in 0;
+    }
+
+    .table-of-contents ul li {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 0;
+    }
+
+    .table-of-contents ul li::before { display: none; }
+
+    .table-of-contents ul li span {
+      color: rgba(46, 42, 41, 0.5);
+    }
+
+    .notes-box {
+      min-height: 3in;
+      border: 1px dashed var(--border-strong);
+      border-radius: 18px;
+      background: rgba(252, 249, 243, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="hero-tag">Atlas Academy · Caregiver Briefing</div>
+    <h1>Feelings Unplugged · Parent Guide</h1>
+    <p class="cover-subtitle">Open Access · Scholar Studio</p>
+    <p>
+      A compassionate companion for caregivers supporting adolescents through identity work, survival contexts,
+      and mental health journeys. Built as open curriculum so every family can access evidence-based tools without a paywall.
+    </p>
+    <div class="image-placeholder">Optional family illustration / stock photo</div>
+    <div class="page-metadata">
+      <span>Feelings Unplugged</span>
+      <span>atlas@feelingsunplugged.space</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Table of Contents</h2>
+    <div class="card table-of-contents">
+      <ul>
+        <li>01 · Why This Guide Exists <span>p.2</span></li>
+        <li>02 · Core Principles <span>p.3</span></li>
+        <li>03 · Conversation Scripts <span>p.4</span></li>
+        <li>04 · Identity-Affirming Support (Part I) <span>p.5</span></li>
+        <li>05 · Identity-Affirming Support (Part II) <span>p.6</span></li>
+        <li>06 · Crisis Response Workflow <span>p.7</span></li>
+        <li>07 · Caregiver Nervous-System Practices <span>p.8</span></li>
+        <li>08 · Field Notes & Futures <span>p.9</span></li>
+        <li>09 · Resources & Citations <span>p.10</span></li>
+        <li>10 · Credits & License <span>p.11</span></li>
+      </ul>
+    </div>
+    <p class="footnote">
+      Scholar Studio Style Guide · v2025.10 · Aligns with web app and marketing narrative.
+    </p>
+    <div class="page-metadata">
+      <span>Contents</span>
+      <span>Page 1</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Why This Guide Exists</h2>
+    <div class="card">
+      <div class="badge">Heartbeat</div>
+      <p>
+        Adolescents are navigating the steepest brain rewiring of their lives while the world expects them to perform adulthood.
+        Your presence—not perfection—builds the safety they need to feel, iterate, and thrive.
+      </p>
+    </div>
+    <div class="card">
+      <div class="badge">Open Access Pledge</div>
+      <p>
+        Atlas Academy keeps caregiver frameworks free to download, teach, and translate. Pay-what-you-can contributions fund youth co-researchers,
+        language access, and family stipends. Share how you adapt it: atlas@feelingsunplugged.space.
+      </p>
+    </div>
+    <p class="footnote">
+      Reference: SAMHSA Trauma-Informed Framework (2014); Polyvagal Theory (Porges, 2011).
+    </p>
+    <div class="page-metadata">
+      <span>Why This Guide Exists</span>
+      <span>Page 2</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Core Principles</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Hold Psychological Safety</h3>
+        <ul class="list-plain">
+          <li>Validate feelings before problem-solving.</li>
+          <li>Separate behavior from worth (“You’re not bad; we’re going to solve this together”).</li>
+          <li>Ask permission before offering advice.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Mirror, Don’t Manage</h3>
+        <ul class="list-plain">
+          <li>Reflect: “I hear how heavy this feels.”</li>
+          <li>Offer choice: “Listen, brainstorm, or sit together?”</li>
+          <li>Use rituals (tea, walks, playlists) instead of lectures.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Co-Regulate First</h3>
+        <ul class="list-plain">
+          <li>Slow breathing, grounding questions, sensory anchors.</li>
+          <li>Model self-reset: “I need two minutes to breathe so I can hear you fully.”</li>
+          <li>Build calm kits together.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Repair Often</h3>
+        <ul class="list-plain">
+          <li>Apologize with specificity (“I snapped; you deserved calm”).</li>
+          <li>Ask what would help heal the rupture.</li>
+          <li>Schedule follow-ups (“Let’s check back tomorrow”).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Core Principles</span>
+      <span>Page 3</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Conversation Scripts</h2>
+    <div class="card">
+      <div class="badge">Daily Check-Ins</div>
+      <div class="prompt"><strong>Arrival:</strong> “What’s one high and one hard moment today?”</div>
+      <div class="prompt"><strong>When emotions spike:</strong> “Do you want company, a hug, water, or space?”</div>
+      <div class="prompt"><strong>Repairing:</strong> “I reacted from fear. Can we redo this when you’re ready?”</div>
+      <div class="prompt"><strong>Planning:</strong> “What support would make next week feel doable?”</div>
+    </div>
+    <div class="card">
+      <div class="badge">Boundary Language</div>
+      <ul class="list-plain">
+        <li>“I care and need ten minutes to regulate so I can listen well.”</li>
+        <li>“Let’s pick this up after dinner so I’m not half-listening.”</li>
+        <li>“I love you. I can’t be your only support. Let’s add one more trusted adult.”</li>
+      </ul>
+    </div>
+    <div class="page-metadata">
+      <span>Conversation Scripts</span>
+      <span>Page 4</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Identity-Affirming Support · Part I</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>BIPOC Youth</h3>
+        <ul class="list-plain">
+          <li>Validate racial stress and code-switching as labor.</li>
+          <li>Protect time with affirming communities.</li>
+          <li>Share your own experiences navigating bias and survival.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>LGBTQIA+ Youth</h3>
+        <ul class="list-plain">
+          <li>Mirror pronouns/names exactly as offered.</li>
+          <li>Create a safety map (affirming vs. draining spaces).</li>
+          <li>Connect to queer mental health supports and peer networks.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Identity Support</span>
+      <span>Page 5</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Identity-Affirming Support · Part II</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Neurodivergent Youth</h3>
+        <ul class="list-plain">
+          <li>Normalize stims, sensory needs, shutdowns.</li>
+          <li>Co-create scripts for requesting accommodations.</li>
+          <li>Celebrate focused interests as brilliance, not distraction.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Immigrant + First-Gen Families</h3>
+        <ul class="list-plain">
+          <li>Honor bicultural navigation as real work.</li>
+          <li>Translate expectations; clarify what’s negotiable.</li>
+          <li>Share migration stories so resilience feels inherited, not demanded.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="image-placeholder">Insert cultural affirmation imagery / quote</div>
+    <div class="page-metadata">
+      <span>Identity Support (cont.)</span>
+      <span>Page 6</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Crisis Response Workflow</h2>
+    <div class="card">
+      <div class="badge">Immediate Steps</div>
+      <ul class="list-plain">
+        <li>Stay near; reduce stimuli where possible.</li>
+        <li>Remove immediate harm (unsafe objects, unlocked car keys).</li>
+        <li>Call appropriate crisis support (local responder or 988).</li>
+        <li>Use calm, concrete language: “We’re getting help; I’m with you.”</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="badge">After Stabilization</div>
+      <ul class="list-plain">
+        <li>Document triggers, supports requested, next steps.</li>
+        <li>Inform trusted adults, share resources, plan follow-up.</li>
+        <li>Schedule a repair conversation and update safety plans.</li>
+      </ul>
+    </div>
+    <div class="page-metadata">
+      <span>Crisis Workflow</span>
+      <span>Page 7</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Caregiver Nervous-System Practices</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Micro Rituals</h3>
+        <ul class="list-plain">
+          <li>Two minutes outdoors between transitions.</li>
+          <li>Somatic release: shake, stretch, paced breathing.</li>
+          <li>Voice memo to trusted adult; ask for mirrors, not fixes.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Boundaries to Model</h3>
+        <ul class="list-plain">
+          <li>Office hours for emotional check-ins.</li>
+          <li>Shared tech-free rest windows.</li>
+          <li>Limit after-hours response; involve professionals when needed.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="footnote">
+      Caring for yourself models regulation pathways and prevents compassion fatigue.
+    </p>
+    <div class="page-metadata">
+      <span>Caregiver Practices</span>
+      <span>Page 8</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Field Notes & Futures</h2>
+    <p>
+      Use this space to capture adaptations, resources, or scripts your family creates. Email highlights to atlas@feelingsunplugged.space
+      so we can fold them into future releases.
+    </p>
+    <div class="notes-box"></div>
+    <div class="page-metadata">
+      <span>Field Notes</span>
+      <span>Page 9</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Resources & Citations</h2>
+    <div class="card">
+      <h3>Core References</h3>
+      <ul class="list-plain">
+        <li>Ryan, R. M., & Deci, E. L. (2000). Self-Determination Theory.</li>
+        <li>SAMHSA (2014). Trauma-Informed Care Framework.</li>
+        <li>Martín-Baró, I. (1994). Liberation Psychology.</li>
+        <li>Porges, S. W. (2011). Polyvagal Theory.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Suggested Resources</h3>
+      <ul class="list-plain">
+        <li>Parenting for Liberation · parentingforliberation.org</li>
+        <li>Gender Spectrum · genderspectrum.org</li>
+        <li>Atlas Academy · feelingsunplugged.space/atlas</li>
+        <li>Caregiver Hotlines & local supports</li>
+      </ul>
+    </div>
+    <div class="page-metadata">
+      <span>Resources</span>
+      <span>Page 10</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Credits & License</h2>
+    <p>
+      Created by Dr. Erica L. Tartt and the Atlas Academy scholar studio. Licensed CC BY-NC 4.0—share, remix, teach, cite the work,
+      and keep core materials free for the families you serve.
+    </p>
+    <p class="footnote">
+      Contact: atlas@feelingsunplugged.space · Scholar Studio Brand System © 2025.
+    </p>
+    <div class="page-metadata">
+      <span>Credits</span>
+      <span>Page 11</span>
+    </div>
+  </div>
+</body>
+</html>
+

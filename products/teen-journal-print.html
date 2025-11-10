@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelings Unplugged · Teen Journal (Print Edition)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    :root {
+      --surface: linear-gradient(135deg, rgba(252, 249, 243, 0.98), rgba(240, 229, 211, 0.94));
+      --pattern: repeating-linear-gradient(
+        125deg,
+        rgba(183, 102, 79, 0.06) 0px,
+        rgba(183, 102, 79, 0.06) 28px,
+        rgba(109, 139, 138, 0.06) 28px,
+        rgba(109, 139, 138, 0.06) 56px
+      );
+      --border: rgba(70, 91, 115, 0.2);
+      --border-strong: rgba(70, 91, 115, 0.32);
+      --primary: #B7664F;
+      --secondary: #465B73;
+      --accent: #6D8B8A;
+      --neutral: #2E2A29;
+      --muted: rgba(46, 42, 41, 0.68);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--neutral);
+      line-height: 1.6;
+      font-size: 12pt;
+      background: #F4EEE2;
+    }
+
+    .page {
+      position: relative;
+      min-height: 10.5in;
+      padding: 0.8in 0.75in;
+      margin-bottom: 0.35in;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .page:last-of-type {
+      page-break-after: auto;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--pattern);
+      mix-blend-mode: multiply;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .page > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+      margin: 0 0 0.2in;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 46pt; letter-spacing: -0.02em; }
+    h2 { font-size: 30pt; color: var(--primary); }
+    h3 { font-size: 22pt; color: var(--secondary); }
+    h4 { font-size: 16pt; color: var(--accent); }
+
+    p { margin: 0 0 0.18in; color: var(--muted); }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.15in 0 0.3in;
+    }
+
+    ul li {
+      margin-bottom: 0.12in;
+      padding-left: 0.28in;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "✶";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 11pt;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08in 0.3in;
+      border-radius: 999px;
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      background: rgba(70, 91, 115, 0.12);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 10pt;
+      color: var(--secondary);
+    }
+
+    .cover-subtitle {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 11pt;
+      color: var(--secondary);
+      margin-bottom: 0.25in;
+    }
+
+    .card {
+      background: rgba(252, 249, 243, 0.92);
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      border-radius: 18px;
+      padding: 0.35in;
+      margin-bottom: 0.25in;
+      box-shadow: 0 18px 38px rgba(71, 59, 56, 0.12);
+      break-inside: avoid;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.06in 0.24in;
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      background: rgba(70, 91, 115, 0.08);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 9pt;
+      color: var(--secondary);
+      margin-bottom: 0.12in;
+    }
+
+    .prompt {
+      border-left: 3px solid var(--primary);
+      padding-left: 0.25in;
+      margin: 0.17in 0;
+      break-inside: avoid;
+    }
+
+    .footnote {
+      font-size: 9pt;
+      color: rgba(46, 42, 41, 0.55);
+      margin-top: 0.25in;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(2.6in, 1fr));
+      gap: 0.25in;
+      margin-top: 0.2in;
+    }
+
+    .grid .card { height: 100%; }
+
+    .list-plain {
+      list-style: none;
+      padding: 0;
+      margin: 0.12in 0;
+    }
+
+    .list-plain li {
+      padding-left: 0;
+      margin-bottom: 0.12in;
+      color: var(--muted);
+    }
+
+    .list-plain li::before { display: none; }
+
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 0.14in;
+      margin-top: 0.2in;
+    }
+
+    .table thead th {
+      text-align: left;
+      font-size: 10pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      padding-bottom: 0.08in;
+    }
+
+    .table tbody td {
+      background: rgba(252, 249, 243, 0.92);
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      border-radius: 14px;
+      padding: 0.18in 0.22in;
+      vertical-align: top;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(2.45in, 1fr));
+      gap: 0.22in;
+      margin-top: 0.2in;
+    }
+
+    .metric-card {
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      border-radius: 18px;
+      padding: 0.3in;
+      background: rgba(252, 249, 243, 0.94);
+      break-inside: avoid;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 2.1in;
+      border: 1px dashed var(--border-strong);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11pt;
+      color: rgba(70, 91, 115, 0.6);
+      margin: 0.25in 0;
+    }
+
+    .page-metadata {
+      position: absolute;
+      bottom: 0.45in;
+      left: 0.75in;
+      right: 0.75in;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9pt;
+      color: rgba(46, 42, 41, 0.55);
+    }
+
+    .table-of-contents ul li::before {
+      display: none;
+    }
+
+    .table-of-contents ul li {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 0;
+      font-size: 12pt;
+    }
+
+    .table-of-contents ul li span {
+      color: var(--muted);
+    }
+
+    .notes-box {
+      min-height: 3.3in;
+      border-radius: 18px;
+      border: 1px dashed var(--border-strong);
+      background: rgba(252, 249, 243, 0.75);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="hero-tag">Atlas Academy · Scholar Studio</div>
+    <h1>Feelings Unplugged</h1>
+    <p class="cover-subtitle">Open-Source Teen Journal · Field Edition</p>
+    <p>
+      Built so Gen Z and Gen Alpha can strengthen cognitive reappraisal, moderate suppression inside survival contexts,
+      and imagine futures past survival—even when formal supports are limited.
+    </p>
+    <div class="image-placeholder">Optional cover illustration / student artwork</div>
+    <div class="page-metadata">
+      <span>Feelings Unplugged · Teen Journal</span>
+      <span>atlas@feelingsunplugged.space</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Table of Contents</h2>
+    <div class="card table-of-contents">
+      <ul>
+        <li>01 · How to Use This Journal <span>p.2</span></li>
+        <li>02 · Morning Glow · Grounding + Intention <span>p.3</span></li>
+        <li>03 · Midday Spark · Emotional Check-In <span>p.4</span></li>
+        <li>04 · Evening Calm · Reflection + Release <span>p.5</span></li>
+        <li>05 · Atlas Academy Identity Archetypes <span>p.6</span></li>
+        <li>06 · Shadow Work Prompts <span>p.7</span></li>
+        <li>07 · Weekly Reflection · Pattern Tracking <span>p.8</span></li>
+        <li>08 · Playlist Therapy · Emotional Soundtracks <span>p.9</span></li>
+        <li>09 · Immediate Support & Resources <span>p.10</span></li>
+        <li>10 · Notes & Futures / Credits <span>p.11–12</span></li>
+      </ul>
+    </div>
+    <p class="footnote">
+      Scholar Studio Style Guide · v2025.10. Each section mirrors the web app experience and marketing narrative.
+    </p>
+    <div class="page-metadata">
+      <span>Contents</span>
+      <span>Page 1</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>How to Use This Journal</h2>
+    <div class="card">
+      <div class="badge">Daily Rhythm</div>
+      <p><strong>Frequency:</strong> Use 1–3 times daily (morning, midday, evening) or whenever emotions feel too big.</p>
+      <p><strong>No rules:</strong> Skip prompts that don’t resonate. Draw. Record voice notes. This is your studio.</p>
+      <p><strong>Track patterns:</strong> Review weekly to notice emotional trends, triggers, and growth moments.</p>
+    </div>
+    <div class="card">
+      <div class="badge">Open Access Pledge</div>
+      <p>
+        Atlas Academy keeps core curriculum free to download, remix, and translate. Optional purchases fund youth designer
+        stipends, language access, and mutual aid. Credit the project, keep essentials free for young people, and share how
+        it's landing in your community.
+      </p>
+    </div>
+    <p class="footnote">
+      Grounding practices increase cognitive reappraisal capacity (SAMHSA, 2014); intentional choice-making supports autonomy (Ryan & Deci, 2000).
+    </p>
+    <div class="page-metadata">
+      <span>How to Use This Journal</span>
+      <span>Page 2</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Morning Glow · Grounding + Intention</h2>
+    <div class="card">
+      <h3>Daily Prompts</h3>
+      <div class="prompt">
+        <strong>Energy scan:</strong> What energy am I bringing into today? (Tired? Anxious? Excited? Numb?)
+      </div>
+      <div class="prompt">
+        <strong>Nervous system check:</strong> What do I need to feel safe today? (Movement, a person, music, boundaries)
+      </div>
+      <div class="prompt">
+        <strong>Intention + affirmation:</strong> One truth I want to remember about myself.
+      </div>
+      <div class="prompt">
+        <strong>Body note + permission slip:</strong> Today, I give myself permission to ___.
+      </div>
+    </div>
+    <p class="footnote">
+      Ritualized intention-setting lowers stress and improves self-regulation in adolescent populations (SAMHSA, 2014).
+    </p>
+    <div class="page-metadata">
+      <span>Morning Glow</span>
+      <span>Page 3</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Midday Spark · Emotional Check-In</h2>
+    <div class="card">
+      <h3>Reset Prompts</h3>
+      <div class="prompt">
+        <strong>Mood meter:</strong> Which emotion is loudest right now? What triggered it?
+      </div>
+      <div class="prompt">
+        <strong>Reframe:</strong> What would it look like to respond instead of react?
+      </div>
+      <div class="prompt">
+        <strong>Support:</strong> What could I ask for or offer myself to ease this feeling?
+      </div>
+      <div class="prompt">
+        <strong>Energy inventory:</strong> How full or empty is my tank? What’s one nurturing move I can make?
+      </div>
+    </div>
+    <div class="image-placeholder">Add calming imagery or journal spread photo</div>
+    <div class="page-metadata">
+      <span>Midday Spark</span>
+      <span>Page 4</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Evening Calm · Reflection + Release</h2>
+    <div class="card">
+      <h3>Integration Prompts</h3>
+      <div class="prompt">
+        <strong>Daily recap:</strong> What really happened, and how did it affect my body and brain?
+      </div>
+      <div class="prompt">
+        <strong>Emotion trend:</strong> Which feeling showed up the most? What is it teaching me?
+      </div>
+      <div class="prompt">
+        <strong>Release ritual:</strong> What can I set down before sleep? (Write it, tear it, breathe it out)
+      </div>
+      <div class="prompt">
+        <strong>Future note:</strong> One boundary or reminder for tomorrow. A sentence to future-me.
+      </div>
+    </div>
+    <p class="footnote">
+      Closing routines support the nervous system in transitioning from alert to rest (SAMHSA, 2014).
+    </p>
+    <div class="page-metadata">
+      <span>Evening Calm</span>
+      <span>Page 5</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Atlas Academy Identity Archetypes</h2>
+    <p>Every firefly glows differently. Use the archetypes as mirrors—not boxes.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>The Catalyst</h3>
+        <p>Change-maker, disruptor, truth-teller breathing transformation into every space.</p>
+        <ul class="list-plain">
+          <li>Shadow prompt: When do I dim my power to stay safe?</li>
+          <li>Strength reminder: Your voice moves rooms.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>The Luminary</h3>
+        <p>Creative, expressive, visible dreamer who narrates the world through art, words, and rhythm.</p>
+        <ul class="list-plain">
+          <li>Shadow prompt: What parts of my story feel unsafe to share?</li>
+          <li>Strength reminder: Your light helps others see.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>The Guardian</h3>
+        <p>Protector, nurturer, steady anchor when the room wobbles.</p>
+        <ul class="list-plain">
+          <li>Shadow prompt: Where am I carrying too much?</li>
+          <li>Strength reminder: Boundaries protect your ability to care.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Identity Archetypes</span>
+      <span>Page 6</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="grid">
+      <div class="card">
+        <h3>The Maverick</h3>
+        <p>Independent, freedom-seeker, builder of alternative paths.</p>
+        <ul class="list-plain">
+          <li>Shadow prompt: When does isolation disconnect me from support?</li>
+          <li>Strength reminder: Your imagination builds futures.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>The Weaver</h3>
+        <p>Connector, bridge-builder, harmony designer linking people, ideas, and worlds.</p>
+        <ul class="list-plain">
+          <li>Shadow prompt: Where do I abandon myself to keep peace?</li>
+          <li>Strength reminder: You translate complexity into belonging.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="image-placeholder">Optional archetype collage or youth art</div>
+    <div class="page-metadata">
+      <span>Identity Archetypes (cont.)</span>
+      <span>Page 7</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Shadow Work Prompts</h2>
+    <div class="card">
+      <div class="prompt"><strong>Hidden self:</strong> What part of myself do I hide? What would feel different if I let it be seen?</div>
+      <div class="prompt"><strong>Learned silence:</strong> Which emotion was I taught to suppress? What is it asking from me now?</div>
+      <div class="prompt"><strong>Inherited narratives:</strong> What story about survival did I inherit? Does it still serve me?</div>
+      <div class="prompt"><strong>Unprocessed grief:</strong> What grief am I carrying—person, dream, version of myself?</div>
+      <div class="prompt"><strong>Shadow voice:</strong> If my shadow could speak freely, what truth would it name?</div>
+    </div>
+    <p class="footnote">
+      Liberation psychology (Martín-Baró) affirms that naming suppressed truths is a step toward healing and action.
+    </p>
+    <div class="page-metadata">
+      <span>Shadow Work</span>
+      <span>Page 8</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Weekly Reflection · Pattern Tracking</h2>
+    <div class="metrics">
+      <div class="metric-card">
+        <h4>Emotional Weather Report</h4>
+        <p>Chart dominant emotions each day. Notice cycles, swells, quiet moments.</p>
+      </div>
+      <div class="metric-card">
+        <h4>Growth Tracker</h4>
+        <p>One sentence about progress—even if it’s “I showed up.”</p>
+      </div>
+      <div class="metric-card">
+        <h4>Energy Levels</h4>
+        <p>Rate each day 1–10. Track how rest, food, social energy play in.</p>
+      </div>
+      <div class="metric-card">
+        <h4>Next Week’s Intention</h4>
+        <p>Set a boundary, ritual, or support request for future-you.</p>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr><th>Day</th><th>Dominant Emotion</th><th>Trigger / Context</th><th>Reframe / Support Move</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Monday</td><td>________________</td><td>________________</td><td>________________</td></tr>
+        <tr><td>Tuesday</td><td>________________</td><td>________________</td><td>________________</td></tr>
+        <tr><td>Wednesday</td><td>________________</td><td>________________</td><td>________________</td></tr>
+        <tr><td>Thursday</td><td>________________</td><td>________________</td><td>________________</td></tr>
+        <tr><td>Friday</td><td>________________</td><td>________________</td><td>________________</td></tr>
+        <tr><td>Weekend</td><td>________________</td><td>________________</td><td>________________</td></tr>
+      </tbody>
+    </table>
+    <div class="page-metadata">
+      <span>Weekly Reflection</span>
+      <span>Page 9</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Playlist Therapy · Soundtrack Your Nervous System</h2>
+    <p>Music regulates emotions when words can’t. Build playlists across emotional states.</p>
+    <div class="grid">
+      <div class="card">
+        <h4>Anger · Safe Rage</h4>
+        <ul class="list-plain">
+          <li>Song 1 __________________________</li>
+          <li>Song 2 __________________________</li>
+          <li>Song 3 __________________________</li>
+          <li>Song 4 __________________________</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Sadness · Honoring Loss</h4>
+        <ul class="list-plain">
+          <li>Song 1 __________________________</li>
+          <li>Song 2 __________________________</li>
+          <li>Song 3 __________________________</li>
+          <li>Song 4 __________________________</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Joy · Feeling Alive</h4>
+        <ul class="list-plain">
+          <li>Song 1 __________________________</li>
+          <li>Song 2 __________________________</li>
+          <li>Song 3 __________________________</li>
+          <li>Song 4 __________________________</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Calm · Grounding</h4>
+        <ul class="list-plain">
+          <li>Song 1 __________________________</li>
+          <li>Song 2 __________________________</li>
+          <li>Song 3 __________________________</li>
+          <li>Song 4 __________________________</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Hype · Power Up</h4>
+        <ul class="list-plain">
+          <li>Song 1 __________________________</li>
+          <li>Song 2 __________________________</li>
+          <li>Song 3 __________________________</li>
+          <li>Song 4 __________________________</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Playlist Therapy</span>
+      <span>Page 10</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Immediate Support & Crisis Lines</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>24/7 Hotlines (US)</h3>
+        <ul class="list-plain">
+          <li>📞 988 Suicide & Crisis Lifeline (call / text)</li>
+          <li>💬 Crisis Text Line: Text HOME to 741741</li>
+          <li>🏳️‍🌈 The Trevor Project: 1-866-488-7386</li>
+          <li>⚧️ Trans Lifeline: 877-565-8860</li>
+          <li>🖤 BlackLine: 1-800-604-5841</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Grounding Moves</h3>
+        <ul class="list-plain">
+          <li>Name five things you can see, four you can touch, three you can hear...</li>
+          <li>Change sensory input: temperature, sound, texture.</li>
+          <li>Ask a trusted adult to co-regulate (stay nearby, breathe together).</li>
+          <li>Use the web app’s Emergency Kit for scripts and tap-outs.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Community & Care</h3>
+        <ul class="list-plain">
+          <li>BEAM · beam.community</li>
+          <li>NQTTCN · nqttcn.com</li>
+          <li>Loveland Foundation · thelovelandfoundation.org</li>
+          <li>Atlas Academy · atlas@feelingsunplugged.space</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Immediate Support</span>
+      <span>Page 11</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Notes & Futures</h2>
+    <p>
+      Use this space for reflections, doodles, reminders, or curriculum adaptations you want to share back with Atlas Academy.
+      Your feedback keeps the open-source ecosystem alive.
+    </p>
+    <div class="notes-box"></div>
+    <p class="footnote">
+      Share adaptations: atlas@feelingsunplugged.space
+    </p>
+    <div class="page-metadata">
+      <span>Notes</span>
+      <span>Page 12</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Credits & License</h2>
+    <p>
+      Feelings Unplugged is created by Dr. Erica L. Tartt and the Atlas Academy scholar studio. This core curriculum is licensed CC BY-NC 4.0:
+      share, remix, adapt—credit the work and keep essentials free for the young people you serve.
+    </p>
+    <p class="footnote">
+      References: Ryan, R. M., & Deci, E. L. (2000); SAMHSA Trauma-Informed Care (2014); Liberation Psychology (Martín-Baró); Dr. Erica L. Tartt’s doctoral research on adolescent brain health.
+    </p>
+    <div class="page-metadata">
+      <span>Credits</span>
+      <span>Page 13</span>
+    </div>
+  </div>
+</body>
+</html>
+

@@ -32,7 +32,7 @@ function main() {
 
     // Magazine articles structure (article name: page count)
     var articles = [
-        {name: "Welcome to Your Altered Earth", pages: 4},
+        {name: "Welcome to Feelings Unplugged", pages: 4},
         {name: "Your Brain Is Changing", pages: 6},
         {name: "Meet the Academy", pages: 8},
         {name: "Shadow Work for Beginners", pages: 6},
@@ -53,7 +53,7 @@ function main() {
     var userConfirm = confirm(
         "This will duplicate page " + pageNum + " to create " + totalPages + " pages for magazine articles.\n\n" +
         "Articles to create:\n" +
-        "• Welcome to Your Altered Earth (4 pages)\n" +
+        "• Welcome to Feelings Unplugged (4 pages)\n" +
         "• Your Brain Is Changing (6 pages)\n" +
         "• Meet the Academy (8 pages)\n" +
         "• Shadow Work for Beginners (6 pages)\n" +

@@ -8,14 +8,15 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Cormorant Garamond', 'serif'],
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(107, 70, 193, 0.3)',
-        'glow-secondary': '0 0 20px rgba(236, 72, 153, 0.3)',
+        'glow': '0 18px 40px rgba(71, 59, 56, 0.2)',
+        'glow-secondary': '0 18px 40px rgba(140, 166, 164, 0.25)',
       },
     },
   },
@@ -24,30 +25,30 @@ module.exports = {
     themes: [
       {
         feelingsunplugged: {
-          "primary": "#6B46C1",      // Deep purple - trust, introspection
-          "primary-content": "#FFFFFF",
-          
-          "secondary": "#EC4899",    // Vibrant pink - energy, emotion
-          "secondary-content": "#FFFFFF",
-          
-          "accent": "#F59E0B",       // Warm amber - hope, warmth
-          "accent-content": "#1F2937",
-          
-          "neutral": "#1F2937",      // Dark slate - grounded
-          "neutral-content": "#F3F4F6",
-          
-          "base-100": "#0F172A",     // Near-black background
-          "base-200": "#1E293B",     // Slightly lighter bg
-          "base-300": "#334155",     // Card backgrounds
-          "base-content": "#F1F5F9",
-          
-          "info": "#3B82F6",
-          "success": "#10B981",
-          "warning": "#F59E0B",
-          "error": "#EF4444",
+          "primary": "#B7664F",      // Terracotta warmth
+          "primary-content": "#FCF9F3",
+
+          "secondary": "#465B73",    // Muted scholastic slate
+          "secondary-content": "#F9F4EA",
+
+          "accent": "#6D8B8A",       // Dusty teal for balance
+          "accent-content": "#0F1C1B",
+
+          "neutral": "#2E2A29",      // Charcoal grounding
+          "neutral-content": "#F7F2E7",
+
+          "base-100": "#F4EEE2",     // Parchment background
+          "base-200": "#E6DDCE",     // Paper stack
+          "base-300": "#D6C9B6",     // Card edging
+          "base-content": "#2E2A29",
+
+          "info": "#5E7FAF",
+          "success": "#588B6A",
+          "warning": "#D9A441",
+          "error": "#C2625A",
         },
       },
-      "dark",  // Fallback theme
+      "cupcake",  // Fallback theme
     ],
     darkTheme: "feelingsunplugged",
     base: true,

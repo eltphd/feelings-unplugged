@@ -1,10 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Work_Sans, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
+const workSans = Work_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
+  weight: ['300', '400', '500', '600', '700'],
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -19,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="feelingsunplugged">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${workSans.variable} ${cormorant.variable} antialiased bg-base-100 text-base-content`}>{children}</body>
     </html>
   )
 }

@@ -1,270 +1,269 @@
 'use client'
 
-import BottomNav from '../components/BottomNav'
-import FloatingActionButton from '../components/FloatingActionButton'
+import { CSSProperties } from 'react'
+import Link from 'next/link'
+import Layout from '../components/Layout'
+
+const hotlines = [
+  {
+    icon: '🆘',
+    name: '988 Suicide & Crisis Lifeline',
+    contact: 'Call or text: 988',
+    description: 'Available 24/7 for anyone in crisis',
+  },
+  {
+    icon: '🏳️‍🌈',
+    name: 'The Trevor Project',
+    contact: "Call: 1-866-488-7386 · Text 'START' to 678-678",
+    description: 'Specialized support for LGBTQ+ youth',
+  },
+  {
+    icon: '🖤',
+    name: 'BlackLine',
+    contact: 'Call or text: 1-800-604-5841',
+    description: 'Peer support for Black & BIPOC youth in crisis',
+  },
+  {
+    icon: '💬',
+    name: 'Crisis Text Line',
+    contact: "Text 'HELLO' to 741741",
+    description: 'Free 24/7 text support with a trained responder',
+  },
+]
+
+const apps = [
+  { name: 'Calm', description: 'Meditation & sleep audios', emoji: '🧘' },
+  { name: 'Headspace', description: 'Mindfulness practice', emoji: '🎯' },
+  { name: 'Finch', description: 'Self-care companion', emoji: '🐦' },
+  { name: 'Sanvello', description: 'Mood tracking tools', emoji: '📊' },
+  { name: 'Wysa', description: 'AI therapy chatbot', emoji: '🤖' },
+  { name: 'MindShift', description: 'Anxiety management', emoji: '🧠' },
+]
+
+type TexturePanelStyle = CSSProperties & {
+  '--texture-panel-gradient'?: string
+  '--texture-panel-pattern'?: string
+  '--texture-panel-opacity'?: string
+}
+
+const heroPanelStyle: TexturePanelStyle = {
+  '--texture-panel-gradient': 'linear-gradient(135deg, #F3ECE1 0%, #E3D4C0 52%, #CBB499 100%)',
+  '--texture-panel-pattern':
+    'repeating-linear-gradient(118deg, rgba(109,139,138,0.1) 0px, rgba(109,139,138,0.1) 18px, rgba(183,102,79,0.08) 18px, rgba(183,102,79,0.08) 36px)',
+}
+
+const closingPanelStyle: TexturePanelStyle = {
+  '--texture-panel-gradient': 'linear-gradient(135deg, #EAD8C4 0%, #D7C0A7 52%, #BFA082 100%)',
+  '--texture-panel-pattern':
+    'repeating-linear-gradient(120deg, rgba(183,102,79,0.08) 0px, rgba(183,102,79,0.08) 20px, rgba(109,139,138,0.08) 20px, rgba(109,139,138,0.08) 40px)',
+}
+
+const organizations = [
+  { name: 'BEAM', description: 'Black Emotional and Mental Health Collective', url: 'https://beam.community' },
+  { name: 'Trevor Project', description: 'LGBTQ+ youth mental health support', url: 'https://thetrevorproject.org' },
+  { name: 'Trans Lifeline', description: 'Peer hotline run by trans people', url: 'https://translifeline.org' },
+  { name: 'JED Foundation', description: 'Programs for teen mental health safety', url: 'https://jedfoundation.org' },
+  { name: 'Active Minds', description: 'Mental health advocacy community', url: 'https://activeminds.org' },
+]
 
 export default function ResourcesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-off-white via-cream/30 to-off-white pb-24">
-      {/* Header */}
-      <header className="gradient-bg-sage text-off-white py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <a href="/" className="text-white/80 hover:text-white transition-colors mb-6 inline-flex items-center gap-2 font-sans text-lg">
-            <span>←</span> <span>Back to Home</span>
-          </a>
-          <div className="mb-6 flex justify-center md:justify-start">
-            <div className="text-6xl bg-white/20 backdrop-blur-sm p-4 rounded-2xl">🆘</div>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-sans font-bold mb-4 text-white">Crisis Resources</h1>
-          <p className="text-2xl md:text-3xl text-white/90 font-serif">
-            You deserve help. You deserve to be here.
-          </p>
-        </div>
-      </header>
-
-      {/* When Journaling Isn't Enough */}
-      <section className="max-w-4xl mx-auto px-6 py-12 -mt-12 relative z-20">
-        <div className="card hover-lift bg-gradient-to-br from-white to-terracotta/10 border-2 border-terracotta/30 mb-8">
-          <h2 className="text-3xl md:text-4xl font-sans font-bold gradient-text mb-4">When Journaling Isn't Enough</h2>
-          <p className="text-xl mb-4 font-serif leading-relaxed">
-            This journal can help you understand your feelings.
-          </p>
-          <p className="text-xl mb-6 font-serif leading-relaxed">
-            But if you're feeling really, really bad, talk to an adult you trust.
-          </p>
-          <div className="bg-terracotta/20 rounded-2xl p-4 border-2 border-terracotta/30">
-            <p className="text-2xl font-sans font-bold text-terracotta text-center">
-              Journaling is a tool, not a cure.
-            </p>
-          </div>
-        </div>
-
-        {/* Warning Signs */}
-        <div className="bg-white border-4 border-red-400 rounded-3xl p-8 soft-shadow mb-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="bg-gradient-to-br from-red-400 to-red-500 p-3 rounded-2xl text-3xl">⚠️</div>
-            <h2 className="text-3xl font-sans font-bold text-red-800">Warning Signs (When to Ask for Help)</h2>
-          </div>
-          <div className="space-y-4 text-lg font-serif">
-            <label className="flex items-start gap-3 cursor-pointer p-3 hover:bg-red-50 rounded-xl transition-colors">
-              <input type="checkbox" className="mt-1 w-6 h-6 rounded border-2 border-red-400 focus:ring-2 focus:ring-red-400" />
-              <span>I think about hurting myself</span>
-            </label>
-            <label className="flex items-start gap-3 cursor-pointer p-3 hover:bg-red-50 rounded-xl transition-colors">
-              <input type="checkbox" className="mt-1 w-6 h-6 rounded border-2 border-red-400 focus:ring-2 focus:ring-red-400" />
-              <span>I don't want to be alive anymore</span>
-            </label>
-            <label className="flex items-start gap-3 cursor-pointer p-3 hover:bg-red-50 rounded-xl transition-colors">
-              <input type="checkbox" className="mt-1 w-6 h-6 rounded border-2 border-red-400 focus:ring-2 focus:ring-red-400" />
-              <span>I feel sad or scared every day</span>
-            </label>
-            <label className="flex items-start gap-3 cursor-pointer p-3 hover:bg-red-50 rounded-xl transition-colors">
-              <input type="checkbox" className="mt-1 w-6 h-6 rounded border-2 border-red-400 focus:ring-2 focus:ring-red-400" />
-              <span>I can't eat or sleep</span>
-            </label>
-            <label className="flex items-start gap-3 cursor-pointer p-3 hover:bg-red-50 rounded-xl transition-colors">
-              <input type="checkbox" className="mt-1 w-6 h-6 rounded border-2 border-red-400 focus:ring-2 focus:ring-red-400" />
-              <span>I can't focus on anything</span>
-            </label>
-            <label className="flex items-start gap-3 cursor-pointer p-3 hover:bg-red-50 rounded-xl transition-colors">
-              <input type="checkbox" className="mt-1 w-6 h-6 rounded border-2 border-red-400 focus:ring-2 focus:ring-red-400" />
-              <span>I feel numb all the time</span>
-            </label>
-          </div>
-          <div className="mt-6 bg-red-100 rounded-2xl p-4 border-2 border-red-400">
-            <p className="text-xl font-sans font-bold text-red-800 text-center">
-              If you checked ANY of these: Please talk to someone you trust.
-            </p>
-          </div>
-        </div>
-
-        {/* Crisis Hotlines */}
-        <h2 className="text-4xl font-sans font-bold text-forest mb-8">24/7 Crisis Hotlines</h2>
-        <div className="grid gap-6 mb-12">
-          <CrisisCard
-            icon="🆘"
-            name="988 Suicide & Crisis Lifeline"
-            contact="Call or text: 988"
-            description="Available 24/7 for anyone in crisis"
-            color="terracotta"
-          />
-          <CrisisCard
-            icon="🏳️‍🌈"
-            name="Trevor Project"
-            contact="Call: 1-866-488-7386 | Text 'START' to 678-678"
-            description="For LGBTQ+ youth in crisis"
-            color="sage"
-          />
-          <CrisisCard
-            icon="🖤"
-            name="BlackLine"
-            contact="Call or text: 1-800-604-5841"
-            description="For Black & BIPOC youth experiencing crisis"
-            color="amber"
-          />
-          <CrisisCard
-            icon="💬"
-            name="Crisis Text Line"
-            contact="Text 'HELLO' to 741741"
-            description="Free 24/7 support via text message"
-            color="forest"
-          />
-        </div>
-
-        {/* What Therapy Actually Is */}
-        <div className="card hover-lift bg-gradient-to-br from-white to-sage/10 border-2 border-sage/30 mb-12">
-          <h2 className="text-3xl font-sans font-bold text-forest mb-6">What Therapy Actually Is</h2>
-          <p className="text-xl mb-4 font-serif leading-relaxed">
-            Therapy is like having a feelings coach.
-          </p>
-          <p className="text-xl mb-6 font-serif leading-relaxed">They help you:</p>
-          <ul className="space-y-3 text-xl font-serif mb-6">
-            <li className="flex items-start gap-3">
-              <span className="text-sage">→</span>
-              <span>Understand your brain</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-sage">→</span>
-              <span>Work through hard stuff</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-sage">→</span>
-              <span>Learn tools that actually work</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-sage">→</span>
-              <span>Feel less alone</span>
-            </li>
-          </ul>
-          <div className="bg-sage/20 rounded-2xl p-4 border-2 border-sage/30">
-            <p className="text-xl font-sans font-bold text-forest text-center">
-              Therapy isn't for "crazy people." It's for people who want help. That's strength, not weakness.
-            </p>
-          </div>
-        </div>
-
-        {/* Mental Health Apps */}
-        <h2 className="text-4xl font-sans font-bold text-forest mb-8">Mental Health Apps for Teens</h2>
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {[
-            { name: 'Calm', description: 'Meditation & sleep', emoji: '🧘' },
-            { name: 'Headspace', description: 'Mindfulness', emoji: '🎯' },
-            { name: 'Finch', description: 'Self-care pet', emoji: '🐦' },
-            { name: 'Sanvello', description: 'Mood tracking', emoji: '📊' },
-            { name: 'Wysa', description: 'AI therapy chatbot', emoji: '🤖' },
-            { name: 'Mindshift', description: 'Anxiety management', emoji: '🧠' }
-          ].map((app) => (
-            <div key={app.name} className="bg-white border-2 border-forest/20 rounded-2xl p-6 hover-lift">
-              <div className="flex items-center gap-4">
-                <div className="bg-gradient-to-br from-forest to-sage p-3 rounded-2xl text-4xl">
-                  {app.emoji}
-                </div>
-                <div>
-                  <h3 className="font-sans font-bold text-xl text-forest">{app.name}</h3>
-                  <p className="text-gray-600 font-serif">{app.description}</p>
-                </div>
+    <Layout>
+      <div className="space-y-12">
+        <section className="texture-panel p-8 md:p-10" style={heroPanelStyle}>
+          <div className="space-y-6">
+            <span className="inline-flex items-center rounded-full bg-secondary/15 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-secondary">
+              Crisis resources
+            </span>
+            <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_260px] md:items-end">
+              <div className="space-y-4">
+                <h1 className="font-serif text-4xl md:text-5xl text-neutral leading-tight">
+                  You deserve help. Your story matters.
+                </h1>
+                <p className="max-w-2xl text-base md:text-lg text-neutral/75">
+                  This studio is for reflection, but if things feel heavy, reach out. These lines are staffed 24/7 with
+                  people who listen, believe, and can get you to safety. Asking for help is an act of strength.
+                </p>
+              </div>
+              <div className="rounded-[28px] border border-base-200 bg-base-100/90 p-6 text-sm text-neutral/70 shadow-inner">
+                <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">If in immediate danger</p>
+                <p className="mt-2 font-semibold text-neutral">
+                  Call local emergency services right away. Then connect with a trusted adult.
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Websites & Organizations */}
-        <h2 className="text-4xl font-sans font-bold text-forest mb-8">Websites & Organizations</h2>
-        <div className="space-y-4 mb-12">
-          {[
-            { name: 'BEAM', description: 'Black Emotional and Mental Health Collective', url: 'beam.community' },
-            { name: 'Trevor Project', description: 'LGBTQ+ youth mental health', url: 'thetrevorproject.org' },
-            { name: 'Trans Lifeline', description: 'Trans peer support', url: 'translifeline.org' },
-            { name: 'JED Foundation', description: 'Teen mental health resources', url: 'jedfoundation.org' },
-            { name: 'Active Minds', description: 'Youth mental health advocacy', url: 'activeminds.org' }
-          ].map((org) => (
-            <div key={org.name} className="bg-white border-2 border-amber/30 rounded-2xl p-6 hover-lift">
-              <h3 className="font-sans font-bold text-xl text-forest mb-2">{org.name}</h3>
-              <p className="text-gray-600 font-serif mb-3">{org.description}</p>
-              <a href={`https://${org.url}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-amber hover:text-terracotta font-sans font-bold transition-colors">
-                <span>{org.url}</span>
-                <span>→</span>
-              </a>
+            <div className="flex flex-wrap gap-4 text-xs uppercase tracking-[0.2em] text-neutral/50">
+              <span>Confidential</span>
+              <span>Free</span>
+              <span>24/7 support</span>
+              <span>Diverse responders</span>
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
 
-        {/* Emergency Contacts Template */}
-        <div className="card hover-lift bg-gradient-to-br from-white to-forest/10 border-2 border-forest/30">
-          <h2 className="text-3xl font-sans font-bold text-forest mb-4">My Emergency Contacts</h2>
-          <p className="text-xl font-serif mb-6 leading-relaxed">Write down people you can call when you need help:</p>
-          <div className="space-y-4">
+        <section className="glass-card p-8 md:p-10 space-y-8">
+          <div className="space-y-3">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Safety checklist</p>
+            <h2 className="font-serif text-3xl text-neutral">When journaling isn’t enough</h2>
+            <p className="text-neutral/70">
+              If any of these resonate, reach out to an adult you trust or use the crisis lines below. Your nervous system
+              does not have to carry this alone.
+            </p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2">
             {[
-              'Trusted Adult',
-              'Friend',
-              'Family Member',
-              'Therapist/Counselor'
-            ].map((label) => (
-              <div key={label}>
-                <label className="block font-sans font-bold text-forest mb-2 text-lg">{label}:</label>
-                <input
-                  type="text"
-                  placeholder="Name & phone number"
-                  className="w-full p-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-forest focus:ring-4 focus:ring-forest/20 font-serif transition-all"
-                />
+              'I think about hurting myself.',
+              "I don’t feel like I want to be alive.",
+              'I feel sad, scared, or numb every day.',
+              'Eating, sleeping, or focusing feels impossible.',
+              'I notice my emotions feel out of control.',
+              'I hide how bad things feel from everyone.',
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-error/20 bg-error/5 px-5 py-4 text-sm font-semibold text-neutral/80">
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 text-error">⚠️</span>
+                  <p>{item}</p>
+                </div>
               </div>
             ))}
           </div>
-        </div>
+          <div className="rounded-[22px] border border-error/25 bg-error/10 px-5 py-4 text-center text-sm font-semibold text-error/90">
+            If you checked even one, talk to someone today. You aren’t a burden; you’re brave.
+          </div>
+        </section>
 
-        {/* Final Message */}
-        <div className="mt-12 text-center card bg-gradient-to-br from-terracotta/20 to-amber/20 border-4 border-terracotta/40 hover-lift">
-          <div className="text-6xl mb-6">💚</div>
-          <p className="text-4xl font-sans font-bold text-forest mb-4">You matter.</p>
-          <p className="text-2xl font-serif text-forest mb-2">You deserve to be here.</p>
-          <p className="text-2xl font-serif text-forest">Asking for help is brave.</p>
-        </div>
-      </section>
+        <section className="space-y-6">
+          <header className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Immediate support</p>
+            <h2 className="font-serif text-3xl text-neutral">24/7 crisis hotlines</h2>
+            <p className="text-neutral/70">
+              These services are confidential, free, and staffed by trained listeners.
+            </p>
+          </header>
+          <div className="grid gap-6 md:grid-cols-2">
+            {hotlines.map((line) => (
+              <article key={line.name} className="glass-card p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-glow">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-secondary/30 bg-secondary/10 text-3xl">
+                    {line.icon}
+                  </span>
+                  <div className="space-y-2">
+                    <h3 className="font-serif text-xl text-neutral">{line.name}</h3>
+                    <p className="text-sm font-semibold text-neutral/80">{line.contact}</p>
+                    <p className="text-sm text-neutral/70">{line.description}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      {/* Floating Action Button */}
-      <FloatingActionButton />
+        <section className="glass-card p-8 md:p-10 space-y-6">
+          <header className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Understanding help</p>
+            <h2 className="font-serif text-3xl text-neutral">What therapy actually is</h2>
+            <p className="text-neutral/70">
+              Therapists are feelings coaches—not judges. They help you build a toolkit and feel less alone.
+            </p>
+          </header>
+          <div className="grid gap-4 md:grid-cols-2">
+            {[
+              'Understand how your brain processes stress.',
+              'Talk through the hard things with someone trained to hold them.',
+              'Collect tools that fit your actual life, not a generic list.',
+              'Build a consistent circle of support.',
+            ].map((point) => (
+              <div key={point} className="rounded-2xl border border-accent/25 bg-accent/10 px-5 py-4 text-sm text-neutral/80">
+                <div className="flex items-start gap-3">
+                  <span className="text-accent">→</span>
+                  <p>{point}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="rounded-[22px] border border-accent/30 bg-accent/15 px-5 py-4 text-center text-sm font-semibold text-accent/90">
+            Therapy is for people who want support. That’s strength, not weakness.
+          </div>
+        </section>
 
-      {/* Bottom Navigation */}
-      <BottomNav />
-    </div>
-  )
-}
+        <section className="space-y-6">
+          <header className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Digital companions</p>
+            <h2 className="font-serif text-3xl text-neutral">Supportive apps for teens</h2>
+            <p className="text-neutral/70">Use these alongside real human connections—not instead of them.</p>
+          </header>
+          <div className="grid gap-4 md:grid-cols-2">
+            {apps.map((app) => (
+              <div key={app.name} className="glass-card p-5">
+                <div className="flex items-center gap-4">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/25 bg-primary/10 text-2xl">
+                    {app.emoji}
+                  </span>
+                  <div>
+                    <p className="font-serif text-lg text-neutral">{app.name}</p>
+                    <p className="text-sm text-neutral/70">{app.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-function CrisisCard({
-  icon,
-  name,
-  contact,
-  description,
-  color
-}: {
-  icon: string
-  name: string
-  contact: string
-  description: string
-  color: string
-}) {
-  const getGradient = () => {
-    switch (color) {
-      case 'terracotta': return 'from-terracotta to-amber'
-      case 'sage': return 'from-sage to-forest'
-      case 'amber': return 'from-amber to-terracotta'
-      case 'forest': return 'from-forest to-sage'
-      default: return 'from-forest to-sage'
-    }
-  }
+        <section className="glass-card p-8 md:p-10 space-y-6">
+          <header className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Community anchors</p>
+            <h2 className="font-serif text-3xl text-neutral">Websites & organizations</h2>
+            <p className="text-neutral/70">Explore these trusted spaces for education, advocacy, and peer support.</p>
+          </header>
+          <div className="grid gap-4 md:grid-cols-2">
+            {organizations.map((org) => (
+              <article key={org.name} className="rounded-[24px] border border-base-200 bg-base-100/90 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-glow">
+                <h3 className="font-serif text-xl text-neutral">{org.name}</h3>
+                <p className="mt-2 text-sm text-neutral/70">{org.description}</p>
+                <Link
+                  href={org.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-secondary hover:text-secondary/80"
+                >
+                  Visit site <span>→</span>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
 
-  return (
-    <div className="bg-white rounded-3xl p-8 soft-shadow hover-lift border-2 border-gray-100">
-      <div className="flex items-start gap-6">
-        <div className={`bg-gradient-to-br ${getGradient()} p-4 rounded-2xl text-5xl flex-shrink-0`}>
-          {icon}
-        </div>
-        <div className="flex-1">
-          <h3 className="text-3xl font-sans font-bold text-forest mb-3">{name}</h3>
-          <p className="text-2xl font-sans font-bold text-gray-800 mb-3">{contact}</p>
-          <p className="text-xl text-gray-600 font-serif leading-relaxed">{description}</p>
-        </div>
+        <section className="glass-card p-8 md:p-10 space-y-6">
+          <header className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Emergency plan</p>
+            <h2 className="font-serif text-3xl text-neutral">Save your calm circle</h2>
+            <p className="text-neutral/70">Write down the humans who can sit with you when things feel rough.</p>
+          </header>
+          <div className="space-y-4">
+            {['Trusted adult', 'Friend', 'Family member', 'Therapist or counselor'].map((label) => (
+              <label key={label} className="block space-y-2">
+                <span className="text-xs uppercase tracking-[0.18em] text-neutral/50">{label}</span>
+                <input
+                  type="text"
+                  placeholder="Name · phone · best way to reach"
+                  className="w-full rounded-2xl border border-base-300 bg-base-100 px-4 py-3 text-sm text-neutral/80 placeholder:text-neutral/40 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20"
+                />
+              </label>
+            ))}
+          </div>
+        </section>
+
+        <section className="texture-panel p-10 text-center" style={closingPanelStyle}>
+          <div className="space-y-4">
+            <span className="text-4xl">💚</span>
+            <h2 className="font-serif text-3xl text-neutral">You matter. You deserve to feel safe.</h2>
+            <p className="text-sm text-neutral/75">
+              Keep these numbers close, keep your calm kit ready, and keep telling your story. Asking for help is brave.
+            </p>
+          </div>
+        </section>
       </div>
-    </div>
+    </Layout>
   )
 }
+

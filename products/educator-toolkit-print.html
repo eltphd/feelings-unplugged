@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelings Unplugged · Educator Toolkit (Print Edition)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    :root {
+      --surface: linear-gradient(135deg, rgba(252, 249, 243, 0.98), rgba(240, 229, 211, 0.94));
+      --pattern: repeating-linear-gradient(
+        125deg,
+        rgba(183, 102, 79, 0.06) 0px,
+        rgba(183, 102, 79, 0.06) 28px,
+        rgba(109, 139, 138, 0.06) 28px,
+        rgba(109, 139, 138, 0.06) 56px
+      );
+      --border: rgba(70, 91, 115, 0.2);
+      --border-strong: rgba(70, 91, 115, 0.32);
+      --primary: #B7664F;
+      --secondary: #465B73;
+      --accent: #6D8B8A;
+      --neutral: #2E2A29;
+      --muted: rgba(46, 42, 41, 0.68);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #F4EEE2;
+      font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--neutral);
+      line-height: 1.6;
+      font-size: 12pt;
+    }
+
+    .page {
+      position: relative;
+      min-height: 10.5in;
+      padding: 0.8in 0.75in;
+      margin-bottom: 0.35in;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .page:last-of-type { page-break-after: auto; }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--pattern);
+      mix-blend-mode: multiply;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .page > * { position: relative; z-index: 1; }
+
+    h1, h2, h3, h4 {
+      font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+      margin: 0 0 0.22in;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 46pt; letter-spacing: -0.02em; }
+    h2 { font-size: 30pt; color: var(--primary); }
+    h3 { font-size: 22pt; color: var(--secondary); }
+    h4 { font-size: 15pt; color: var(--accent); }
+
+    p { margin: 0 0 0.18in; color: var(--muted); }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.15in 0 0.3in;
+    }
+
+    ul li {
+      margin-bottom: 0.12in;
+      padding-left: 0.3in;
+      position: relative;
+      color: var(--neutral);
+    }
+
+    ul li::before {
+      content: "✶";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 11pt;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08in 0.3in;
+      border-radius: 999px;
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      background: rgba(70, 91, 115, 0.12);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 10pt;
+      color: var(--secondary);
+    }
+
+    .cover-subtitle {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 11pt;
+      color: var(--secondary);
+      margin-bottom: 0.25in;
+    }
+
+    .card {
+      background: rgba(252, 249, 243, 0.92);
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      border-radius: 18px;
+      padding: 0.38in;
+      margin-bottom: 0.25in;
+      box-shadow: 0 18px 38px rgba(71, 59, 56, 0.12);
+      break-inside: avoid;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.06in 0.24in;
+      border-radius: 999px;
+      border: 1px solid rgba(70, 91, 115, 0.18);
+      background: rgba(70, 91, 115, 0.08);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 9pt;
+      color: var(--secondary);
+      margin-bottom: 0.14in;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(2.7in, 1fr));
+      gap: 0.25in;
+      margin-top: 0.25in;
+    }
+
+    .grid .card { height: 100%; }
+
+    .list-plain {
+      list-style: none;
+      padding: 0;
+      margin: 0.12in 0;
+    }
+
+    .list-plain li {
+      padding-left: 0;
+      margin-bottom: 0.12in;
+      color: var(--muted);
+    }
+
+    .list-plain li::before { display: none; }
+
+    .footnote {
+      font-size: 9pt;
+      color: rgba(46, 42, 41, 0.55);
+      margin-top: 0.25in;
+    }
+
+    .page-metadata {
+      position: absolute;
+      bottom: 0.45in;
+      left: 0.75in;
+      right: 0.75in;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9pt;
+      color: rgba(46, 42, 41, 0.55);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 2.1in;
+      border: 1px dashed var(--border-strong);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11pt;
+      color: rgba(70, 91, 115, 0.6);
+      margin: 0.3in 0;
+    }
+
+    .table-of-contents ul li {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 0;
+    }
+
+    .table-of-contents ul li::before { display: none; }
+
+    .table-of-contents ul li span {
+      color: rgba(46, 42, 41, 0.5);
+    }
+
+    .notes-box {
+      min-height: 3in;
+      border: 1px dashed var(--border-strong);
+      border-radius: 18px;
+      background: rgba(252, 249, 243, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="hero-tag">Atlas Academy · Educator Vertical</div>
+    <h1>Feelings Unplugged · Classroom Toolkit</h1>
+    <p class="cover-subtitle">Scholar Studio · Open Access</p>
+    <p>
+      Practical scaffolds for teachers, counselors, and worldschool facilitators building emotionally intelligent learning ecosystems.
+      Distributed open-source so adolescents everywhere can access core regulation skills.
+    </p>
+    <div class="image-placeholder">Optional classroom illustration / classroom photo</div>
+    <div class="page-metadata">
+      <span>Feelings Unplugged</span>
+      <span>atlas@feelingsunplugged.space</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Table of Contents</h2>
+    <div class="card table-of-contents">
+      <ul>
+        <li>01 · Purpose & Licensing <span>p.2</span></li>
+        <li>02 · Quick-Start · 5-Minute Check-In <span>p.3</span></li>
+        <li>03 · Regulation Menu <span>p.4</span></li>
+        <li>04 · Trauma-Informed Response <span>p.5</span></li>
+        <li>05 · Lesson Integration <span>p.6</span></li>
+        <li>06 · Classroom Prompts <span>p.7</span></li>
+        <li>07 · Emergency Protocol Snapshot <span>p.8</span></li>
+        <li>08 · Educator Nervous-System Care <span>p.9</span></li>
+        <li>09 · Field Notes & Adaptations <span>p.10</span></li>
+        <li>10 · Resources & Citations <span>p.11</span></li>
+        <li>11 · Credits & License <span>p.12</span></li>
+      </ul>
+    </div>
+    <p class="footnote">Scholar Studio Style Guide · v2025.10.</p>
+    <div class="page-metadata">
+      <span>Contents</span>
+      <span>Page 1</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Purpose & Licensing</h2>
+    <div class="card">
+      <div class="badge">Why Now</div>
+      <p>
+        Students arrive carrying grief, hypervigilance, and brilliance. Emotional regulation isn’t a detour from curriculum—it's the on-ramp.
+        These rituals adapt to five-minute homeroom check-ins or full SEL blocks.
+      </p>
+    </div>
+    <div class="card">
+      <div class="badge">Open Access</div>
+      <p>
+        Core resources are released under CC BY-NC 4.0. Copy, translate, and remix for noncommercial classrooms.
+        Pay-what-you-can licensing fuels translation, facilitator residencies, and youth co-design.
+      </p>
+    </div>
+    <p class="footnote">
+      Reference: CASEL (2023) competencies; SAMHSA Trauma-Informed Schools (2014).
+    </p>
+    <div class="page-metadata">
+      <span>Purpose & Licensing</span>
+      <span>Page 2</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Quick-Start · 5-Minute Check-In</h2>
+    <div class="card">
+      <div class="badge">Daily Ritual</div>
+      <ul class="list-plain">
+        <li><strong>1. Arrival regulation:</strong> Dim lights, play calm audio, or invite three deep breaths.</li>
+        <li><strong>2. Mood meter:</strong> Students mark energy (high/low) × pleasantness (pleasant/unpleasant).</li>
+        <li><strong>3. Prompt rotation:</strong> “What do you need to feel ready?” / “What’s one thing you’re proud of?”</li>
+        <li><strong>4. Expression options:</strong> Speak, write, draw, or log digitally.</li>
+        <li><strong>5. Transition:</strong> Celebrate courage: “Showing up counts as success.”</li>
+      </ul>
+    </div>
+    <div class="image-placeholder">Add check-in board or mood meter photo</div>
+    <div class="page-metadata">
+      <span>Quick-Start</span>
+      <span>Page 3</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Regulation Menu</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Somatic Corners</h3>
+        <ul class="list-plain">
+          <li>Weighted lap pads / resistance bands.</li>
+          <li>Textured mats for grounding feet.</li>
+          <li>Noise-cancel headphones or playlist station.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Sentence Frames</h3>
+        <ul class="list-plain">
+          <li>“Today my energy feels ___ because ___.”</li>
+          <li>“If I had a support buddy, I’d ask for ___.”</li>
+          <li>“What I want you to know is ___.”</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Micro-Interventions</h3>
+        <ul class="list-plain">
+          <li>4-7-8 breathing with visual timer.</li>
+          <li>Emotion charades for name-it-to-tame-it practice.</li>
+          <li>Three-minute journaling using Feelings Unplugged prompts.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Co-Regulation Scripts</h3>
+        <ul class="list-plain">
+          <li>“Would a pause, stretch, or water help right now?”</li>
+          <li>“Do you want me to sit nearby or give space?”</li>
+          <li>“Your nervous system is doing its job. Let’s breathe together.”</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Regulation Menu</span>
+      <span>Page 4</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Trauma-Informed Response</h2>
+    <div class="card">
+      <div class="badge">If a Student Dysregulates</div>
+      <ul class="list-plain">
+        <li>Regulate the room (lower stimuli, anchor remaining students).</li>
+        <li>Approach with neutral posture, soft eye contact.</li>
+        <li>Offer choices: “Hallway, calming corner, or sit with me?”</li>
+        <li>After stabilization, document triggers and supports requested.</li>
+        <li>Schedule restorative follow-up; invite student voice in consequences.</li>
+      </ul>
+    </div>
+    <p class="footnote">
+      Reference: SAMHSA Trauma-Informed Schools (2014); Liberation-centered classroom practice (Love, 2019).
+    </p>
+    <div class="page-metadata">
+      <span>Trauma-Informed Response</span>
+      <span>Page 5</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Lesson Integration</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>ELA / Humanities</h3>
+        <ul class="list-plain">
+          <li>Map character emotional arcs with the mood meter.</li>
+          <li>Journaling from archetype perspectives to deepen analysis.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>STEM</h3>
+        <ul class="list-plain">
+          <li>Brain science mini-lessons (amygdala vs. prefrontal cortex).</li>
+          <li>Data projects tracking sleep, mood, and focus correlations.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Advisory & SEL</h3>
+        <ul class="list-plain">
+          <li>Weekly reflection circle using journal prompts.</li>
+          <li>Playlist therapy sessions to co-create calming soundtracks.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Project-Based Learning</h3>
+        <ul class="list-plain">
+          <li>Students design regulation corners for the school.</li>
+          <li>Community interviews on emotional resilience strategies.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Lesson Integration</span>
+      <span>Page 6</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Classroom Prompts</h2>
+    <div class="card">
+      <div class="badge">Copy & Clip</div>
+      <div class="prompt"><strong>Opening:</strong> “What’s the weather in your head today? Sunny, foggy, stormy, still?”</div>
+      <div class="prompt"><strong>Midweek:</strong> “Name one boundary you honored this week. Where do you want help protecting one?”</div>
+      <div class="prompt"><strong>Closing:</strong> “Name a support that kept you grounded. Who can you thank?”</div>
+      <div class="prompt"><strong>Project Reflection:</strong> “What did your nervous system learn from this assignment?”</div>
+    </div>
+    <div class="page-metadata">
+      <span>Classroom Prompts</span>
+      <span>Page 7</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Emergency Protocol Snapshot</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Safety Steps</h3>
+        <ul class="list-plain">
+          <li>Stay with student; remove audience when possible.</li>
+          <li>Call in designated crisis responder/counselor.</li>
+          <li>Document what was said/requested verbatim.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Family Communication</h3>
+        <ul class="list-plain">
+          <li>Neutral tone: “Here’s what we observed; here’s how we responded.”</li>
+          <li>Share resources (crisis lines, school supports).</li>
+          <li>Schedule follow-up; invite caregiver voice.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Aftercare</h3>
+        <ul class="list-plain">
+          <li>Debrief privately once regulated.</li>
+          <li>Update safety plans/accommodation notes.</li>
+          <li>Provide re-entry ritual (affirmations, new plan).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-metadata">
+      <span>Emergency Snapshot</span>
+      <span>Page 8</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Educator Nervous-System Care</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Micro Practices</h3>
+        <ul class="list-plain">
+          <li>Two minutes of box breathing between classes.</li>
+          <li>Shake or stretch before/after high-energy lessons.</li>
+          <li>Tag in colleagues—co-regulation is communal.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Boundaries to Model</h3>
+        <ul class="list-plain">
+          <li>Office hours for emotional check-ins.</li>
+          <li>“I care and want to keep holding space—let’s pick this up during advisory.”</li>
+          <li>Limit after-hours messaging; protect restoration time.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="footnote">
+      Compassion fatigue is cumulative. Transparent boundaries demonstrate sustainable care for both educators and students.
+    </p>
+    <div class="page-metadata">
+      <span>Educator Care</span>
+      <span>Page 9</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Field Notes & Adaptations</h2>
+    <p>
+      Capture lesson tweaks, student feedback, and co-created rituals here. Send excerpts to atlas@feelingsunplugged.space
+      so we can fold them into future releases.
+    </p>
+    <div class="notes-box"></div>
+    <div class="page-metadata">
+      <span>Field Notes</span>
+      <span>Page 10</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Resources & Citations</h2>
+    <div class="card">
+      <h3>Research References</h3>
+      <ul class="list-plain">
+        <li>Ryan, R. M., & Deci, E. L. (2000). Self-Determination Theory.</li>
+        <li>SAMHSA (2014). Trauma-Informed Schools.</li>
+        <li>CASEL (2023). Social-Emotional Learning Competencies.</li>
+        <li>Love, B. (2019). We Want to Do More Than Survive.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Useful Links</h3>
+      <ul class="list-plain">
+        <li>Feelings Unplugged App · feelingsunplugged.space</li>
+        <li>Atlas Academy · feelingsunplugged.space/atlas</li>
+        <li>Teaching Tolerance / Learning for Justice · learningforjustice.org</li>
+        <li>Mindful Schools · mindfulschools.org</li>
+      </ul>
+    </div>
+    <div class="page-metadata">
+      <span>Resources</span>
+      <span>Page 11</span>
+    </div>
+  </div>
+
+  <div class="page">
+    <h2>Credits & License</h2>
+    <p>
+      Developed by Dr. Erica L. Tartt and the Atlas Academy scholar studio. CC BY-NC 4.0—share widely, cite the work, and keep core materials free for students.
+      Partnerships + training inquiries: atlas@feelingsunplugged.space.
+    </p>
+    <p class="footnote">
+      Scholar Studio Brand System © 2025 · Feelings Unplugged Open Curriculum.
+    </p>
+    <div class="page-metadata">
+      <span>Credits</span>
+      <span>Page 12</span>
+    </div>
+  </div>
+</body>
+</html>
+

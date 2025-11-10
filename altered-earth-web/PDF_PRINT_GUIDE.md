@@ -79,7 +79,7 @@ You already have InDesign files! Let's use them.
 
 ### Step 1: Use Your Existing InDesign File
 
-You have: `/Users/tarttphd/Downloads/feelings-unplugged/alteredearth/AlteredEarthJ1.indd`
+You have: `/Users/tarttphd/Documents/GitHub/feelings-unplugged/archive/alteredearth/AlteredEarthJ1.indd`
 
 This file already has 139 pages set up!
 

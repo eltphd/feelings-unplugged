@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { JournalEntry } from '@/types';
 import { getEmotionById } from '@/utils/emotions';
@@ -48,101 +48,109 @@ export default function EmotionTimeline() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6">
-      {/* Stats Cards */}
-      <div className="stats stats-vertical lg:stats-horizontal shadow-lg w-full mb-8">
-        <div className="stat bg-base-200">
-          <div className="stat-figure text-secondary">
-            <div 
-              className="radial-progress text-primary" 
-              style={{ "--value": stats.weekPercentage } as React.CSSProperties}
-              role="progressbar"
+    <div className="mx-auto w-full max-w-5xl space-y-10">
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="rounded-2xl border border-neutral/15 bg-white/80 p-5 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Week streak</p>
+          <div className="mt-4 flex items-center gap-4">
+            <div
+              className="relative h-16 w-16 rounded-full border border-neutral/10 bg-gradient-to-br from-primary/10 to-primary/20"
+              aria-hidden="true"
             >
-              {stats.weekPercentage}%
+              <div
+                className="absolute inset-1 rounded-full"
+                style={{
+                  background: `conic-gradient(#B7664F ${stats.weekPercentage}%, rgba(183,102,79,0.18) ${stats.weekPercentage}% 100%)`,
+                }}
+              />
+              <div className="absolute inset-[10px] flex items-center justify-center rounded-full bg-white text-sm font-semibold text-neutral">
+                {stats.weekPercentage}%
+              </div>
+            </div>
+            <div>
+              <p className="text-2xl font-serif text-neutral">{stats.weekStreak} days</p>
+              <p className="text-sm text-neutral/60">You&apos;re showing up 💜</p>
             </div>
           </div>
-          <div className="stat-title">Week Streak</div>
-          <div className="stat-value">{stats.weekStreak} days</div>
-          <div className="stat-desc">You're showing up 💜</div>
         </div>
-        
+
         {stats.mostFeltEmotion && (
-          <div className="stat bg-base-200">
-            <div className="stat-figure text-secondary">
-              <span className="text-5xl">{stats.mostFeltEmotion.emoji}</span>
+          <div className="rounded-2xl border border-neutral/15 bg-white/80 p-5 shadow-sm">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Most felt</p>
+            <div className="mt-4 flex items-center gap-4">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary/15 text-4xl">
+                {stats.mostFeltEmotion.emoji}
+              </span>
+              <div>
+                <p className="text-2xl font-serif text-neutral">{stats.mostFeltEmotion.label}</p>
+                <p className="text-sm text-neutral/60">This week&apos;s vibe</p>
+              </div>
             </div>
-            <div className="stat-title">Most Felt</div>
-            <div className="stat-value text-2xl">{stats.mostFeltEmotion.label}</div>
-            <div className="stat-desc">This week's vibe</div>
           </div>
         )}
 
-        <div className="stat bg-base-200">
-          <div className="stat-title">Total Moments</div>
-          <div className="stat-value">{stats.totalEntries}</div>
-          <div className="stat-desc">Captured so far</div>
+        <div className="rounded-2xl border border-neutral/15 bg-white/80 p-5 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.2em] text-neutral/50">Total moments</p>
+          <div className="mt-4 flex items-center gap-4">
+            <span className="text-3xl font-serif text-neutral">{stats.totalEntries}</span>
+            <p className="text-sm text-neutral/60">Captured so far</p>
+          </div>
         </div>
       </div>
 
-      {/* Timeline */}
       {entries.length === 0 ? (
-        <div className="alert alert-info">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span>No entries yet. Check in with how you're feeling to start building your timeline.</span>
+        <div className="rounded-2xl border border-info/25 bg-info/10 p-6 text-center text-sm text-neutral/70">
+          No entries yet. Check in with how you&apos;re feeling to start building your timeline.
         </div>
       ) : (
-        <ul className="timeline timeline-vertical timeline-snap-icon">
+        <div className="relative space-y-8">
+          <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-neutral/20 via-neutral/30 to-transparent md:left-6" />
           {entries.map((entry, i) => {
             const emotion = getEmotionById(entry.emotion);
             if (!emotion) return null;
 
-            const getBadgeClass = (color: string) => {
-              const colorMap: Record<string, string> = {
-                'primary': 'badge-primary',
-                'secondary': 'badge-secondary',
-                'accent': 'badge-accent',
-                'info': 'badge-info',
-                'success': 'badge-success',
-                'warning': 'badge-warning',
-                'error': 'badge-error',
-                'neutral': 'badge-neutral',
-              };
-              return `badge ${colorMap[color] || 'badge-primary'} badge-lg p-3`;
-            };
-
             return (
-              <li key={entry.id}>
-                <div className="timeline-middle">
-                  <div className={getBadgeClass(emotion.color)}>
-                    <span className="text-xl">{emotion.emoji}</span>
-                  </div>
+              <div key={entry.id} className="relative pl-12 md:pl-16">
+                <div className="absolute left-0 top-1.5 flex h-9 w-9 items-center justify-center rounded-2xl border border-neutral/15 bg-white text-xl shadow-sm md:left-2">
+                  {emotion.emoji}
                 </div>
-                <div className={`${i % 2 === 0 ? 'timeline-start' : 'timeline-end'} mb-10`}>
-                  <time className="font-mono italic text-sm opacity-60">
-                    {formatDate(entry.timestamp)}
-                  </time>
-                  <div className="text-lg font-black">{emotion.label}</div>
+                <div className="rounded-2xl border border-neutral/12 bg-white/75 p-5 shadow-sm">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <time className="text-xs uppercase tracking-[0.18em] text-neutral/50">
+                      {formatDate(entry.timestamp)}
+                    </time>
+                    <span className="rounded-full border border-neutral/20 px-3 py-1 text-xs font-semibold text-neutral/60">
+                      {entry.intensity || 0}/10 intensity
+                    </span>
+                  </div>
+                  <h3 className="mt-3 font-serif text-2xl text-neutral">{emotion.label}</h3>
                   {entry.promptQuestion && (
-                    <p className="text-xs uppercase tracking-wide mt-1 opacity-60">Prompt: {entry.promptQuestion}</p>
+                    <p className="mt-2 text-xs uppercase tracking-[0.2em] text-neutral/40">
+                      Prompt · {entry.promptQuestion}
+                    </p>
                   )}
                   {entry.tags && entry.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-2">
+                    <div className="mt-3 flex flex-wrap gap-2">
                       {entry.tags.map((tag) => (
-                        <span key={tag} className="badge badge-ghost badge-sm">#{tag}</span>
+                        <span
+                          key={tag}
+                          className="rounded-full border border-neutral/18 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral/55"
+                        >
+                          #{tag}
+                        </span>
                       ))}
                     </div>
                   )}
                   {entry.note && (
-                    <p className="text-sm opacity-80 mt-2">{entry.note}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-neutral/70">
+                      {entry.note}
+                    </p>
                   )}
                 </div>
-                <hr className={i === entries.length - 1 ? 'bg-transparent border-base-300' : 'border-base-300'} />
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       )}
     </div>
   );

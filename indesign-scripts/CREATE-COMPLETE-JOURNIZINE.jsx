@@ -217,7 +217,7 @@ function main() {
 
     var articles = [
         {
-            name: "Welcome to Your Altered Earth",
+            name: "Welcome to Feelings Unplugged",
             pages: [
                 "WELCOME TO YOUR ALTERED EARTH\n\nLetter from Dr. Tartt\n\nThis is for kids who feel BIG feelings. You don't have to hide them. You don't have to only feel happy.\n\nYour feelings are not too much.\n\nThis journizine is for the ones who feel everything deeply. If you've ever been told to 'just think positive' when you felt sad, this is for you.\n\nHow to use this:\nThere are no rules. Just tools.\n\n• Read the articles to understand your brain\n• Use the journal prompts when you need them\n• Skip days if you want\n• Draw instead of write\n• Make it yours\n\nYour feelings matter. Even the hard ones.",
 

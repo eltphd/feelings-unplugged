@@ -40,7 +40,7 @@ All changes committed and pushed! ✅
     ├── branding/                 ✅ Design assets
     ├── content/                  ✅ Article content
     ├── products/                 ✅ PDF products
-    ├── alteredearth/             ✅ InDesign files (.indd)
+    ├── archive/alteredearth/     ✅ InDesign files (.indd)
     └── indesign-scripts/         ✅ Design automation
 ```
 
@@ -80,7 +80,7 @@ All directories serve distinct purposes:
 |-----------|---------|-------|
 | `/` (root) | Static marketing site for Cloudflare Pages | ✅ YES |
 | `/altered-earth-web/` | Next.js web app for Vercel | ✅ YES |
-| `/alteredearth/` | InDesign design files (.indd) | ✅ YES |
+| `/archive/alteredearth/` | InDesign design files (.indd) | ✅ YES |
 | `/branding/` | Design assets & references | ✅ YES |
 | `/content/` | Article markdown content | ✅ YES |
 | `/products/` | PDF products & documentation | ✅ YES |

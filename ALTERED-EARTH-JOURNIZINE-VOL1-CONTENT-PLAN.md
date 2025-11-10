@@ -72,7 +72,7 @@ and light (hope). Authentic, unposed, tender. Shot on 35mm film, Kodak Portra
 
 ---
 
-#### **ARTICLE 1: "Welcome to Your Altered Earth" (4 pages)**
+#### **ARTICLE 1: "Welcome to Feelings Unplugged" (4 pages)**
 
 **Letter from Dr. Tartt**
 - Who this is for (kids who feel things deeply)
