@@ -12,7 +12,7 @@
 | Hero copy density | Rich narrative copy but heavy on mobile | Trim body paragraphs to ~2 sentences each; add collapsible sections for details. |
 | CTA clarity | Buttons such as “Join Atlas Beta” lack context | Add subtext clarifying the outcome (e.g., “Sign up for email waitlist”). |
 | Navigation | No persistent nav/header | Add top-level nav linking to app, teen/parent/educator pages, contact. |
-| Analytics | No tracking scripts | Integrate Cloudflare Web Analytics + Vercel Analytics dashboard. |
+| Analytics | Cloudflare Web Analytics snippet added; token placeholder | Replace `YOUR-CF-BEACON-TOKEN` with production token and configure Cloudflare dashboard. |
 | Footer | Static attribution only | Extend with contact email, social links, privacy policy placeholder. |
 
 ## App Route Review

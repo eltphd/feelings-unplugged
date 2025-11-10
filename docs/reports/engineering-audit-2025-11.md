@@ -9,7 +9,7 @@
 | `docs/` | Ops | Active documentation (`reports/`, `reference/`) | ✅ Organized | Continue adding dated reports here; archive previous versions under `archive/docs/` when superseded. |
 | `archive/` | Archive | Historical documentation/assets | ✅ Contained | Leave untouched; helpful for provenance. |
 | `branding/`, `products/`, `content/` | Marketing | Static assets and collateral | ✅ Useful | Document owners and update cadence; add README if workflows change. |
-| Static marketing site (`marketing/`) | Marketing | Landing pages + collateral | ✅ Deployed | Vercel project `feelings-unplugged-marketing`; update analytics token and consider adding CI smoke checks. |
+| Static marketing site (`marketing/`) | Marketing | Landing pages + collateral | ✅ Deployed | Cloudflare Pages (via `wrangler pages deploy marketing`) with Cloudflare Web Analytics snippet; update token before launch. |
 | `indesign-scripts/` | Production | MCP automation scripts for print journizine | ✅ Valid | Updated to reference the new content plan; keep for production handoff. |
 
 ## Branch & Workflow Overview
@@ -24,7 +24,7 @@
 - Production hosting: Vercel project `altered-earth-web` (confirmed via `altered-earth-web/.vercel/project.json`).
 - Root link was reset (`rm -rf .vercel`) and CLI relinked from `altered-earth-web/`.
 - Auto-deploy: Git push to `main` triggers build; manual `vercel deploy --prod --cwd altered-earth-web` also supported.
-- Outstanding task: Delete the accidental “feelings-unplugged” project in Vercel dashboard to remove “No production deployment” warning.
+- Marketing hosting: Cloudflare Pages (project name of your choice via Wrangler). Remove the old Vercel marketing project (already done) to reduce noise.
 
 ## Tooling & Tests
 
@@ -47,5 +47,5 @@
 1. **CI Pipeline:** Add GitHub Actions workflow to run lint/build/Lighthouse on PRs.
 2. **Monitoring:** Enable Vercel Analytics or integrate privacy-first analytics (PostHog self-hosted, Fathom, etc.).
 3. **QA:** Establish Playwright tests for key flows (emotion check-in, prompts start, data export/delete).
-4. **Static Site Deploy:** Decide on Cloudflare Pages vs Vercel static site; set up deploy script and DNS.
+4. **Static Site Deploy:** Wire up Cloudflare Pages CI (Wrangler) and point DNS when ready.
 

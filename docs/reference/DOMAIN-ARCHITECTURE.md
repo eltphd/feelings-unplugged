@@ -29,7 +29,7 @@ altered.earth
 
 feelingsunplugged.space
 ├── Purpose: Feelings Unplugged product site
-├── Hosting: Vercel static project (`feelings-unplugged-marketing`)
+├── Hosting: Cloudflare Pages (Wrangler)
 ├── Content: marketing/teen-journal.html, marketing/parent-guide.html, marketing/educator-toolkit.html
 └── Status: OWNED ✅
 ```
@@ -55,7 +55,7 @@ app.feelingsunplugged.space
 Repository: /home/user/feelings-unplugged/marketing
 Domain: altered.earth
 Files: index.html (product hub)
-Deploy: Cloudflare Pages or Vercel static (optional)
+Deploy: Cloudflare Pages
 Cost: $0/month
 ```
 
@@ -63,8 +63,8 @@ Cost: $0/month
 ```
 Repository: /home/user/feelings-unplugged/marketing
 Domain: feelingsunplugged.space
-Files: teen-journal.html, parent-guide.html, educator-toolkit.html, style.css
-Deploy: Vercel (`feelings-unplugged-marketing`)
+Files: teen-journal.html, parent-guide.html, educator-toolkit.html, style.css, _headers
+Deploy: Cloudflare Pages (`wrangler pages deploy marketing`)
 Cost: $0/month
 ```
 
@@ -86,17 +86,17 @@ Backup URL: altered-earth-green.vercel.app
 
 ### **For feelingsunplugged.space (Static Site)**
 
-Add these records in your domain registrar (Namecheap/etc):
+If the domain is managed in Cloudflare, connect the Pages project directly; otherwise add:
 
 ```
-Type: A
-Name: @
-Value: [Cloudflare Pages provides these IPs]
-TTL: Auto
-
 Type: CNAME
 Name: www
-Value: [your-project].pages.dev
+Value: <your-project>.pages.dev
+TTL: Auto
+
+Type: CNAME (optional, for apex using CNAME flattening)
+Name: @
+Value: <your-project>.pages.dev
 TTL: Auto
 ```
 
@@ -205,6 +205,7 @@ https://altered-earth-green.vercel.app/
 | **feelingsunplugged.space** | Domain | ~$12-15 |
 | **Cloudflare Pages** | Hosting for static sites | $0 |
 | **Vercel** | Hosting for web app | $0 |
+| **Cloudflare Pages** | Hosting for marketing site | $0 |
 | **SSL Certificates** | Auto-provided | $0 |
 | **CDN/Bandwidth** | Unlimited | $0 |
 | **TOTAL** | | **~$12-15/year** |
@@ -246,13 +247,13 @@ Sans:   'Space Grotesk' (headers, UI elements)
 - [x] Purchased feelingsunplugged.space
 
 ### **Phase 2: Update Code** ✅
-- [x] Updated teen-journal.html links (2 places)
+- [x] Restructured static marketing pages under `marketing/` and refreshed internal links
 - [x] Updated DEPLOYMENT.md
 - [x] Created DOMAIN-ARCHITECTURE.md
 
 ### **Phase 3: Configure DNS** ⏳
 - [ ] Add CNAME for app.feelingsunplugged.space → Vercel
-- [ ] Add A/CNAME for feelingsunplugged.space → Cloudflare Pages
+- [ ] Add CNAME (or enable Cloudflare Pages custom domain) for feelingsunplugged.space → Cloudflare Pages
 - [ ] Add A/CNAME for altered.earth → Cloudflare Pages
 - [ ] Wait 5-10 minutes for DNS propagation
 - [ ] Verify HTTPS/SSL enabled on all domains
@@ -261,10 +262,10 @@ Sans:   'Space Grotesk' (headers, UI elements)
 - [ ] Deploy to Cloudflare Pages (altered.earth)
 - [ ] Deploy to Cloudflare Pages (feelingsunplugged.space)
 
-### **Phase 5: Configure Vercel** ⏳
-- [ ] Add custom domain: app.feelingsunplugged.space
-- [ ] Verify deployment works
-- [ ] Test all links from static site → web app
+### **Phase 5: Configure Vercel (App)** ⏳
+- [ ] Add/verify custom domain: app.feelingsunplugged.space
+- [ ] Confirm deployment health
+- [ ] Test links from marketing site → app routes
 
 ### **Phase 6: Testing** ⏳
 - [ ] Test on mobile (iOS Safari, Chrome Android)
@@ -286,7 +287,7 @@ Sans:   'Space Grotesk' (headers, UI elements)
 ### **Delete (After DNS Migration):**
 - ❌ `altered-earth-app.vercel.app` → Duplicate
 - ❌ `altered-earth-web.vercel.app` → 404/doesn't exist
-- ❌ `feelings-unplugged.vercel.app` → Old marketing page (replaced by feelingsunplugged.space)
+- ✅ `feelings-unplugged-marketing` → Removed (marketing now on Cloudflare Pages)
 
 ---
 
@@ -328,7 +329,7 @@ Once deployed, add analytics to track engagement:
 
 1. **Configure DNS records** (see DNS Configuration section above)
 2. **Deploy static sites** to Cloudflare Pages
-3. **Add custom domain** in Vercel
+3. **Add custom domains** in Cloudflare Pages (marketing) and Vercel (app)
 4. **Test everything** on mobile devices
 5. **Share with beta testers** to get feedback
 
