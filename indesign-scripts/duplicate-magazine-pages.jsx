@@ -1,6 +1,6 @@
 // ALTERED.EARTH JOURNIZINE - Duplicate Magazine Article Pages
 // This script duplicates a template page to create all magazine article pages
-// Based on ALTERED-EARTH-JOURNIZINE-VOL1-CONTENT-PLAN.md
+// Based on FEELINGS-UNPLUGGED-CONTENT-PLAN.md
 
 #target indesign
 

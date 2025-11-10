@@ -834,7 +834,7 @@ Generate TWO PDF versions:
    - Already at 4th grade reading level
    - Already formatted with sections
 
-3. **ALTERED-EARTH-JOURNIZINE-VOL1-CONTENT-PLAN.md**
+3. **FEELINGS-UNPLUGGED-CONTENT-PLAN.md**
    - Source: Complete strategic plan
    - Use: Reference for structure, flow, and article topics
    - Contains: Simplified language examples, design notes, full page map

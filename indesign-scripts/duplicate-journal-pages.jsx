@@ -1,6 +1,6 @@
 // ALTERED.EARTH JOURNIZINE - Duplicate Journal Spread Pages
 // This script creates all daily journal spreads (2-page layouts)
-// Based on ALTERED-EARTH-JOURNIZINE-VOL1-CONTENT-PLAN.md
+// Based on FEELINGS-UNPLUGGED-CONTENT-PLAN.md
 
 #target indesign
 

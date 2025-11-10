@@ -171,7 +171,7 @@ Every 12 pages follows this pattern:
 You'll receive:
 1. **article-playlist-as-medicine.md** (complete, use as-is)
 2. **Teen-Journal-Feelings-Unplugged.pdf** (extract prompts, simplify language)
-3. **ALTERED-EARTH-JOURNIZINE-VOL1-CONTENT-PLAN.md** (structure guide)
+3. **FEELINGS-UNPLUGGED-CONTENT-PLAN.md** (structure guide)
 4. **New articles to write** (I'll provide or you'll draft):
    - Welcome letter
    - Brain science article

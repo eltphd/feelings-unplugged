@@ -3,7 +3,7 @@
 
 **Created:** November 8, 2025  
 **For:** Dr. Erica L. Tartt  
-**Project:** Altered.Earth Journizine Vol. 1 Implementation
+**Project:** Feelings Unplugged Journizine Vol. 1 Implementation
 
 ---
 
@@ -152,7 +152,7 @@ For a designer to complete this project, they'll need:
 ### Content Files You Have:
 - [x] Teen-Journal-Feelings-Unplugged.pdf
 - [x] article-playlist-as-medicine.md
-- [x] ALTERED-EARTH-JOURNIZINE-VOL1-CONTENT-PLAN.md
+- [x] FEELINGS-UNPLUGGED-CONTENT-PLAN.md
 
 ### Content That Needs Writing (4th Grade Level):
 - [ ] Welcome letter (2 pages)
@@ -389,4 +389,4 @@ END OF README
 
 **Package Created:** November 8, 2025  
 **By:** Dr. Erica L. Tartt with Claude (Anthropic)  
-**For:** Altered.Earth Journizine Vol. 1 Implementation
+**For:** Feelings Unplugged Journizine Vol. 1 Implementation
