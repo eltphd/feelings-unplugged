@@ -1,0 +1,9 @@
+{
+  "framework": "nextjs",
+  "installCommand": "cd altered-earth-web && npm install",
+  "buildCommand": "cd altered-earth-web && npm run build",
+  "devCommand": "cd altered-earth-web && npm run dev",
+  "outputDirectory": "altered-earth-web/.next",
+  "regions": ["iad1"]
+}
+

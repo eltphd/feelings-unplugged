@@ -1,273 +1,95 @@
 # Feelings Unplugged
 
-> Evidence-based emotional regulation tools for teens, parents, and educators.
-
-**Live Site:** [Deploy to Cloudflare Pages](./DEPLOYMENT.md)
+Evidence-based emotional regulation tools for Gen Alpha/Gen Z teens, their caregivers, and the adults who support them.
 
 ---
 
-## 🎯 What This Is
+## 💫 Live Experiences
 
-A comprehensive content ecosystem featuring:
+- **Production web app:** https://app.feelingsunplugged.space  
+  Next.js 16 experience with emotion check-ins, timelines, prompts, and privacy controls.
+- **Marketing/packaging assets:** `/index.html`, `/teen-journal.html`, `/parent-guide.html`, `/educator-toolkit.html`  
+  Static landing pages that can be deployed to Cloudflare Pages when you are ready.
 
-1. **Teen Journal** (120 pages) - Depth-work journal combining Jungian archetypes, shadow integration, and neuroscience-backed prompts
-2. **Parent Guide** (60 pages) - Compassionate roadmap for supporting adolescent mental health
-3. **Educator Toolkit** (40 pages) - Practical classroom emotion regulation strategies
-
----
-
-## 🎨 Design Philosophy
-
-**Dark Academia + Soft Glow Aesthetic**
-
-- Deep, rich backgrounds (charcoal, navy, black)
-- Serif typography (Crimson Text, Libre Baskerville)
-- Gold/amber accents with subtle glow effects
-- Minimal, elegant, content-focused
-- Fully responsive (mobile-first)
+Deployment steps for the app live in the canonical [`DEPLOYMENT.md`](./DEPLOYMENT.md).
 
 ---
 
-## 📁 Project Structure
+## 🧭 Repository Map
 
 ```
 feelings-unplugged/
-├── index.html              # Landing page / Master hub
-├── teen-journal.html       # Teen Journal product page
-├── parent-guide.html       # Parent Guide product page
-├── educator-toolkit.html   # Educator Toolkit product page
-├── style.css               # Global styles (dark academia theme)
-├── _headers                # Cloudflare Pages security headers
-├── .gitignore              # Git ignore patterns
-├── README.md               # This file
-└── DEPLOYMENT.md           # Complete deployment guide
+├── altered-earth-web/         # Next.js application (production experience)
+│   ├── app/                   # App router pages & routes
+│   ├── components/            # Reusable UI (DaisyUI theme)
+│   ├── hooks/, utils/, types/ # Client-side data + helpers
+│   ├── package.json           # App scripts & dependencies
+│   └── README.md              # App-specific usage notes
+├── docs/
+│   ├── reports/               # Current performance & efficiency reports
+│   └── reference/             # Domain plan, print handoffs, designer briefs
+├── products/, branding/, content/   # PDF deliverables & creative assets
+├── indesign-scripts/          # MCP automation helpers for print production
+├── archive/                   # Older docs & reports kept for historical context
+├── DEPLOYMENT.md              # Canonical Vercel deploy instructions
+└── README.md                  # You are here
 ```
 
----
-
-## 🚀 Quick Start
-
-### Local Development
-
-1. **Clone or download** this repository
-2. **Open in browser:**
-   ```bash
-   cd feelings-unplugged
-   open index.html
-   # Or use a local server:
-   python3 -m http.server 8000
-   # Then visit: http://localhost:8000
-   ```
-
-### Deploy to Cloudflare Pages
-
-**See [DEPLOYMENT.md](./DEPLOYMENT.md) for three deployment methods:**
-- Direct upload (fastest)
-- Git + GitHub (recommended)
-- Wrangler CLI (for developers)
+Everything you need for the live app lives inside `altered-earth-web/`; print-production artifacts and packaging collateral stay at the repo root.
 
 ---
 
-## 💡 Features
+## 🚀 Local Development
 
-### Technical
-- ✅ Pure HTML/CSS (no build step required)
-- ✅ Cloudflare Pages optimized
-- ✅ Security headers configured
-- ✅ SEO-friendly semantic HTML
-- ✅ Accessible (WCAG 2.1 AA compliant)
-- ✅ Fast loading (minimal dependencies)
-- ✅ Mobile-responsive
+```bash
+git clone https://github.com/eltphd/feelings-unplugged.git
+cd feelings-unplugged/altered-earth-web
+npm install
+npm run dev
+```
 
-### Content
-- ✅ 4 complete pages (landing + 3 products)
-- ✅ Professional copywriting
-- ✅ Clear calls-to-action
-- ✅ Pricing structure ($14.99-$34.99)
-- ✅ FAQ sections
-- ✅ Cultural competence framing
-- ✅ Trauma-informed language
+Visit http://localhost:3000 to explore the journaling experience.  
+The app is 100% client-side: all emotion entries, notes, and privacy controls are saved to the user’s browser via `localStorage`.
 
 ---
 
-## 🎨 Customization
+## 🛠 Tooling Highlights
 
-### Update Content
-
-Edit HTML files directly. Key sections:
-- **Prices:** Search for class="price" in HTML files
-- **Product descriptions:** Update `<p class="description">` content
-- **Features lists:** Modify `<ul class="features">` items
-- **CTAs:** Update button text and links
-
-### Modify Styling
-
-Edit `style.css`:
-- **Colors:** Update CSS variables in `:root`
-- **Fonts:** Change Google Fonts link + `--font-serif` variable
-- **Glow effects:** Adjust `--glow-sm/md/lg` variables
-- **Spacing:** Modify `--space-*` variables
-
-### Add Pages
-
-1. Create new HTML file (copy structure from existing pages)
-2. Link from navigation/CTAs
-3. Follow existing naming conventions
-4. Maintain consistent styling
+- **Framework:** Next.js 16 (App Router) + React 19 + TypeScript
+- **Styling:** Tailwind CSS 3 + DaisyUI custom theme (`feelingsunplugged`)
+- **State:** Local hooks + storage utilities (no server-side database)
+- **CI/CD:** Vercel (production + previews), `vercel.json` in repo root orchestrates subdirectory builds
+- **Bundle auditing:** `npm run analyze` generates `.next/analyze` reports (see `docs/reports/`)
 
 ---
 
-## 💰 E-Commerce Integration
+## 📚 Documentation You’ll Revisit Often
 
-### Stripe (Recommended)
+- [`DEPLOYMENT.md`](./DEPLOYMENT.md) – how to redeploy or troubleshoot Vercel
+- [`docs/reports/PERFORMANCE_REPORT.md`](./docs/reports/PERFORMANCE_REPORT.md) – latest bundle and perf opportunities
+- [`docs/reports/EFFICIENCY_SUMMARY.md`](./docs/reports/EFFICIENCY_SUMMARY.md) – current state-of-the-product snapshot
+- [`docs/reference/DOMAIN-ARCHITECTURE.md`](./docs/reference/DOMAIN-ARCHITECTURE.md) – domain + DNS strategy
+- [`docs/reference/README_How_To_Use_These_Files.md`](./docs/reference/README_How_To_Use_These_Files.md) – print journizine briefing package
 
-**Option 1: Payment Links (Simplest)**
-1. Create products in Stripe Dashboard
-2. Generate payment links
-3. Replace `href="#"` with Stripe links
-
-**Option 2: Stripe Checkout (Advanced)**
-- Requires Cloudflare Workers for backend
-- Can build custom checkout flow
-- Contact for implementation
-
-### Gumroad / Lemon Squeezy
-- Alternative platforms
-- Similar integration process
-- Update button links
+Outdated or superseded docs now live in `archive/docs/` so it’s easy to find the active guidance.
 
 ---
 
-## 📊 Analytics Setup
+## 🤝 Contributing & Next Steps
 
-### Cloudflare Web Analytics (Recommended)
-- Privacy-friendly
-- Free
-- No performance impact
-- See DEPLOYMENT.md for setup
+1. Work from the repo root (`feelings-unplugged`) on `main`.
+2. Make updates inside `altered-earth-web/` or the docs directories.
+3. Run `npm run lint` / `npm run build` before pushing if you change app code.
+4. Commit, push, and watch Vercel deploy automatically to `app.feelingsunplugged.space`.
 
-### Google Analytics
-- Add tracking script to all HTML files
-- Place before `</head>` tag
-
----
-
-## 🔧 Advanced Features (Optional)
-
-### Add Contact Form
-- Use Cloudflare Pages Functions
-- Or integrate Formspree/Tally
-
-### Add Blog
-- Use Hugo/Astro static generator
-- Or add simple HTML pages
-
-### Add Search
-- Use Algolia DocSearch
-- Or Pagefind for static search
-
-### Add Newsletter Signup
-- Integrate ConvertKit/Mailchimp
-- Use embedded forms
+Ideas for the upcoming milestone (see the reports for more detail):
+- Add loading skeletons to timeline/prompts routes
+- Run Lighthouse + bundle audits and capture baselines
+- Explore privacy-first analytics or PWA-lite caching for offline journaling
 
 ---
 
-## 📱 Social Media Assets
+## ✨ Mission
 
-Recommended for launch:
-
-1. **Open Graph Tags** (add to `<head>` of each page):
-   ```html
-   <meta property="og:title" content="Feelings Unplugged">
-   <meta property="og:description" content="Evidence-based emotional regulation for teens, parents, educators">
-   <meta property="og:image" content="https://your-domain.com/og-image.png">
-   <meta property="og:url" content="https://your-domain.com">
-   <meta name="twitter:card" content="summary_large_image">
-   ```
-
-2. **Create og-image.png:**
-   - 1200x630px
-   - Dark academia aesthetic
-   - Site title + tagline
-   - Can use Canva or Figma
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend:** HTML5, CSS3
-- **Fonts:** Google Fonts (Crimson Text, Libre Baskerville)
-- **Hosting:** Cloudflare Pages
-- **Version Control:** Git + GitHub (optional)
-- **Payment:** Stripe (when integrated)
-- **Analytics:** Cloudflare Web Analytics (when added)
-
----
-
-## 📄 License & Usage
-
-**Content:** © 2025 Dr. Erica L. Tartt. All rights reserved.
-
-**Code:** Feel free to reuse the HTML/CSS structure for your own projects.
-
----
-
-## 🤝 Contributing
-
-This is a personal project for Dr. Erica L. Tartt's ventures. If you find issues:
-
-1. Note the problem
-2. Suggest a fix
-3. Submit feedback
-
----
-
-## 📞 Support
-
-For deployment issues, see [DEPLOYMENT.md](./DEPLOYMENT.md)
-
-For content updates, edit HTML files directly.
-
-For design changes, modify `style.css`.
-
----
-
-## 🎯 Roadmap
-
-### Phase 1: Launch (Current)
-- [x] Build static site
-- [x] Deploy to Cloudflare Pages
-- [ ] Set up custom domain
-- [ ] Integrate Stripe payments
-- [ ] Add analytics
-
-### Phase 2: Enhance
-- [ ] Add blog for SEO
-- [ ] Create email capture form
-- [ ] Build social proof section
-- [ ] Add testimonials
-
-### Phase 3: Scale
-- [ ] Create affiliate program
-- [ ] Build educator dashboard
-- [ ] Develop companion workbooks
-- [ ] Launch community forum
-
----
-
-## 🌟 Credits
-
-**Created by:** Dr. Erica L. Tartt
-**Built with:** [Claude Code](https://claude.com/claude-code)
-**Hosted on:** Cloudflare Pages
-**Design Inspiration:** Dark academia aesthetic, depth psychology, cultural humility
-
----
-
-**Ready to deploy?** See [DEPLOYMENT.md](./DEPLOYMENT.md) for step-by-step instructions.
-
-**Questions?** Review the deployment guide or consult Cloudflare Pages documentation.
-
----
-
-*Built with intention. Deployed with purpose. 🔥*
+Feelings Unplugged is built to make high-quality, culturally competent emotional regulation tools accessible to teens who need them most.  
+**Your brilliance is not conditional. Neither is theirs.**

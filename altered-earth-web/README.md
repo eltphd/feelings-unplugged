@@ -1,67 +1,79 @@
-# ALTERED.EARTH Journizine Vol. 1 - Web Version
+# Feelings Unplugged – App README
 
-A free, interactive digital journizine for teens who feel everything.
+Next.js 16 + React 19 app powering the live journaling experience at https://app.feelingsunplugged.space.
 
-## 🌍 Live Site
+---
 
-Visit: [Coming Soon - Deploy to Vercel]
+## 🌍 Production & Preview URLs
 
-## ✨ Features
+- **Production:** https://app.feelingsunplugged.space
+- **Latest Vercel preview:** see the Deployment tab in the Vercel dashboard
 
-- **30-Day Interactive Journal** with auto-save to browser
-- **Playlist Builders** (5 emotional playlists)
-- **8 Magazine Articles** written at 4th grade reading level
-- **Crisis Resources** (24/7 hotlines, mental health apps)
-- **100% Privacy** - All data saved locally in your browser
-- **Mobile-Responsive** - Works on phones, tablets, computers
-- **Zero Login Required** - Start journaling immediately
+The root-level `vercel.json` already runs all build/install commands from this directory, so deploys can be triggered from the repo root with `vercel --prod`.
 
-## 🎨 Design
+---
 
-- **Terracotta Forest** color palette (warm, healing, grounded)
-- **Crimson Text** serif font
-- **Accessibility-focused** (4th grade reading level, high contrast)
-
-## 🚀 Quick Start
+## 🚀 Run Locally
 
 ```bash
 npm install
-npm run dev
+npm run dev         # starts on http://localhost:3000
+npm run lint        # type/lint checks
+npm run build       # production build (SSG)
+npm run analyze     # bundle size reports in .next/analyze
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Everything persists in the browser via `localStorage`; no server or database is required. Clear the app data from the in-app settings page to reset state.
 
-## 📖 What's Inside
+---
 
-### Articles
-1. Your Brain Is Changing
-2. Meet the Academy (5 Archetypes + Quiz)
-3. Shadow Work for Beginners
-4. When Journaling Isn't Enough
-5. Crisis Resources
-6. And more...
+## ✨ Core Features
 
-### Interactive Features
-- Daily journal (Morning/Midday/Evening prompts)
-- Playlist builders (Mad/Sad/Happy/Calm/Hyped)
-- Emotion tracking
-- Crisis resources
+- Emotion check-ins with intensity + reflections
+- Timeline analytics with streaks, most-felt emotions, weekly summaries
+- Prompt carousel grouped by feeling (identity, future-self, hard days, joy, relationships)
+- Privacy dashboard with export/delete controls and client-side backups
+- DaisyUI-powered theming tuned for Gen Alpha / Gen Z attention spans
 
-## 🛠 Tech Stack
+---
 
-- **Next.js 16** (React)
-- **TypeScript**
-- **Tailwind CSS**
-- **localStorage** (browser-based data persistence)
+## 🧱 Key Directories
 
-## 📜 License
+```
+app/
+├── page.tsx                  # Home dashboard overview
+├── emotions/, timeline/, ... # Route groups for each experience
+├── components/               # Layout, navigation, widgets, toast system
+├── prompts-feelings/[id]/    # Dynamic route for prompt detail view
+├── globals.css               # Tailwind + DaisyUI theme imports
+└── layout.tsx                # Root layout (theme + font wiring)
 
-Altered.earth publications presents Feelings Unplugged
-Created by Dr. Erica L. Tartt | Atlas Academy
-For educational and mental health support purposes.
+components/                   # Shared UI (BottomNav, DashboardWidgets, etc.)
+hooks/                        # Local storage + preference hooks
+utils/                        # Prompt and emotion dictionaries
+types/                        # Shared TypeScript interfaces
+```
+
+---
+
+## 🧪 Testing & Quality
+
+- Run `npm run lint` before committing—TypeScript + ESLint will catch most issues.
+- Use `npm run analyze` after large UI changes to watch bundle size drift (see reports in `docs/reports/`).
+- Manual QA checklist lives in `docs/reports/EFFICIENCY_SUMMARY.md`.
+
+---
+
+## 🔄 Deployment Notes
+
+- Vercel auto-deploys from `main`.  
+- To force a rebuild without cache: `vercel --prod --force`.
+- Custom domain is managed in Vercel → Settings → Domains (`app.feelingsunplugged.space`).
+- If the dashboard ever complains about a missing root directory, clear the “Root Directory” field (leave it blank) because the repo-level `vercel.json` handles `cd altered-earth-web` for you.
+
+---
 
 ## 💝 Mission
 
-Help vulnerable teens (especially BIPOC, LGBTQ+, neurodivergent youth) access free, high-quality mental health tools without cost barriers.
-
+Feelings Unplugged exists to give overwhelmed teens a soft place to land—free, private, and beautifully made.  
 **Your brilliance is not conditional. Neither is theirs.**
