@@ -36,3 +36,6 @@ dist/
 build/
 notion-content/
 .vercel
+
+# Secrets / credentials
+feelingsunplugged-*.json
