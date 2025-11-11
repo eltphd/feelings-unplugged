@@ -5,6 +5,7 @@
 - **Marketing Surfaces**: Core flows (`marketing/index.html`, `teen-journal.html`, `parent-guide.html`, `educator-toolkit.html`) share a consistent head stack (favicons, `<base>` routing, Cloudflare Web Analytics beacon). Responsiveness verified at primary breakpoints but still needs structured QA logs.
 - **Automation**: n8n Docker instance running locally (`docker run … -v n8n_data`). Workflow `Feelings Unplugged Deploy & QA` imported with live Cloudflare deploy hook, JWT auth against Google PageSpeed Insights, optional Slack/Teams webhook, and post-deploy Lighthouse capture.
 - **Security & Privacy**: Service-account JSON excluded from git, `.gitignore` hardened, Cloudflare Content Signals, Bot Fight, Browser Integrity check disabled to avoid Lighthouse regressions. Web analytics relies on Cloudflare’s privacy-first beacon—no extra tracking cookies.
+- **Commerce Pipeline**: Stripe payment link `https://buy.stripe.com/00wcN43Dm1gK78g6nX4Rq06` embedded on key marketing pages, downloads hub live at `/marketing/downloads.html`, and n8n Stripe Fulfillment workflow ready (awaiting Stripe + SMTP credentials) to email PDFs automatically.
 - **Brand System**: Favicon generator script in `scripts/generate_favicon.py`, base visual language defined in marketing HTML (color palette, motion minimal, CTA hierarchy).
 - **Docs & Guides**: Automation (`docs/automation/cloudflare-automation.md`) and dev guide (`docs/dev/marketing-dev-guide.md`) refreshed with current routing, analytics, and deployment patterns.
 
