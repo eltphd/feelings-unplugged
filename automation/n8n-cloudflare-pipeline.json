@@ -40,10 +40,6 @@
               "value": "https://hooks.slack.com/services/REPLACE/ME"
             },
             {
-              "name": "pagespeedApiKey",
-              "value": "REPLACE_WITH_PAGESPEED_API_KEY"
-            },
-            {
               "name": "analyticsDashboard",
               "value": "https://dash.cloudflare.com/a38191cd453b3f9dc61e9108cb40fcc1/web-analytics/feelingsunplugged.space"
             }
@@ -129,21 +125,67 @@
       }
     },
     {
+      "id": "12",
+      "name": "Prepare Google JWT",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        40
+      ],
+      "parameters": {
+        "functionCode": "const clientEmail = $env.GOOGLE_CLIENT_EMAIL;\nconst privateKey = ($env.GOOGLE_PRIVATE_KEY || '').replace(/\\\\n/g, '\\n');\nif (!clientEmail || !privateKey) {\n  throw new Error('GOOGLE_CLIENT_EMAIL or GOOGLE_PRIVATE_KEY env vars are missing.');\n}\nconst now = Math.floor(Date.now() / 1000);\nconst header = { alg: 'RS256', typ: 'JWT' };\nconst payload = {\n  iss: clientEmail,\n  scope: 'https://www.googleapis.com/auth/pagespeedonline',\n  aud: 'https://oauth2.googleapis.com/token',\n  iat: now,\n  exp: now + 3600,\n};\nconst base64url = (input) => Buffer.from(input).toString('base64').replace(/=/g, '').replace(/\\+/g, '-').replace(/\\//g, '_');\nconst encodedHeader = base64url(JSON.stringify(header));\nconst encodedPayload = base64url(JSON.stringify(payload));\nconst crypto = require('crypto');\nconst signature = crypto\n  .createSign('RSA-SHA256')\n  .update(`${encodedHeader}.${encodedPayload}`)\n  .sign(privateKey, 'base64')\n  .replace(/=/g, '')\n  .replace(/\\+/g, '-')\n  .replace(/\\//g, '_');\nconst jwt = `${encodedHeader}.${encodedPayload}.${signature}`;\nreturn [{ jwt }];"
+      }
+    },
+    {
+      "id": "13",
+      "name": "Get Google Token",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1600,
+        40
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://oauth2.googleapis.com/token",
+        "responseFormat": "json",
+        "options": {
+          "timeout": 30
+        },
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "urn:ietf:params:oauth:grant-type:jwt-bearer"
+            },
+            {
+              "name": "assertion",
+              "value": "={{$json[\"jwt\"]}}"
+            }
+          ]
+        }
+      }
+    },
+    {
       "id": "10",
       "name": "Fetch Lighthouse",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1400,
-        120
+        1800,
+        40
       ],
       "parameters": {
         "method": "GET",
-        "url": "={{`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://feelingsunplugged.space/&strategy=mobile&category=PERFORMANCE&category=ACCESSIBILITY&category=BEST_PRACTICES&category=SEO&key=${$json[\"pagespeedApiKey\"]}`}}",
+        "url": "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://feelingsunplugged.space/&strategy=mobile&category=PERFORMANCE&category=ACCESSIBILITY&category=BEST_PRACTICES&category=SEO",
         "responseFormat": "json",
         "options": {
           "timeout": 60
-        }
+        },
+        "headerParametersJson": "={\"Authorization\":\"Bearer {{$json[\\\"access_token\\\"]}}\"}"
       }
     },
     {
@@ -152,8 +194,8 @@
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
-        1600,
-        120
+        2000,
+        40
       ],
       "parameters": {
         "functionCode": "const deployment = $items(\"Fetch Deployment\", 0, 0).json.result[0];\nconst categories = $json.lighthouseResult.categories;\nconst audits = $json.lighthouseResult.audits;\nconst toPct = (val) => Math.round((val || 0) * 100);\nreturn [{\n  deployment,\n  lighthouse: {\n    performance: toPct(categories.performance.score),\n    accessibility: toPct(categories.accessibility.score),\n    bestPractices: toPct(categories['best-practices'].score),\n    seo: toPct(categories.seo.score),\n    fcp: audits['first-contentful-paint'].displayValue,\n    lcp: audits['largest-contentful-paint'].displayValue,\n    cls: audits['cumulative-layout-shift'].displayValue,\n    tbt: audits['total-blocking-time'].displayValue\n  },\n  analyticsDashboard: $items(\"Config\", 0, 0).json.analyticsDashboard\n}];"
@@ -165,8 +207,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        1400,
-        160
+        2200,
+        40
       ],
       "parameters": {
         "values": {
@@ -282,7 +324,7 @@
       "main": [
         [
           {
-            "node": "Fetch Lighthouse",
+            "node": "Prepare Google JWT",
             "type": "main",
             "index": 0
           }
@@ -290,6 +332,28 @@
         [
           {
             "node": "Failure Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Google JWT": {
+      "main": [
+        [
+          {
+            "node": "Get Google Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Google Token": {
+      "main": [
+        [
+          {
+            "node": "Fetch Lighthouse",
             "type": "main",
             "index": 0
           }

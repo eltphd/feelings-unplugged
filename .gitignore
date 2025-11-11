@@ -39,3 +39,4 @@ notion-content/
 
 # Secrets / credentials
 feelingsunplugged-*.json
+n8n.env
