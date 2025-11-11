@@ -24,5 +24,5 @@ products/images/
 - Use lowercase, hyphenated names (e.g., `archetypes-collage.jpg`).
 - Export at print-ready resolution (minimum 300 DPI) where possible.
 
-Once images are in place, ping the team so we can embed them into the HTML templates and regenerate the PDFs.***
+Once images are in place, ping the team so we can embed them into the HTML templates and regenerate the PDFs.
 
