@@ -19,7 +19,10 @@ Secrets managed in n8n or CI need the following:
 - `CLOUDFLARE_PROJECT_NAME` (`feelings-unplugged`)
 - `CLOUDFLARE_API_TOKEN` (Pages Edit + Workers Scripts Edit)
 - `GITHUB_TOKEN` (repo: workflow scope)
-- Optional: `SLACK_WEBHOOK_URL`, `EMAIL_SMTP_*`, `LIGHTHOUSE_API_KEY`, `PAGESPEED_API_KEY`
+- Optional: `SLACK_WEBHOOK_URL`, `EMAIL_SMTP_*`, `LIGHTHOUSE_API_KEY`
+- Google PageSpeed service-account env vars:
+  - `GOOGLE_CLIENT_EMAIL`
+  - `GOOGLE_PRIVATE_KEY` (use `\n` escape sequences in env files)
 
 ---
 
@@ -38,7 +41,7 @@ Secrets managed in n8n or CI need the following:
 2. n8n flow `Post Deploy QA` (`automation/n8n-cloudflare-pipeline.json` import):
    - Manual trigger → deploy hook.
    - Wait 60 seconds, poll `/accounts/:id/pages/projects/:name/deployments`.
-   - On success, call PageSpeed Insights API (mobile) to collect fresh Performance / A11y / BP / SEO scores + FCP/LCP/CLS/TBT.
+   - On success, build a Google OAuth JWT from service-account env vars, exchange it for an access token, then call PageSpeed Insights API (mobile) to collect fresh Performance / A11y / BP / SEO scores + FCP/LCP/CLS/TBT.
    - Post Slack summary with deployment URL, Lighthouse scores, and Web Analytics dashboard deep link.
 
 ---
@@ -48,7 +51,7 @@ Secrets managed in n8n or CI need the following:
 | Automation | Purpose | Suggested Tool | Notes |
 | --- | --- | --- | --- |
 | Deployment verify | Ensure Pages completed & alias updated | n8n HTTP nodes | Re-run if `latest_stage.status !== success`. |
-| Production Lighthouse | Alert on CLS/contrast regressions | n8n + PageSpeed Insights | Run nightly; threshold CLS ≤ 0.1, Performance ≥ 95, BP = 100 (disable Browser Integrity / Bot Fight scripts if they introduce deprecated APIs). |
+| Production Lighthouse | Alert on CLS/contrast regressions | n8n + PageSpeed Insights (service account) | Run nightly; threshold CLS ≤ 0.1, Performance ≥ 95, BP = 100 (disable Browser Integrity / Bot Fight scripts if they introduce deprecated APIs). |
 | Link crawler | Catch broken marketing links | n8n + `broken-link-checker` CLI in an Execute Command node | Run weekly. |
 | Asset sync | Ensure `marketing/favicon*` + `robots.txt` present | GitHub Action | Block merges if missing. |
 | Cache purge (optional) | Bust CDN when assets change | n8n HTTP node → `POST /zones/:id/purge_cache` | Use only for major revamps. |
