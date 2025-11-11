@@ -1,0 +1,293 @@
+{
+  "name": "Feelings Unplugged Deploy & QA",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        280
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        430,
+        280
+      ],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "deployHookUrl",
+              "value": "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/REPLACE_WITH_DEPLOY_HOOK"
+            },
+            {
+              "name": "accountId",
+              "value": "a38191cd453b3f9dc61e9108cb40fcc1"
+            },
+            {
+              "name": "projectName",
+              "value": "feelings-unplugged"
+            },
+            {
+              "name": "notifyWebhook",
+              "value": "https://hooks.slack.com/services/REPLACE/ME"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "3",
+      "name": "Trigger Deploy Hook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        640,
+        280
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json[\"deployHookUrl\"]}}",
+        "responseFormat": "json",
+        "options": {
+          "timeout": 15
+        }
+      }
+    },
+    {
+      "id": "4",
+      "name": "Wait 60s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        830,
+        280
+      ],
+      "parameters": {
+        "options": {
+          "delay": {
+            "amount": 60,
+            "unit": "seconds"
+          }
+        }
+      }
+    },
+    {
+      "id": "5",
+      "name": "Fetch Deployment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1010,
+        280
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{`https://api.cloudflare.com/client/v4/accounts/${$json[\"accountId\"]}/pages/projects/${$json[\"projectName\"]}/deployments`}}",
+        "responseFormat": "json",
+        "options": {
+          "timeout": 20
+        },
+        "headerParametersJson": "={\"Authorization\":\"Bearer {{$env.CLOUDFLARE_API_TOKEN}}\"}"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Check Status",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        280
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"result\"][0][\"latest_stage\"][\"status\"]}}",
+              "operation": "equal",
+              "value2": "success"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "7",
+      "name": "Success Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        160
+      ],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "text",
+              "value": "✅ Cloudflare Pages deployment succeeded for Feelings Unplugged.\nID: {{$json[\"result\"][0][\"id\"]}}\nURL: {{$json[\"result\"][0][\"url\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "8",
+      "name": "Failure Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        1400,
+        420
+      ],
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "text",
+              "value": "⚠️ Cloudflare Pages deployment still pending or failed.\nLatest status: {{$json[\"result\"][0][\"latest_stage\"][\"status\"]}}\nCheck Cloudflare dashboard."
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "9",
+      "name": "Notify Channel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1590,
+        280
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json[\"notifyWebhook\"]}}",
+        "responseFormat": "json",
+        "jsonParameters": true,
+        "options": {
+          "timeout": 10
+        },
+        "bodyParametersJson": "={\"text\": $json[\"text\"]}"
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Trigger Deploy Hook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Deploy Hook": {
+      "main": [
+        [
+          {
+            "node": "Wait 60s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 60s": {
+      "main": [
+        [
+          {
+            "node": "Fetch Deployment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Deployment": {
+      "main": [
+        [
+          {
+            "node": "Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Status": {
+      "main": [
+        [
+          {
+            "node": "Success Payload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Failure Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Success Payload": {
+      "main": [
+        [
+          {
+            "node": "Notify Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Failure Payload": {
+      "main": [
+        [
+          {
+            "node": "Notify Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "active": false,
+  "versionId": "5c14f5e4-automation-template",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
+
