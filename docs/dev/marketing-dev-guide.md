@@ -13,6 +13,7 @@ This guide keeps contributors aligned when updating the marketing pages served f
 | `/marketing/style.css` | Shared stylesheet | Cache headers defined in `_headers`. |
 | `functions/[[path]].ts` | Cloudflare Pages Function | Routes `/` (and `/index.html`) to `/marketing/` while leaving other assets untouched. |
 | `functions/robots.txt.ts` | Cloudflare Pages Function | Returns the canonical robots.txt (Cloudflare-managed content signals may still prepend text at the edge). |
+| Cloudflare Web Analytics beacon | Instrumentation script | Manually embedded in every marketing page `<head>` using token `f98e1afdae084da6bfa84f10a6009b7e`. |
 | `automation/n8n-cloudflare-pipeline.json` | Deploy + QA flow | Import into n8n for automated deploy verification. |
 
 ---
@@ -40,6 +41,7 @@ This guide keeps contributors aligned when updating the marketing pages served f
 ## Implementation Guidelines
 
 - **Do not duplicate HTML at the project root.** Use the base href plus the catch-all function to keep a single source of truth under `/marketing`.
+- **Web Analytics** is wired via Cloudflare’s beacon script; update all pages if the token rotates.
 - **Always update asset paths absolutely** (e.g., `/marketing/style.css`) when adding new files so both `/` and `/marketing/` contexts work.
 - **Favicons** are generated via `scripts/generate_favicon.py`. Run it after modifying brand colors and commit the resulting assets.
 - **Robots.txt** modifications belong in the function. Update both `functions/robots.txt.ts` and `robots.txt` (reference copy) together to stay consistent.
