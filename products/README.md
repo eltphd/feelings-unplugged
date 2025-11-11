@@ -26,7 +26,8 @@ The HTML file renders the redesigned print edition that matches the current web/
    - Set download limits (recommend: unlimited downloads, or 5 downloads within 30 days)
 4. **Update Payment Link**:
    - Your existing payment link: https://buy.stripe.com/00wcN43Dm1gK78g6nX4Rq06
-   - Should automatically include the uploaded file
+   - Add a success redirect to `https://feelingsunplugged.space/marketing/downloads.html`
+   - Under **Advanced options → Webhooks**, point to `https://<your-n8n-host>/webhook/stripe/checkout` and use the signing secret in `n8n.env`
    - Test by making a test purchase to verify file delivery
 
 ### Option 2: Host Externally
@@ -46,7 +47,7 @@ If you prefer to host the PDF elsewhere:
 ### Testing Your Setup
 
 1. **Make a test purchase** using Stripe test mode
-2. **Verify email delivery** includes PDF download link
+2. **Verify email delivery** includes PDF download link (sent from n8n automation)
 3. **Check download works** and file opens correctly
 4. **Confirm file size** is appropriate for email delivery (236 KB is perfect)
 
@@ -103,15 +104,16 @@ INSTANT DOWNLOAD - PDF format, print or use digitally
 
 ## Next Steps
 
-1. [ ] Upload PDF to Stripe product
-2. [ ] Test purchase flow in test mode
-3. [ ] Verify email delivery and download
-4. [ ] Switch to live mode
-5. [ ] Market the product!
+1. [ ] Upload latest PDFs to Stripe product
+2. [ ] Configure webhook → n8n (`/stripe/checkout`)
+3. [ ] Set success redirect to marketing downloads page
+4. [ ] Test purchase flow in Stripe test mode
+5. [ ] Verify email delivery and downloads
+6. [ ] Switch to live mode and announce the launch!
 
 ---
 
-**Questions?** contact@measurementally.com
+**Questions?** care@feelingsunplugged.space
 
 ---
 

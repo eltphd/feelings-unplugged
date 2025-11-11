@@ -49,6 +49,7 @@
 ### 4. Next Actions (Lightning List)
 - Document manual QA runs (template in `docs/qa/` to create).
 - Add Cron node or GitHub trigger to n8n workflow; confirm Slack webhook once channel ready.
+- Connect Stripe Payment Link webhook to n8n (`/stripe/checkout`) and send a test purchase to confirm emails + downloads.
 - Create modular component library (cards, CTA blocks, progress trackers) in a shared design system file + code partials.
 - Schedule strategic workshop: map Gen Alpha personas, language, and digital behaviors.
 - Draft monetization whitepaper summarizing value exchange, pricing experiments, sustainable donation flow.
@@ -57,12 +58,16 @@
 - **MVP Launch Gate**
   - [x] Marketing site routes correctly at root domain.
   - [x] Automation workflow posts deploy trigger and waits for status.
+  - [x] Stripe payment link embedded across hero + product pages.
+  - [x] Download landing page live at `/marketing/downloads.html`.
   - [ ] Manual responsive QA log captured in `docs/qa/`.
   - [ ] Lighthouse mobile scorecard archived (Performance ≥ 95, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95).
   - [ ] Production links/CTAs verified after each deploy and logged.
 - **Reliability Hardening**
   - [ ] n8n instance auto-start (systemd/compose) with health checks.
   - [ ] GitHub Action wired to kick Cloudflare deploy and n8n QA on push to `main`.
+  - [ ] Stripe webhook secret stored and mapped to n8n credential vault.
+  - [ ] SMTP service configured for automated fulfillment emails.
   - [ ] Secrets vaulted (no JSON on disk; rotation playbook documented).
   - [ ] Regression suite green (pa11y, html-validate, link-check, Lighthouse CI).
 - **Growth & Monetization**

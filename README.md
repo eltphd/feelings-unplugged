@@ -8,8 +8,8 @@ Evidence-based emotional regulation tools for Gen Alpha/Gen Z teens, their careg
 
 - **Production web app:** https://app.feelingsunplugged.space  
   Next.js 16 experience with emotion check-ins, timelines, prompts, and privacy controls.
-- **Marketing/packaging assets:** `marketing/` (`index.html`, `teen-journal.html`, `parent-guide.html`, `educator-toolkit.html`, `_headers`, `style.css`)  
-  Static landing pages deployed via Cloudflare Pages (with Cloudflare Web Analytics embedded).
+- **Marketing/packaging assets:** `marketing/` (`index.html`, `teen-journal.html`, `parent-guide.html`, `educator-toolkit.html`, `downloads.html`, `_headers`, `style.css`)  
+  Static landing pages deployed via Cloudflare Pages (with Cloudflare Web Analytics embedded). Stripe payment link: https://buy.stripe.com/00wcN43Dm1gK78g6nX4Rq06.
 
 Deployment steps for the app live in the canonical [`DEPLOYMENT.md`](./DEPLOYMENT.md).
 
@@ -60,6 +60,7 @@ The app is 100% client-side: all emotion entries, notes, and privacy controls ar
 - **Styling:** Tailwind CSS 3 + DaisyUI custom theme (`feelingsunplugged`)
 - **State:** Local hooks + storage utilities (no server-side database)
 - **CI/CD:** Vercel (production + previews), `vercel.json` in repo root orchestrates subdirectory builds
+- **Automation:** n8n workflows (`automation/n8n-cloudflare-pipeline.json`, `automation/n8n-stripe-fulfillment.json`) handle Cloudflare deploy QA + Stripe digital delivery
 - **Bundle auditing:** `npm run analyze` generates `.next/analyze` reports (see `docs/reports/`)
 
 ---

@@ -1,0 +1,226 @@
+{
+  "name": "Feelings Unplugged Stripe Fulfillment",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Stripe Checkout Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stripe/checkout",
+        "responseMode": "responseNode",
+        "options": {
+          "binaryData": false,
+          "rawBody": true
+        }
+      }
+    },
+    {
+      "id": "2",
+      "name": "Event Type?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        520,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"type\"]}}",
+              "operation": "equal",
+              "value2": "checkout.session.completed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "3",
+      "name": "Respond (ignored)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 2,
+      "position": [
+        780,
+        440
+      ],
+      "parameters": {
+        "responseBody": "={{ { \"received\": true, \"ignored\": true } }}",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "4",
+      "name": "Retrieve Session",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        780,
+        140
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{`https://api.stripe.com/v1/checkout/sessions/${$json[\"data\"][\"object\"][\"id\"]}?expand[]=line_items`}}",
+        "responseFormat": "json",
+        "options": {
+          "timeout": 30000
+        },
+        "headerParametersJson": "={\"Authorization\": \"Bearer {{$env.STRIPE_SECRET_KEY}}\"}"
+      }
+    },
+    {
+      "id": "5",
+      "name": "Build Download Payload",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        140
+      ],
+      "parameters": {
+        "functionCode": "const session = items[0].json;\nconst lineItems = session.line_items?.data ?? [];\nconst email = session.customer_details?.email;\nif (!email) {\n  throw new Error('Stripe session missing customer email.');\n}\n\nconst links = [];\nfor (const item of lineItems) {\n  const description = (item.description || '').toLowerCase();\n  if (description.includes('teen journal')) {\n    links.push({\n      title: 'Feelings Unplugged Teen Journal (Print-Ready PDF)',\n      url: 'https://feelingsunplugged.space/products/Teen-Journal-Feelings-Unplugged.pdf'\n    });\n  }\n  if (description.includes('parent') || description.includes('caregiver')) {\n    links.push({\n      title: 'Parent Guide (Print-Ready PDF)',\n      url: 'https://feelingsunplugged.space/products/parent-guide-print.pdf'\n    });\n  }\n  if (description.includes('educator') || description.includes('toolkit')) {\n    links.push({\n      title: 'Educator Toolkit (Print-Ready PDF)',\n      url: 'https://feelingsunplugged.space/products/educator-toolkit-print.pdf'\n    });\n  }\n}\n\nif (!links.length) {\n  links.push({\n    title: 'Feelings Unplugged Resource Library',\n    url: 'https://feelingsunplugged.space/marketing/downloads.html'\n  });\n}\n\nreturn [{\n  json: {\n    checkout: session,\n    links,\n    email\n  }\n}];"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Prepare Email Content",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        140
+      ],
+      "parameters": {
+        "functionCode": "const { email, links, checkout } = items[0].json;\nconst customerName = checkout.customer_details?.name || 'Firefly';\nconst subject = 'Feelings Unplugged • Your downloads are ready';\n\nconst linkList = links\n  .map(link => `<li><a href=\"${link.url}\" target=\"_blank\" rel=\"noopener\">${link.title}</a></li>`)\n  .join('\\n');\n\nconst html = `\n  <p>Hi ${customerName},</p>\n  <p>Thank you for supporting Feelings Unplugged. Your downloads are ready:</p>\n  <ul>\n    ${linkList}\n  </ul>\n  <p>If you run into any snags, reply to this email and we will help right away.</p>\n  <p>With care,<br/>Feelings Unplugged Team</p>\n`;\n\nconst text = `Hi ${customerName},\\n\\nThank you for supporting Feelings Unplugged. Your downloads are ready:\\n${links\n  .map((link, idx) => `${idx + 1}. ${link.title} → ${link.url}`)\n  .join('\\n')}\\n\\nIf you run into any snags, reply to this email and we will help right away.\\n\\nWith care,\\nFeelings Unplugged Team`;\n\nreturn [{\n  json: {\n    checkout,\n    email,\n    links,\n    message: {\n      subject,\n      html,\n      text\n    }\n  }\n}];"
+      }
+    },
+    {
+      "id": "7",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        140
+      ],
+      "parameters": {
+        "fromEmail": "={{$env.FULFILLMENT_FROM_EMAIL}}",
+        "fromName": "={{$env.FULFILLMENT_FROM_NAME || 'Feelings Unplugged'}}",
+        "toEmail": "={{$json[\"email\"]}}",
+        "subject": "={{$json[\"message\"][\"subject\"]}}",
+        "text": "={{$json[\"message\"][\"text\"]}}",
+        "html": "={{$json[\"message\"][\"html\"]}}",
+        "options": {
+          "smtp": {
+            "host": "={{$env.N8N_SMTP_HOST}}",
+            "port": "={{$env.N8N_SMTP_PORT || 587}}",
+            "secure": false,
+            "user": "={{$env.N8N_SMTP_USER}}",
+            "pass": "={{$env.N8N_SMTP_PASS}}"
+          }
+        }
+      }
+    },
+    {
+      "id": "8",
+      "name": "Respond (fulfilled)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 2,
+      "position": [
+        1660,
+        140
+      ],
+      "parameters": {
+        "responseBody": "={{ { \"received\": true, \"fulfilled\": true } }}",
+        "responseCode": 200
+      }
+    }
+  ],
+  "connections": {
+    "Stripe Checkout Webhook": {
+      "main": [
+        [
+          {
+            "node": "Event Type?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Event Type?": {
+      "main": [
+        [
+          {
+            "node": "Retrieve Session",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond (ignored)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retrieve Session": {
+      "main": [
+        [
+          {
+            "node": "Build Download Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Download Payload": {
+      "main": [
+        [
+          {
+            "node": "Prepare Email Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Email Content": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Respond (fulfilled)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {},
+  "staticData": {},
+  "id": null,
+  "active": false
+}
+

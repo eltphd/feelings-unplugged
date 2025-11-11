@@ -19,10 +19,16 @@ Secrets managed in n8n or CI need the following:
 - `CLOUDFLARE_PROJECT_NAME` (`feelings-unplugged`)
 - `CLOUDFLARE_API_TOKEN` (Pages Edit + Workers Scripts Edit)
 - `GITHUB_TOKEN` (repo: workflow scope)
-- Optional: `SLACK_WEBHOOK_URL`, `EMAIL_SMTP_*`, `LIGHTHOUSE_API_KEY`
 - Google PageSpeed service-account env vars:
   - `GOOGLE_CLIENT_EMAIL`
   - `GOOGLE_PRIVATE_KEY` (use `\n` escape sequences in env files)
+- Stripe fulfillment (n8n):
+  - `STRIPE_SECRET_KEY`
+  - `STRIPE_WEBHOOK_SECRET` (checkout link signing secret)
+  - `FULFILLMENT_FROM_EMAIL`
+  - `FULFILLMENT_FROM_NAME`
+  - `N8N_SMTP_HOST`, `N8N_SMTP_PORT`, `N8N_SMTP_USER`, `N8N_SMTP_PASS`
+- Optional: `SLACK_WEBHOOK_URL`, `LIGHTHOUSE_API_KEY`
 
 ---
 
@@ -43,6 +49,11 @@ Secrets managed in n8n or CI need the following:
    - Wait 60 seconds, poll `/accounts/:id/pages/projects/:name/deployments`.
    - On success, build a Google OAuth JWT from service-account env vars, exchange it for an access token, then call PageSpeed Insights API (mobile) to collect fresh Performance / A11y / BP / SEO scores + FCP/LCP/CLS/TBT.
    - Post Slack summary with deployment URL, Lighthouse scores, and Web Analytics dashboard deep link.
+3. n8n flow `Stripe Fulfillment` (`automation/n8n-stripe-fulfillment.json` import):
+   - Webhook endpoint `/stripe/checkout` (add this as a webhook in the Stripe Payment Link advanced options and supply the signing secret).
+   - Confirms the event type `checkout.session.completed`, retrieves the expanded session from Stripe, and maps line items to hosted PDFs.
+   - Sends the customer an email with download links (SMTP credentials come from the new env vars).
+   - Responds `200` so Stripe marks the webhook delivery successful.
 
 ---
 
