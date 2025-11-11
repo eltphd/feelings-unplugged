@@ -53,7 +53,50 @@
 - Schedule strategic workshop: map Gen Alpha personas, language, and digital behaviors.
 - Draft monetization whitepaper summarizing value exchange, pricing experiments, sustainable donation flow.
 
-### 5. Invitation to Contributors
+### 5. Deployment Milestones & Checklists
+- **MVP Launch Gate**
+  - [x] Marketing site routes correctly at root domain.
+  - [x] Automation workflow posts deploy trigger and waits for status.
+  - [ ] Manual responsive QA log captured in `docs/qa/`.
+  - [ ] Lighthouse mobile scorecard archived (Performance ≥ 95, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95).
+  - [ ] Production links/CTAs verified after each deploy and logged.
+- **Reliability Hardening**
+  - [ ] n8n instance auto-start (systemd/compose) with health checks.
+  - [ ] GitHub Action wired to kick Cloudflare deploy and n8n QA on push to `main`.
+  - [ ] Secrets vaulted (no JSON on disk; rotation playbook documented).
+  - [ ] Regression suite green (pa11y, html-validate, link-check, Lighthouse CI).
+- **Growth & Monetization**
+  - [ ] Subscription/donation funnel UX drafted and tested with privacy copy.
+  - [ ] Analytics uplift plan (Cloudflare + server-side events) validated against privacy goals.
+  - [ ] Content calendar and drip automations mapped in marketing CRM.
+
+### 6. Apprentice Ramp-Up Curriculum (Gen Alpha Specialist)
+- **Week 1: Orientation**
+  - Mission briefing, personas, and tone guide review.
+  - Walkthrough of `docs/ops/progress-roadmap.md`, `docs/dev/marketing-dev-guide.md`, and n8n workflow.
+  - Hands-on: run local Lighthouse + responsive audits, log findings in QA template.
+- **Week 2: UI Systems & Accessibility**
+  - Study color/typography tokens, propose Gen Alpha friendly variants.
+  - Implement focus states, reduced motion modes, and alternative font toggles.
+  - Pair with AI assistant on micro-interactions; document learnings.
+- **Week 3: Automation & Deployments**
+  - Shadow n8n workflow edits; add Cron trigger and Slack integration.
+  - Practice Cloudflare deploy via hook, verify logs, update runbook.
+  - Security quiz: explain secrets handling, privacy-first analytics choices.
+- **Week 4+: Feature Pods**
+  - Lead a “Feelings Routine” mini-feature from brief → design → build.
+  - Coordinate user testing with peer teens; file reports and iterate.
+  - Present outcomes during weekly review, propose next backlog items.
+
+### 7. Majors & Specialty Invitations
+- **Major Pillars**: Automation Reliability, Gen Alpha UX, Compassionate Content, Sustainable Monetization, Privacy-Ethical Data.
+- **Specialist Callouts**
+  - Automation engineers: help productionize CI/CD, add alerts, streamline n8n scaling.
+  - Frontend artists: craft emotionally resonant visuals, animation, and responsive layouts.
+  - Teen co-creators: stress-test language and flows, ensure authenticity for neurodiverse peers.
+  - Mental health strategists: ground exercises in evidence-based practice, ensure ethical guardrails.
+
+### 8. Invitation to Contributors
 - **Engineers**: Help wire automated QA pipelines, strengthen infrastructure, and craft accessible, high-performance UI primitives.
 - **Designers/Researchers**: Lead Gen Alpha co-creation sessions, animate the journey, ensure neurodiverse-friendly experiences.
 - **Content & Partnerships**: Author empathetic storytelling, recruit teen ambassadors, and secure collaborative grants or sponsorships.
