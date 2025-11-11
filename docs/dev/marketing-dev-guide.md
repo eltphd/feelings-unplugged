@@ -42,6 +42,7 @@ This guide keeps contributors aligned when updating the marketing pages served f
 
 - **Do not duplicate HTML at the project root.** Use the base href plus the catch-all function to keep a single source of truth under `/marketing`.
 - **Web Analytics** is wired via Cloudflare’s beacon script; update all pages if the token rotates.
+- **Browser integrity/Bot Fight** features are disabled for marketing pages to avoid Cloudflare challenge scripts that hurt Lighthouse scores; re-enable only if security posture changes.
 - **Always update asset paths absolutely** (e.g., `/marketing/style.css`) when adding new files so both `/` and `/marketing/` contexts work.
 - **Favicons** are generated via `scripts/generate_favicon.py`. Run it after modifying brand colors and commit the resulting assets.
 - **Robots.txt** modifications belong in the function. Update both `functions/robots.txt.ts` and `robots.txt` (reference copy) together to stay consistent.

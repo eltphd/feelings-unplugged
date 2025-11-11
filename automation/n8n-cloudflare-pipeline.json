@@ -38,6 +38,14 @@
             {
               "name": "notifyWebhook",
               "value": "https://hooks.slack.com/services/REPLACE/ME"
+            },
+            {
+              "name": "pagespeedApiKey",
+              "value": "REPLACE_WITH_PAGESPEED_API_KEY"
+            },
+            {
+              "name": "analyticsDashboard",
+              "value": "https://dash.cloudflare.com/a38191cd453b3f9dc61e9108cb40fcc1/web-analytics/feelingsunplugged.space"
             }
           ]
         },
@@ -121,6 +129,37 @@
       }
     },
     {
+      "id": "10",
+      "name": "Fetch Lighthouse",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1400,
+        120
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://feelingsunplugged.space/&strategy=mobile&category=PERFORMANCE&category=ACCESSIBILITY&category=BEST_PRACTICES&category=SEO&key=${$json[\"pagespeedApiKey\"]}`}}",
+        "responseFormat": "json",
+        "options": {
+          "timeout": 60
+        }
+      }
+    },
+    {
+      "id": "11",
+      "name": "Assemble Success Context",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        120
+      ],
+      "parameters": {
+        "functionCode": "const deployment = $items(\"Fetch Deployment\", 0, 0).json.result[0];\nconst categories = $json.lighthouseResult.categories;\nconst audits = $json.lighthouseResult.audits;\nconst toPct = (val) => Math.round((val || 0) * 100);\nreturn [{\n  deployment,\n  lighthouse: {\n    performance: toPct(categories.performance.score),\n    accessibility: toPct(categories.accessibility.score),\n    bestPractices: toPct(categories['best-practices'].score),\n    seo: toPct(categories.seo.score),\n    fcp: audits['first-contentful-paint'].displayValue,\n    lcp: audits['largest-contentful-paint'].displayValue,\n    cls: audits['cumulative-layout-shift'].displayValue,\n    tbt: audits['total-blocking-time'].displayValue\n  },\n  analyticsDashboard: $items(\"Config\", 0, 0).json.analyticsDashboard\n}];"
+      }
+    },
+    {
       "id": "7",
       "name": "Success Payload",
       "type": "n8n-nodes-base.set",
@@ -134,7 +173,7 @@
           "string": [
             {
               "name": "text",
-              "value": "✅ Cloudflare Pages deployment succeeded for Feelings Unplugged.\nID: {{$json[\"result\"][0][\"id\"]}}\nURL: {{$json[\"result\"][0][\"url\"]}}"
+              "value": "✅ Cloudflare Pages deployment succeeded for Feelings Unplugged.\nDeployment: {{$json[\"deployment\"][\"short_id\"]}} → {{$json[\"deployment\"][\"url\"]}}\nLighthouse (mobile): Perf {{$json[\"lighthouse\"][\"performance\"]}} / A11y {{$json[\"lighthouse\"][\"accessibility\"]}} / BP {{$json[\"lighthouse\"][\"bestPractices\"]}} / SEO {{$json[\"lighthouse\"][\"seo\"]}}\nKey metrics: FCP {{$json[\"lighthouse\"][\"fcp\"]}}, LCP {{$json[\"lighthouse\"][\"lcp\"]}}, CLS {{$json[\"lighthouse\"][\"cls\"]}}, TBT {{$json[\"lighthouse\"][\"tbt\"]}}\nWeb Analytics: {{$json[\"analyticsDashboard\"]}}"
             }
           ]
         },
@@ -243,7 +282,7 @@
       "main": [
         [
           {
-            "node": "Success Payload",
+            "node": "Fetch Lighthouse",
             "type": "main",
             "index": 0
           }
@@ -251,6 +290,28 @@
         [
           {
             "node": "Failure Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Lighthouse": {
+      "main": [
+        [
+          {
+            "node": "Assemble Success Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assemble Success Context": {
+      "main": [
+        [
+          {
+            "node": "Success Payload",
             "type": "main",
             "index": 0
           }
