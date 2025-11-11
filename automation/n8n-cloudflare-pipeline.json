@@ -25,7 +25,7 @@
           "string": [
             {
               "name": "deployHookUrl",
-              "value": "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/97a1d005-69cf-40d5-b241-5d0f59553368"
+              "value": "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/b822ec72-9b3a-4f0e-a1bf-20d3c9c95a77"
             },
             {
               "name": "accountId",
@@ -62,7 +62,7 @@
         "url": "={{$json[\"deployHookUrl\"]}}",
         "responseFormat": "json",
         "options": {
-          "timeout": 15
+          "timeout": 30000
         }
       }
     },
