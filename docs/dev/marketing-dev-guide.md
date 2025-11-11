@@ -11,8 +11,8 @@ This guide keeps contributors aligned when updating the marketing pages served f
 | `/marketing/index.html` | Main marketing hub | Contains `<base href="/marketing/">` so it can be served from `/` or `/marketing/`. |
 | `/marketing/*.html` | Subpages (teen journal, parent guide, educator toolkit) | Share the same base href and styling. |
 | `/marketing/style.css` | Shared stylesheet | Cache headers defined in `_headers`. |
-| `_redirects` | Rewrites `/` to the marketing hub | Keeps the root URL clean without duplicating markup. |
-| `functions/robots.txt.ts` | Cloudflare Pages Function | Returns the canonical robots.txt and bypasses managed content signals. |
+| `functions/[[path]].ts` | Cloudflare Pages Function | Routes `/` (and `/index.html`) to `/marketing/` while leaving other assets untouched. |
+| `functions/robots.txt.ts` | Cloudflare Pages Function | Returns the canonical robots.txt (Cloudflare-managed content signals may still prepend text at the edge). |
 | `automation/n8n-cloudflare-pipeline.json` | Deploy + QA flow | Import into n8n for automated deploy verification. |
 
 ---
@@ -31,15 +31,15 @@ This guide keeps contributors aligned when updating the marketing pages served f
    Cloudflare Pages auto-builds (`feelings-unplugged` project). Use the n8n flow or deploy hook to watch status and send alerts.
 
 3. **Post-deploy checks**  
-   - `https://feelingsunplugged.space/` should render the marketing hub (rewritten via `_redirects`).  
-   - `https://feelingsunplugged.space/robots.txt` must match `functions/robots.txt.ts` output exactly.  
+   - `https://feelingsunplugged.space/` should render the marketing hub (served via `functions/[[path]].ts`).  
+   - `https://feelingsunplugged.space/robots.txt` should serve the Pages Function output; if Cloudflare adds a “content-signal” banner, disable content signals in the dashboard (Rules → Content → Content Signals).  
    - Re-run Lighthouse against production to ensure parity with local results.
 
 ---
 
 ## Implementation Guidelines
 
-- **Do not duplicate HTML at the project root.** Use the base href and `_redirects` strategy to keep a single source of truth under `/marketing`.
+- **Do not duplicate HTML at the project root.** Use the base href plus the catch-all function to keep a single source of truth under `/marketing`.
 - **Always update asset paths absolutely** (e.g., `/marketing/style.css`) when adding new files so both `/` and `/marketing/` contexts work.
 - **Favicons** are generated via `scripts/generate_favicon.py`. Run it after modifying brand colors and commit the resulting assets.
 - **Robots.txt** modifications belong in the function. Update both `functions/robots.txt.ts` and `robots.txt` (reference copy) together to stay consistent.
@@ -52,9 +52,9 @@ This guide keeps contributors aligned when updating the marketing pages served f
 
 | Symptom | Fix |
 | --- | --- |
-| Root URL shows the old placeholder | Ensure `_redirects` contains `/ /marketing/index.html 200` and commit/deploy. |
+| Root URL shows the old placeholder | Confirm `functions/[[path]].ts` is present and redeploy. |
 | Styles missing on root | Confirm `<base href="/marketing/">` exists in every HTML file so asset paths resolve correctly. |
-| Lighthouse SEO < 100 citing `Content-signal` | Verify the Pages Function is deployed; clear caches (`Deployments → Retry`) if old static robots is served. |
+| Lighthouse SEO < 100 citing `Content-signal` | Turn off Cloudflare content signals (Rules → Content → Content Signals) or request ops to do so; the robots function alone cannot override it. |
 | Beacon/CORS errors | Only include production analytics scripts with valid tokens. Remove unused scripts to maintain a clean console. |
 | Cloudflare deploy mismatch | Use `automation/n8n-cloudflare-pipeline.json` or trigger a manual redeploy via the Pages dashboard. |
 
