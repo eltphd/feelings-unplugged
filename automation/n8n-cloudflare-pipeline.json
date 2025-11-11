@@ -25,7 +25,7 @@
           "string": [
             {
               "name": "deployHookUrl",
-              "value": "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/REPLACE_WITH_DEPLOY_HOOK"
+              "value": "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/97a1d005-69cf-40d5-b241-5d0f59553368"
             },
             {
               "name": "accountId",
@@ -37,7 +37,7 @@
             },
             {
               "name": "notifyWebhook",
-              "value": "https://hooks.slack.com/services/REPLACE/ME"
+              "value": ""
             },
             {
               "name": "analyticsDashboard",
@@ -249,8 +249,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1590,
-        280
+        2410,
+        180
       ],
       "parameters": {
         "method": "POST",
@@ -258,9 +258,30 @@
         "responseFormat": "json",
         "jsonParameters": true,
         "options": {
-          "timeout": 10
+          "timeout": 10,
+          "ignoreResponseCode": true
         },
         "bodyParametersJson": "={\"text\": $json[\"text\"]}"
+      }
+    },
+    {
+      "id": "14",
+      "name": "Should Notify?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2200,
+        180
+      ],
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json[\"notifyWebhook\"]}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
       }
     }
   ],
@@ -386,7 +407,7 @@
       "main": [
         [
           {
-            "node": "Notify Channel",
+            "node": "Should Notify?",
             "type": "main",
             "index": 0
           }
@@ -397,11 +418,23 @@
       "main": [
         [
           {
-            "node": "Notify Channel",
+            "node": "Should Notify?",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "Should Notify?": {
+      "main": [
+        [
+          {
+            "node": "Notify Channel",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
       ]
     }
   },
