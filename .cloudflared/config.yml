@@ -1,5 +1,5 @@
-tunnel: $(cloudflared tunnel list --format json | python3 -c "import sys, json; tunnels = json.load(sys.stdin); n8n = [t for t in tunnels if t.get('name') == 'n8n']; print(n8n[0]['id'] if n8n else '')" 2>/dev/null)
-credentials-file: $(pwd)/.cloudflared/$(cloudflared tunnel list --format json | python3 -c "import sys, json; tunnels = json.load(sys.stdin); n8n = [t for t in tunnels if t.get('name') == 'n8n']; print(n8n[0]['id'] if n8n else '')" 2>/dev/null).json
+tunnel: 4da8c59f-5011-4fa7-aaff-3c7c72c68f80
+credentials-file: /Users/tarttphd/.cloudflared/4da8c59f-5011-4fa7-aaff-3c7c72c68f80.json
 
 ingress:
   - hostname: n8n.feelingsunplugged.space
