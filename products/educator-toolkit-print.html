@@ -8,8 +8,8 @@
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap');
 
     @page {
-      size: letter landscape;
-      margin: 0.5in;
+      size: letter portrait;
+      margin: 0.75in 0.625in; /* Top/bottom: 0.75", Left/right: 0.625" (gutter for binding) */
     }
 
     :root {
@@ -43,11 +43,11 @@
 
     .page {
       position: relative;
-      min-height: 7in;
-      padding: 0.55in 0.6in 0.7in;
+      min-height: 9.5in; /* Portrait height (11" - 1.5" margins) */
+      padding: 0.65in 0.6in 0.75in; /* Adjusted for portrait */
       margin-bottom: 0.25in;
-      border-radius: 24px;
-      border: 1px solid var(--border);
+      border-radius: 0; /* Remove rounded corners for book-like appearance */
+      border: none; /* Remove outer border */
       background: var(--surface);
       overflow: hidden;
       page-break-after: always;
@@ -68,7 +68,7 @@
     .page > * { position: relative; z-index: 1; }
 
     .page-tight {
-      padding: 0.5in 0.55in 0.65in;
+      padding: 0.6in 0.55in 0.7in; /* Adjusted for portrait */
     }
 
     .page-tight .card {
@@ -105,6 +105,7 @@
       list-style: none;
       padding: 0;
       margin: 0.15in 0 0.3in;
+      break-inside: avoid;
     }
 
     ul li {
@@ -146,11 +147,12 @@
     .card {
       background: rgba(252, 249, 243, 0.92);
       border: 1px solid rgba(70, 91, 115, 0.18);
-      border-radius: 18px;
+      border-radius: 6px; /* Minimal radius for subtlety, not book-edge */
       padding: 0.38in;
       margin-bottom: 0.25in;
       box-shadow: 0 18px 38px rgba(71, 59, 56, 0.12);
       break-inside: avoid;
+      page-break-inside: avoid;
     }
 
     .badge {
@@ -167,11 +169,20 @@
       margin-bottom: 0.14in;
     }
 
+    .prompt {
+      border-left: 3px solid var(--primary);
+      padding-left: 0.25in;
+      margin: 0.17in 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(2.7in, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(2.4in, 1fr)); /* Adjusted for portrait width */
       gap: 0.25in;
       margin-top: 0.25in;
+      break-inside: avoid;
     }
 
     .grid .card { height: 100%; }
@@ -211,13 +222,38 @@
       width: 100%;
       height: 2.1in;
       border: 1px dashed var(--border-strong);
-      border-radius: 20px;
+      border-radius: 6px; /* Minimal radius */
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 11pt;
       color: rgba(70, 91, 115, 0.6);
       margin: 0.3in 0;
+      break-inside: avoid;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .cover-image {
+      width: 100%;
+      max-height: 4in;
+      object-fit: cover;
+      border-radius: 6px;
+      margin: 0.25in 0;
+    }
+
+    .section-image {
+      width: 100%;
+      max-height: 2.5in;
+      object-fit: cover;
+      border-radius: 6px;
+      margin: 0.25in 0;
     }
 
     .table-of-contents ul li {
@@ -235,8 +271,9 @@
     .notes-box {
       min-height: 3in;
       border: 1px dashed var(--border-strong);
-      border-radius: 18px;
+      border-radius: 6px; /* Minimal radius */
       background: rgba(252, 249, 243, 0.8);
+      break-inside: avoid;
     }
   </style>
 </head>
@@ -249,7 +286,7 @@
       Practical scaffolds for teachers, counselors, and worldschool facilitators building emotionally intelligent learning ecosystems.
       Distributed open-source so adolescents everywhere can access core regulation skills.
     </p>
-    <div class="image-placeholder">Optional classroom illustration / classroom photo</div>
+    <img src="images/Generated Image November 11, 2025 - 6_23PM.png" alt="Classroom illustration" class="cover-image">
     <div class="page-metadata">
       <span>Feelings Unplugged</span>
       <span>atlas@feelingsunplugged.space</span>
@@ -317,7 +354,7 @@
         <li><strong>5. Transition:</strong> Celebrate courage: “Showing up counts as success.”</li>
       </ul>
     </div>
-    <div class="image-placeholder">Add check-in board or mood meter photo</div>
+    <img src="images/Generated Image November 11, 2025 - 6_18PM.png" alt="Check-in board or mood meter" class="section-image">
     <div class="page-metadata">
       <span>Quick-Start</span>
       <span>Page 3</span>
