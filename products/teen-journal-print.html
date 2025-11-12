@@ -60,8 +60,8 @@
     }
 
     .page-tight .card {
-      padding: 0.3in;
-      margin-bottom: 0.2in;
+      padding: 0.28in; /* Slightly reduced padding */
+      margin-bottom: 0.18in; /* Tighter spacing */
     }
 
     .page-tight .grid {
@@ -82,6 +82,11 @@
 
     .page-tight .page-metadata {
       bottom: 0.3in;
+    }
+
+    /* Ensure content doesn't overlap page metadata */
+    .page-tight > *:last-child:not(.page-metadata) {
+      margin-bottom: 0.5in; /* Space for footer */
     }
 
     .page:last-of-type {
@@ -287,18 +292,22 @@
 
     .cover-image {
       width: 100%;
-      max-height: 4in;
+      max-height: 3.5in; /* Reduced to ensure footer fits */
       object-fit: cover;
       border-radius: 6px;
-      margin: 0.25in 0;
+      margin: 0.2in 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
     }
 
     .section-image {
       width: 100%;
-      max-height: 2.5in;
+      max-height: 2.2in; /* Reduced to prevent overflow */
       object-fit: cover;
       border-radius: 6px;
-      margin: 0.25in 0;
+      margin: 0.2in 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
     }
 
     .page-metadata {
@@ -310,6 +319,7 @@
       justify-content: space-between;
       font-size: 9pt;
       color: rgba(46, 42, 41, 0.55);
+      z-index: 10;
     }
 
     .table-of-contents ul li::before {
@@ -480,7 +490,7 @@
 
   <div class="page page-tight">
     <h2>Atlas Academy Identity Archetypes</h2>
-    <p>Every firefly glows differently. Use the archetypes as mirrors—not boxes.</p>
+    <p style="margin-bottom: 0.15in;">Every firefly glows differently. Use the archetypes as mirrors—not boxes.</p>
     <div class="grid">
       <div class="card">
         <h3>The Catalyst</h3>
@@ -514,7 +524,7 @@
   </div>
 
   <div class="page page-tight">
-    <div class="grid">
+    <div class="grid" style="margin-bottom: 0.15in;">
       <div class="card">
         <h3>The Maverick</h3>
         <p>Independent, freedom-seeker, builder of alternative paths.</p>
@@ -532,7 +542,7 @@
         </ul>
       </div>
     </div>
-    <img src="images/teen-journal/IMG_4208.JPG" alt="Identity archetypes collage" class="section-image">
+    <img src="images/teen-journal/IMG_4208.JPG" alt="Identity archetypes collage" class="section-image" style="max-height: 2in; margin-bottom: 0.1in;">
     <div class="page-metadata">
       <span>Identity Archetypes (cont.)</span>
       <span>Page 7</span>
@@ -559,25 +569,25 @@
 
   <div class="page page-tight">
     <h2>Weekly Reflection · Pattern Tracking</h2>
-    <div class="metrics">
+    <div class="metrics" style="margin-bottom: 0.15in;">
       <div class="metric-card">
         <h4>Emotional Weather Report</h4>
         <p>Chart dominant emotions each day. Notice cycles, swells, quiet moments.</p>
       </div>
       <div class="metric-card">
         <h4>Growth Tracker</h4>
-        <p>One sentence about progress—even if it’s “I showed up.”</p>
+        <p>One sentence about progress—even if it's "I showed up."</p>
       </div>
       <div class="metric-card">
         <h4>Energy Levels</h4>
         <p>Rate each day 1–10. Track how rest, food, social energy play in.</p>
       </div>
       <div class="metric-card">
-        <h4>Next Week’s Intention</h4>
+        <h4>Next Week's Intention</h4>
         <p>Set a boundary, ritual, or support request for future-you.</p>
       </div>
     </div>
-    <table class="table">
+    <table class="table" style="margin-bottom: 0.1in;">
       <thead>
         <tr><th>Day</th><th>Dominant Emotion</th><th>Trigger / Context</th><th>Reframe / Support Move</th></tr>
       </thead>
@@ -598,8 +608,8 @@
 
   <div class="page page-tight">
     <h2>Playlist Therapy · Soundtrack Your Nervous System</h2>
-    <p>Music regulates emotions when words can’t. Build playlists across emotional states.</p>
-    <div class="grid">
+    <p style="margin-bottom: 0.15in;">Music regulates emotions when words can't. Build playlists across emotional states.</p>
+    <div class="grid" style="margin-bottom: 0.1in;">
       <div class="card">
         <h4>Anger · Safe Rage</h4>
         <ul class="list-plain">
