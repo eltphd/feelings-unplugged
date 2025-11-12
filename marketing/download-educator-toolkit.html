@@ -4,153 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/marketing/">
-    <title>Educator Toolkit Download - Feelings Unplugged</title>
+    <title>Educator Toolkit - Coming Soon - Feelings Unplugged</title>
+    <meta name="description" content="Educator Toolkit is currently in final QA. Join the waitlist to be notified when it's ready!">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .password-form {
-            max-width: 500px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background: var(--surface);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-        .password-input {
-            width: 100%;
-            padding: 0.75rem;
-            margin: 1rem 0;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-        .error-message {
-            color: #ff6b6b;
-            margin-top: 0.5rem;
-            display: none;
-        }
-        .download-section {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-        }
-        .download-section.active {
-            display: block;
-        }
-        .gratitude-box {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(30, 144, 255, 0.1));
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "f98e1afdae084da6bfa84f10a6009b7e"}'></script>
 </head>
 <body>
     <div class="container">
-        <header class="hero" style="padding: 4rem 2rem;">
+        <header class="hero" style="padding: 4rem 2rem; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
             <div class="glow-overlay"></div>
-            <h1 class="title">Educator Toolkit Download</h1>
-            <p class="subtitle">Enter your password to access your download</p>
-        </header>
-
-        <main class="content">
-            <div class="password-form" id="passwordForm">
-                <h2>Password Required</h2>
-                <p>Please enter the password provided in your purchase confirmation email.</p>
-                <form id="passwordFormElement" onsubmit="checkPassword(event)">
-                    <input type="password" id="passwordInput" class="password-input" placeholder="Enter password" required>
-                    <div class="error-message" id="errorMessage">Incorrect password. Please check your email.</div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Access Download</button>
-                </form>
-            </div>
-
-            <div class="download-section" id="downloadSection">
-                <div class="gratitude-box">
-                    <h2>✨ Thank You for Your Support! ✨</h2>
-                    <p id="gratitudeMessage">Your purchase helps us provide free copies to youth, caregivers, and educators in under-resourced communities.</p>
+            <h1 class="title">Educator Toolkit</h1>
+            <p class="subtitle" style="max-width: 600px; margin: 2rem auto;">Coming Soon</p>
+            <div class="highlight-box" style="max-width: 700px; margin: 2rem auto; padding: 2rem;">
+                <h2 style="margin-top: 0;">Currently in Final QA</h2>
+                <p>We're piloting the Educator Toolkit with schools and community programs to ensure it's classroom-ready. Join the waitlist to be notified as soon as it's available!</p>
+                <div style="margin-top: 2rem;">
+                    <a href="waitlist-educator.html" class="btn btn-primary btn-large">Join the Waitlist</a>
                 </div>
-                
-                <div class="product-card glow-card" style="max-width: 600px; margin: 2rem auto;">
-                    <div class="card-header">
-                        <h2>Educator Toolkit (Print-Ready PDF)</h2>
-                        <span class="tag">Open Source · Classroom Ready</span>
-                    </div>
-                    <p class="description">
-                        Lesson-ready frameworks, regulation rituals, and printable resources for facilitators building emotionally intelligent spaces.
-                    </p>
-                    <div class="cta-group">
-                        <a href="/products/educator-toolkit-print.pdf" class="btn btn-primary" id="downloadLink" target="_blank" rel="noopener" onclick="trackDownload('educator-toolkit')">Download Educator Toolkit</a>
-                        <span class="price">File size: ~1.01 MB · PDF</span>
-                    </div>
-                </div>
-
-                <p style="margin-top: 2rem; color: rgba(255,255,255,0.7);">
-                    <a href="https://app.feelingsunplugged.space/" target="_blank" rel="noopener" style="color: inherit;">Try the free web app</a> · 
-                    <a href="mailto:care@feelingsunplugged.com" style="color: inherit;">Need help?</a>
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: rgba(46, 42, 41, 0.7);">
+                    Expected release: 4-6 weeks<br>
+                    Waitlist members get early access and pay-what-you-can pricing
                 </p>
             </div>
+        </header>
+
+        <main class="content" style="padding-bottom: 4rem;">
+            <section class="section" style="max-width: 800px; margin: 3rem auto;">
+                <h2>What You'll Get</h2>
+                <div class="feature-grid">
+                    <div class="highlight-box">
+                        <h3>📚 The Toolkit</h3>
+                        <ul class="features">
+                            <li>5-minute daily check-in rituals</li>
+                            <li>45-minute lesson plans</li>
+                            <li>Crisis response protocols</li>
+                            <li>Culturally responsive practices</li>
+                            <li>Printable resources (emotion wheels, coping menus)</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-box">
+                        <h3>🤝 Your Impact</h3>
+                        <ul class="features">
+                            <li>Every purchase = 1 free kit gifted</li>
+                            <li>Support Title I schools</li>
+                            <li>Help community centers and youth programs</li>
+                            <li>Fund translation and facilitator residencies</li>
+                            <li>Support youth design stipends</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" style="max-width: 700px; margin: 3rem auto; text-align: center;">
+                <h2>While You Wait</h2>
+                <p>Explore these available resources:</p>
+                <div class="cta-buttons" style="margin-top: 1.5rem;">
+                    <a href="teen-journal.html" class="btn btn-large">Teen Journal (Available Now)</a>
+                    <a href="https://app.feelingsunplugged.space/" class="btn btn-large" target="_blank" rel="noopener">Free Web App</a>
+                </div>
+            </section>
         </main>
+
+        <footer>
+            <p>&copy; 2025 Feelings Unplugged. Created with intention by Dr. Erica L. Tartt.</p>
+        </footer>
     </div>
-
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlPassword = urlParams.get('p');
-        
-        if (urlPassword) {
-            document.getElementById('passwordInput').value = urlPassword;
-            checkPassword(null, urlPassword);
-        }
-
-        function checkPassword(event, providedPassword) {
-            if (event) event.preventDefault();
-            
-            const password = providedPassword || document.getElementById('passwordInput').value;
-            const purchaseId = urlParams.get('id') || '';
-            
-            fetch(`/api/verify-download?password=${encodeURIComponent(password)}&product=educator-toolkit&id=${purchaseId}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.valid) {
-                        document.getElementById('passwordForm').style.display = 'none';
-                        document.getElementById('downloadSection').classList.add('active');
-                        
-                        if (data.contributions) {
-                            document.getElementById('gratitudeMessage').textContent = 
-                                `Your purchase has contributed ${data.contributions} free copy(ies) to youth, caregivers, and educators in under-resourced communities. Thank you!`;
-                        }
-                        
-                        const downloadLink = document.getElementById('downloadLink');
-                        downloadLink.href = `/products/educator-toolkit-print.pdf?p=${encodeURIComponent(password)}&id=${purchaseId}`;
-                    } else {
-                        document.getElementById('errorMessage').style.display = 'block';
-                    }
-                })
-                .catch(() => {
-                    if (password.length >= 8) {
-                        document.getElementById('passwordForm').style.display = 'none';
-                        document.getElementById('downloadSection').classList.add('active');
-                    } else {
-                        document.getElementById('errorMessage').style.display = 'block';
-                    }
-                });
-        }
-
-        function trackDownload(product) {
-            const password = urlParams.get('p') || document.getElementById('passwordInput').value;
-            const purchaseId = urlParams.get('id') || '';
-            
-            fetch('/api/track-download', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    product: product,
-                    password: password,
-                    purchaseId: purchaseId,
-                    timestamp: new Date().toISOString()
-                })
-            }).catch(() => {});
-        }
-    </script>
 </body>
 </html>
