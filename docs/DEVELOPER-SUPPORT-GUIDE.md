@@ -272,6 +272,97 @@ cloudflared tunnel route dns tunnel-name hostname.domain.com
 
 ---
 
+## Buy One · Gift One System
+
+### Overview
+
+The Buy One · Gift One campaign tracks contributions from PDF purchases. Every purchase automatically funds a free copy for under-resourced communities.
+
+### Components
+
+1. **API Endpoint**: `/api/track-contribution`
+   - Receives contribution data from Stripe fulfillment
+   - Stores in Cloudflare KV (if configured)
+   - Sends to n8n webhook (if configured)
+
+2. **Cloudflare KV**: `CONTRIBUTIONS_KV` namespace
+   - Stores contribution records
+   - Key format: `contribution:{timestamp}:{random}`
+   - Value: JSON with purchase details
+
+3. **n8n Workflow**: `automation/n8n-contribution-notifications.json`
+   - Receives contribution webhooks
+   - Formats notification email
+   - Sends to `care@feelingsunplugged.com`
+
+### Setup KV Namespace
+
+**Via Script:**
+```bash
+chmod +x scripts/setup-cloudflare-kv.sh
+./scripts/setup-cloudflare-kv.sh
+```
+
+**Via Dashboard:**
+1. Go to: https://dash.cloudflare.com/
+2. Navigate: Workers & Pages → KV
+3. Create namespace: `CONTRIBUTIONS_KV`
+4. Copy namespace ID
+5. Add binding in Pages project: Settings → Functions → KV namespace bindings
+
+**Via CLI:**
+```bash
+wrangler kv:namespace create CONTRIBUTIONS_KV
+# Then add binding in Cloudflare Pages dashboard
+```
+
+### Import Contribution Notifications Workflow
+
+1. **Open n8n**: http://localhost:5678
+2. **Import**: `automation/n8n-contribution-notifications.json`
+3. **Activate** workflow
+4. **Copy webhook URL** from "Contribution Webhook" node
+5. **Set environment variable** in Cloudflare Pages:
+   ```bash
+   echo "https://n8n.feelingsunplugged.space/webhook/contributions" | \
+     wrangler pages secret put N8N_CONTRIBUTIONS_WEBHOOK --project-name=feelings-unplugged
+   ```
+
+### Testing Contribution Tracking
+
+```bash
+curl -X POST https://feelingsunplugged.space/api/track-contribution \
+  -H "Content-Type: application/json" \
+  -d '{
+    "purchaseId": "test-123",
+    "email": "test@example.com",
+    "products": ["teen-journal"],
+    "contributions": 1
+  }'
+```
+
+---
+
+## Domain Configuration
+
+### feelingsunplugged.com (Namecheap → Cloudflare Pages)
+
+**Full Guide**: `docs/namecheap-cloudflare-pages-setup.md`
+
+**Quick Steps:**
+1. **Transfer DNS to Cloudflare** (recommended):
+   - Add domain to Cloudflare
+   - Update nameservers in Namecheap
+   - Connect domain in Cloudflare Pages
+
+2. **Or keep DNS at Namecheap**:
+   - Add CNAME records pointing to Cloudflare Pages
+   - Connect domain in Cloudflare Pages dashboard
+
+**Landing Page**: `marketing/index-com.html` should be served at root
+
+---
+
 ## Common Tasks
 
 ### Adding New Environment Variable
