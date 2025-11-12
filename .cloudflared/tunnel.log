@@ -1,2 +1,22 @@
-2025-11-12T04:11:43Z ERR Cannot determine default origin certificate path. No file cert.pem in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]. You need to specify the origin certificate path by specifying the origincert option in the configuration file, or set TUNNEL_ORIGIN_CERT environment variable originCertPath=
-error parsing tunnel ID: Error locating origin cert: client didn't specify origincert path
+2025-11-12T04:21:26Z INF Starting tunnel tunnelID=4da8c59f-5011-4fa7-aaff-3c7c72c68f80
+2025-11-12T04:21:26Z INF Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]
+2025-11-12T04:21:26Z INF Version 2025.11.1 (Checksum 53e8656c5207f9cba9ed4915ecaeffc2a8d6b401bef21e60ad543f02c135b4ae)
+2025-11-12T04:21:26Z INF GOOS: darwin, GOVersion: go1.25.4, GoArch: arm64
+2025-11-12T04:21:26Z INF cloudflared will not automatically update if installed by a package manager.
+2025-11-12T04:21:26Z INF Generated Connector ID: 6f357a71-22d6-406f-a3e5-817626c4003b
+2025-11-12T04:21:26Z WRN No ingress rules were defined in provided config (if any) nor from the cli, cloudflared will return 503 for all incoming HTTP requests
+2025-11-12T04:21:27Z INF Initial protocol quic
+2025-11-12T04:21:27Z INF ICMP proxy will use 192.168.0.14 as source for IPv4
+2025-11-12T04:21:27Z INF ICMP proxy will use fe80::1009:806e:485e:67ac in zone en1 as source for IPv6
+2025-11-12T04:21:27Z INF Created ICMP proxy listening on 192.168.0.14:0
+2025-11-12T04:21:27Z INF ICMP proxy will use 192.168.0.14 as source for IPv4
+2025-11-12T04:21:27Z INF ICMP proxy will use fe80::1009:806e:485e:67ac in zone en1 as source for IPv6
+2025-11-12T04:21:27Z INF Starting metrics server on 127.0.0.1:20242/metrics
+2025-11-12T04:21:27Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=0 event=0 ip=198.41.192.47
+2025-11-12T04:21:27Z INF Registered tunnel connection connIndex=0 connection=5264c854-bc47-438b-9682-662d40bd84f8 event=0 ip=198.41.192.47 location=cmh01 protocol=quic
+2025-11-12T04:21:27Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=1 event=0 ip=198.41.200.13
+2025-11-12T04:21:28Z INF Registered tunnel connection connIndex=1 connection=8627b0a0-c3ec-42a1-8f5a-06b33dda7136 event=0 ip=198.41.200.13 location=ord07 protocol=quic
+2025-11-12T04:21:28Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=2 event=0 ip=198.41.192.67
+2025-11-12T04:21:29Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=3 event=0 ip=198.41.200.233
+2025-11-12T04:21:30Z INF Registered tunnel connection connIndex=2 connection=32a16029-1264-4266-a84f-71c759f152f2 event=0 ip=198.41.192.67 location=cmh02 protocol=quic
+2025-11-12T04:21:30Z INF Registered tunnel connection connIndex=3 connection=71402596-1a34-45b8-bdc4-eae095bd8a81 event=0 ip=198.41.200.233 location=ord12 protocol=quic

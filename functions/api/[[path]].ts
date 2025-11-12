@@ -29,6 +29,49 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: a
     }
   }
   
+  // Buy-One-Give-One tracking endpoint
+  if (url.pathname === '/api/track-contribution') {
+    try {
+      const data = await request.json();
+      
+      const contributionData = {
+        ...data,
+        timestamp: new Date().toISOString(),
+        ip: request.headers.get('cf-connecting-ip'),
+        userAgent: request.headers.get('user-agent')
+      };
+      
+      // Store contribution in KV if available
+      if (env.CONTRIBUTIONS_KV) {
+        const key = `contribution:${Date.now()}:${Math.random().toString(36).substr(2, 9)}`;
+        await env.CONTRIBUTIONS_KV.put(key, JSON.stringify(contributionData));
+      }
+      
+      // Send to n8n webhook if configured (for email notifications)
+      if (env.N8N_CONTRIBUTIONS_WEBHOOK) {
+        try {
+          await fetch(env.N8N_CONTRIBUTIONS_WEBHOOK, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(contributionData)
+          });
+        } catch (webhookError) {
+          console.error('Failed to send to n8n webhook:', webhookError);
+        }
+      }
+      
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (error) {
+      console.error('Contribution tracking error:', error);
+      return new Response(JSON.stringify({ success: false, error: 'Failed to track contribution' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
+  
   // Feedback submission endpoint
   if (url.pathname === '/api/feedback') {
     try {
