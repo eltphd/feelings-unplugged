@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/marketing/">
+    <title>Feedback - Feelings Unplugged</title>
+    <meta name="description" content="Share your feedback on Feelings Unplugged guides and resources.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="alternate icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .feedback-container {
+            max-width: 700px;
+            margin: 3rem auto;
+            padding: 2rem;
+        }
+        .feedback-form {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--color-neutral);
+            font-size: 0.95rem;
+        }
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            background: white;
+            color: var(--color-neutral);
+            transition: border-color 0.2s ease;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .btn-submit {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            background: var(--color-primary-strong);
+            transform: translateY(-1px);
+        }
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        .success-message {
+            background: rgba(109, 139, 138, 0.1);
+            border: 1px solid var(--color-accent);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            color: var(--color-secondary);
+            display: none;
+        }
+        .success-message.show {
+            display: block;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="feedback-container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            
+            <div class="feedback-form">
+                <h1>Share Your Feedback</h1>
+                <p style="margin-bottom: 2rem; color: var(--color-muted);">
+                    Your input helps us improve Feelings Unplugged guides and resources. 
+                    Whether you're a teen, parent, caregiver, or educator, we want to hear from you.
+                </p>
+
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Your Name (Optional)</label>
+                        <input type="text" id="name" name="name" placeholder="How should we address you?">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email (Optional)</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com">
+                        <small style="color: var(--color-muted); font-size: 0.875rem;">
+                            We'll only use this to follow up if you'd like us to.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">I am a...</label>
+                        <select id="role" name="role" required>
+                            <option value="">Select one...</option>
+                            <option value="teen">Teen / Young Person</option>
+                            <option value="parent">Parent / Caregiver</option>
+                            <option value="educator">Educator / Teacher</option>
+                            <option value="counselor">Counselor / Therapist</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guide">Which guide did you use?</label>
+                        <select id="guide" name="guide" required>
+                            <option value="">Select one...</option>
+                            <option value="teen-journal">Teen Journal</option>
+                            <option value="parent-guide">Parent Guide</option>
+                            <option value="educator-toolkit">Educator Toolkit</option>
+                            <option value="multiple">Multiple guides</option>
+                            <option value="web-app">Web App</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback">Your Feedback</label>
+                        <textarea id="feedback" name="feedback" required placeholder="What worked well? What could be improved? What would you like to see added?"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Submit Feedback</button>
+                </form>
+
+                <div id="successMessage" class="success-message">
+                    <strong>Thank you!</strong> Your feedback has been received. We appreciate you taking the time to help us improve Feelings Unplugged.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById('successMessage').classList.add('show');
+                    this.reset();
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    alert('There was an error submitting your feedback. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting your feedback. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
+

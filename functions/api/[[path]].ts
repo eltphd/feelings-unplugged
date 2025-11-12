@@ -29,6 +29,50 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: a
     }
   }
   
+  // Feedback submission endpoint
+  if (url.pathname === '/api/feedback') {
+    try {
+      const data = await request.json();
+      
+      // Store feedback in KV (if available) or send to n8n webhook
+      const feedbackData = {
+        ...data,
+        timestamp: new Date().toISOString(),
+        ip: request.headers.get('cf-connecting-ip'),
+        userAgent: request.headers.get('user-agent')
+      };
+      
+      // Option 1: Store in KV if available
+      if (env.FEEDBACK_KV) {
+        const key = `feedback:${Date.now()}:${Math.random().toString(36).substr(2, 9)}`;
+        await env.FEEDBACK_KV.put(key, JSON.stringify(feedbackData));
+      }
+      
+      // Option 2: Send to n8n webhook if configured
+      if (env.N8N_FEEDBACK_WEBHOOK) {
+        try {
+          await fetch(env.N8N_FEEDBACK_WEBHOOK, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(feedbackData)
+          });
+        } catch (webhookError) {
+          console.error('Failed to send to n8n webhook:', webhookError);
+        }
+      }
+      
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (error) {
+      console.error('Feedback submission error:', error);
+      return new Response(JSON.stringify({ success: false, error: 'Failed to submit feedback' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
+  
   return new Response('Not Found', { status: 404 });
 };
 
