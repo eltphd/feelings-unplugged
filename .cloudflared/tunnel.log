@@ -20,3 +20,7 @@
 2025-11-12T04:21:29Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=3 event=0 ip=198.41.200.233
 2025-11-12T04:21:30Z INF Registered tunnel connection connIndex=2 connection=32a16029-1264-4266-a84f-71c759f152f2 event=0 ip=198.41.192.67 location=cmh02 protocol=quic
 2025-11-12T04:21:30Z INF Registered tunnel connection connIndex=3 connection=71402596-1a34-45b8-bdc4-eae095bd8a81 event=0 ip=198.41.200.233 location=ord12 protocol=quic
+2025-11-12T04:55:12Z WRN No ingress rules were defined in provided config (if any) nor from the cli, cloudflared will return 503 for all incoming HTTP requests
+2025-11-12T05:01:11Z WRN No ingress rules were defined in provided config (if any) nor from the cli, cloudflared will return 503 for all incoming HTTP requests
+2025-11-12T05:05:43Z WRN No ingress rules were defined in provided config (if any) nor from the cli, cloudflared will return 503 for all incoming HTTP requests
+2025-11-12T05:07:50Z WRN No ingress rules were defined in provided config (if any) nor from the cli, cloudflared will return 503 for all incoming HTTP requests
