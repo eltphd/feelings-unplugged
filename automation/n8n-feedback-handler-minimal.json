@@ -1,0 +1,106 @@
+{
+  "name": "Feelings Unplugged Feedback Handler",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Feedback Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "feedback",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "2",
+      "name": "Format Feedback Email",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [
+        480,
+        300
+      ],
+      "parameters": {
+        "functionCode": "const feedback = items[0].json;\n\nconst roleMap = {\n  'teen': 'Teen / Young Person',\n  'parent': 'Parent / Caregiver',\n  'educator': 'Educator / Teacher',\n  'counselor': 'Counselor / Therapist',\n  'other': 'Other'\n};\n\nconst guideMap = {\n  'teen-journal': 'Teen Journal',\n  'parent-guide': 'Parent Guide',\n  'educator-toolkit': 'Educator Toolkit',\n  'multiple': 'Multiple guides',\n  'web-app': 'Web App',\n  'other': 'Other'\n};\n\nconst emailBody = `\nNew Feedback Submission\n=====================\n\nName: ${feedback.name || 'Not provided'}\nEmail: ${feedback.email || 'Not provided'}\nRole: ${roleMap[feedback.role] || feedback.role}\nGuide Used: ${guideMap[feedback.guide] || feedback.guide}\n\nFeedback:\n${feedback.feedback}\n\n---\nSubmitted: ${feedback.timestamp}\nIP: ${feedback.ip || 'Unknown'}\n`;\n\nreturn [{\n  json: {\n    to: 'care@feelingsunplugged.com',\n    subject: `Feedback: ${guideMap[feedback.guide] || feedback.guide} - ${roleMap[feedback.role] || feedback.role}`,\n    text: emailBody,\n    html: emailBody.replace(/\\n/g, '<br>'),\n    feedbackData: feedback\n  }\n}];"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "fromEmail": "={{$env.FULFILLMENT_FROM_EMAIL || 'fulfillment@feelingsunplugged.com'}}",
+        "fromName": "={{$env.FULFILLMENT_FROM_NAME || 'Feelings Unplugged Feedback'}}",
+        "toEmail": "={{$json.to}}",
+        "subject": "={{$json.subject}}",
+        "text": "={{$json.text}}",
+        "options": {
+          "html": "={{$json.html}}"
+        }
+      }
+    },
+    {
+      "id": "4",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 2,
+      "position": [
+        920,
+        300
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true } }}"
+      }
+    }
+  ],
+  "connections": {
+    "Feedback Webhook": {
+      "main": [
+        [
+          {
+            "node": "Format Feedback Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Feedback Email": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
