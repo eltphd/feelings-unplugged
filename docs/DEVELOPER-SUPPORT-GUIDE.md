@@ -7,6 +7,13 @@ This guide helps developers and technical managers understand and maintain the F
 **Last Updated:** November 12, 2025  
 **Maintained By:** Development Team
 
+**Recent Updates:**
+- ✅ Buy One · Gift One contribution tracking system
+- ✅ Cloudflare KV setup for contributions
+- ✅ n8n contribution notifications workflow
+- ✅ Marketing pages waitlist system
+- ✅ Namecheap DNS → Cloudflare Pages configuration
+
 ---
 
 ## Table of Contents
@@ -38,8 +45,9 @@ This guide helps developers and technical managers understand and maintain the F
 ```
 
 **Key Services:**
-- **Cloudflare Pages**: Hosts marketing site (`feelingsunplugged.space`)
+- **Cloudflare Pages**: Hosts marketing site (`feelingsunplugged.space` + `feelingsunplugged.com`)
 - **Cloudflare Functions**: API endpoints (`/api/*`)
+- **Cloudflare KV**: Data storage (contributions, feedback, downloads)
 - **n8n**: Automation workflows (Docker container, port 5678)
 - **Cloudflare Tunnel**: Exposes local n8n publicly (`n8n.feelingsunplugged.space`)
 
@@ -58,6 +66,12 @@ This guide helps developers and technical managers understand and maintain the F
 
 **Current Secrets:**
 - `N8N_FEEDBACK_WEBHOOK`: `https://n8n.feelingsunplugged.space/webhook/feedback`
+- `N8N_CONTRIBUTIONS_WEBHOOK`: `https://n8n.feelingsunplugged.space/webhook/contributions` (optional)
+
+**KV Namespaces:**
+- `CONTRIBUTIONS_KV`: Stores buy-one-give-one contribution data
+- `FEEDBACK_KV`: Stores feedback submissions (optional)
+- `DOWNLOADS_KV`: Stores download tracking data (optional)
 
 **To View/Edit:**
 1. Go to: https://dash.cloudflare.com/

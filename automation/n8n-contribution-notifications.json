@@ -1,0 +1,77 @@
+{
+  "name": "Feelings Unplugged Contribution Notifications",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Contribution Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contributions",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "2",
+      "name": "Format Notification Email",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 2,
+      "position": [480, 300],
+      "parameters": {
+        "functionCode": "const contribution = items[0].json;\n\nconst productMap = {\n  'teen-journal': 'Teen Journal',\n  'parent-guide': 'Parent Guide',\n  'educator-toolkit': 'Educator Toolkit'\n};\n\nconst products = (contribution.products || []).map(p => productMap[p] || p).join(', ');\nconst contributionCount = contribution.contributions || 1;\n\nconst emailBody = `\nNew Contribution Received\n=====================\n\nPurchase ID: ${contribution.purchaseId || 'N/A'}\nCustomer Email: ${contribution.email || 'Not provided'}\nProducts: ${products}\nContributions: ${contributionCount} free copy(ies) allocated\n\nTimestamp: ${contribution.timestamp}\nIP: ${contribution.ip || 'Unknown'}\n\n---\n\nThis contribution will fund ${contributionCount} free copy(ies) for:\n- Youth, caregivers, and educators in under-resourced communities\n- Title I schools\n- Community clinics\n- Mutual aid networks\n\nThank you for supporting our Buy One · Gift One mission!\n`;\n\nreturn [{\n  json: {\n    to: 'care@feelingsunplugged.com',\n    subject: `New Contribution: ${products} (${contributionCount} free copy${contributionCount > 1 ? 'ies' : ''} allocated)`,\n    text: emailBody,\n    html: emailBody.replace(/\\n/g, '<br>'),\n    contributionData: contribution\n  }\n}];"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [700, 300],
+      "parameters": {
+        "fromEmail": "={{$env.FULFILLMENT_FROM_EMAIL || 'fulfillment@feelingsunplugged.com'}}",
+        "fromName": "={{$env.FULFILLMENT_FROM_NAME || 'Feelings Unplugged Contributions'}}",
+        "toEmail": "={{$json.to}}",
+        "subject": "={{$json.subject}}",
+        "text": "={{$json.text}}",
+        "options": {
+          "html": "={{$json.html}}"
+        }
+      }
+    },
+    {
+      "id": "4",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 2,
+      "position": [920, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"message\": \"Contribution tracked\" } }}"
+      }
+    }
+  ],
+  "connections": {
+    "Contribution Webhook": {
+      "main": [[{"node": "Format Notification Email", "type": "main", "index": 0}]]
+    },
+    "Format Notification Email": {
+      "main": [[{"node": "Send Email", "type": "main", "index": 0}]]
+    },
+    "Send Email": {
+      "main": [[{"node": "Respond Success", "type": "main", "index": 0}]]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-12T00:00:00.000Z",
+  "versionId": "1"
+}
+
