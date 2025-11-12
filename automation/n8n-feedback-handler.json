@@ -31,7 +31,7 @@
       "typeVersion": 2,
       "position": [700, 300],
       "parameters": {
-        "fromEmail": "={{$env.FULFILLMENT_FROM_EMAIL}}",
+        "fromEmail": "={{$env.FULFILLMENT_FROM_EMAIL || 'fulfillment@feelingsunplugged.com'}}",
         "fromName": "={{$env.FULFILLMENT_FROM_NAME || 'Feelings Unplugged Feedback'}}",
         "toEmail": "={{$json.to}}",
         "subject": "={{$json.subject}}",

@@ -43,23 +43,34 @@ The feedback system allows users to share feedback on Feelings Unplugged guides 
 
 ## Setup Instructions
 
-### Cloudflare Pages Environment Variables
+### Step 1: Configure Cloudflare Pages Environment Variables
 
-Add these to your Cloudflare Pages project settings:
-
+**Option A: Using Setup Script (Recommended)**
+```bash
+chmod +x scripts/setup-feedback-env.sh
+./scripts/setup-feedback-env.sh
 ```
-FEEDBACK_KV = <your-kv-namespace-binding>  # Optional: for storing feedback
-N8N_FEEDBACK_WEBHOOK = https://your-n8n-instance.com/webhook/feedback  # Optional: for email notifications
-```
 
-### n8n Setup (Optional)
+**Option B: Manual Setup**
+1. Go to: https://dash.cloudflare.com/
+2. Navigate to: **Workers & Pages** → **feelings-unplugged** → **Settings** → **Environment Variables**
+3. Add variable:
+   - **Name**: `N8N_FEEDBACK_WEBHOOK`
+   - **Value**: `https://your-n8n-instance.com/webhook/feedback` (get this from n8n after importing workflow)
+4. (Optional) Add KV namespace binding:
+   - **Name**: `FEEDBACK_KV`
+   - **Value**: Create KV namespace first, then bind it here
 
+### Step 2: Import and Configure n8n Workflow
+
+**See detailed guide**: `docs/feedback-n8n-setup.md`
+
+Quick steps:
 1. Import `automation/n8n-feedback-handler.json` into n8n
-2. Configure email node with SMTP credentials:
-   - `FULFILLMENT_FROM_EMAIL` (from n8n.env)
-   - `FULFILLMENT_FROM_NAME` (from n8n.env)
-   - SMTP settings from n8n.env
-3. Copy the webhook URL and add to Cloudflare Pages env as `N8N_FEEDBACK_WEBHOOK`
+2. Email node is pre-configured with SMTP credentials from `n8n.env`
+3. Activate the workflow
+4. Copy the webhook URL from the "Feedback Webhook" node
+5. Add that URL to Cloudflare Pages as `N8N_FEEDBACK_WEBHOOK` (see Step 1)
 
 ### Testing
 
